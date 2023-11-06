@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "892688541888",
+    "project_id": "happydelivery-1",
+    "storage_bucket": "happydelivery-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:892688541888:android:4fcd72388b136fc992e525",
+        "android_client_info": {
+          "package_name": "com.mycompany.hapdel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "892688541888-lrqkqvg966quo6qflt3jb4bb82q58guv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.hapdel",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "892688541888-ai3sur4nmijek9q0qvem8k2v3lqed13e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACBeIJnjqr6aqWXtARYszQJniDR5EEyUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "892688541888-ai3sur4nmijek9q0qvem8k2v3lqed13e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "892688541888-4cc8t2qb654052aqq4l988nfd2erf6h1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.hapdel"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:892688541888:android:001302a9b4242cad92e525",
+        "android_client_info": {
+          "package_name": "com.mycompany.happydelivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "892688541888-ai3sur4nmijek9q0qvem8k2v3lqed13e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACBeIJnjqr6aqWXtARYszQJniDR5EEyUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "892688541888-ai3sur4nmijek9q0qvem8k2v3lqed13e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "892688541888-4cc8t2qb654052aqq4l988nfd2erf6h1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.hapdel"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
