@@ -1142,9 +1142,18 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
                                                                       0.0),
                                                           child: Text(
                                                             getJsonField(
-                                                              dataItem,
-                                                              r'''$.product.name''',
-                                                            ).toString(),
+                                                                      dataItem,
+                                                                      r'''$.product.name''',
+                                                                    ) !=
+                                                                    null
+                                                                ? getJsonField(
+                                                                    dataItem,
+                                                                    r'''$.product.name''',
+                                                                  ).toString()
+                                                                : getJsonField(
+                                                                    dataItem,
+                                                                    r'''$.product.code''',
+                                                                  ).toString(),
                                                             maxLines: 2,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
