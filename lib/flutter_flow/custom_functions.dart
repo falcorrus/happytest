@@ -10,6 +10,7 @@ import 'place.dart';
 import 'uploaded_file.dart';
 import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '/backend/schema/structs/index.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
 dynamic jsonCreate(
@@ -145,4 +146,20 @@ String extractDigits(String input) {
   String digitsOnly =
       input.replaceAll(RegExp(r'[^0-9]'), ''); // оставляем только цифры
   return digitsOnly;
+}
+
+bool? toBool(String origin) {
+  // return "true" if the origin is true
+  if (origin == true) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+String? currentDate() {
+  // return current date in string format YYYY-MM-DD
+  final now = DateTime.now();
+  final formatter = DateFormat('yyyy-MM-dd');
+  return formatter.format(now);
 }

@@ -4,17 +4,15 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'bank_cancel_model.dart';
 export 'bank_cancel_model.dart';
 
 class BankCancelWidget extends StatefulWidget {
   const BankCancelWidget({
-    Key? key,
+    super.key,
     this.slug,
-  }) : super(key: key);
+  });
 
   final String? slug;
 
@@ -59,7 +57,7 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Material(
               color: Colors.transparent,
               elevation: 3.0,
@@ -76,7 +74,7 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 12.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 12.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -103,7 +101,7 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 16.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 16.0),
                       child: Text(
                         'Выберите причину:',
                         style: FlutterFlowTheme.of(context).titleMedium,
@@ -111,7 +109,7 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           logFirebaseEvent(
@@ -130,9 +128,9 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primaryBtnText,
                           textStyle:
@@ -141,7 +139,7 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                                     color: Colors.black,
                                   ),
                           elevation: 3.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -151,7 +149,7 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           logFirebaseEvent(
@@ -170,9 +168,9 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primaryBtnText,
                           textStyle:
@@ -181,7 +179,7 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                                     color: Colors.black,
                                   ),
                           elevation: 3.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -191,7 +189,7 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           logFirebaseEvent(
@@ -210,9 +208,9 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primaryBtnText,
                           textStyle:
@@ -221,7 +219,7 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                                     color: Colors.black,
                                   ),
                           elevation: 3.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -231,7 +229,7 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           logFirebaseEvent(
@@ -250,9 +248,9 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primaryBtnText,
                           textStyle:
@@ -261,7 +259,7 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                                     color: Colors.black,
                                   ),
                           elevation: 3.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -270,8 +268,7 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          16.0, 16.0, 16.0, 16.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           logFirebaseEvent(
@@ -290,9 +287,9 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primaryBtnText,
                           textStyle:
@@ -301,7 +298,7 @@ class _BankCancelWidgetState extends State<BankCancelWidget> {
                                     color: Colors.black,
                                   ),
                           elevation: 3.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),

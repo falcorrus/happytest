@@ -5,21 +5,19 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'proverka_ankety_model.dart';
 export 'proverka_ankety_model.dart';
 
 class ProverkaAnketyWidget extends StatefulWidget {
   const ProverkaAnketyWidget({
-    Key? key,
+    super.key,
     this.slug,
     this.nextslug,
     this.nextsort,
-  }) : super(key: key);
+  });
 
   final String? slug;
   final String? nextslug;
@@ -83,7 +81,7 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: FFAppConstants.background,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,7 +89,7 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
           wrapWithModel(
             model: _model.rowBackModel,
             updateCallback: () => setState(() {}),
-            child: RowBackWidget(),
+            child: const RowBackWidget(),
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -101,10 +99,10 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(-1.00, 0.00),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(25.0, 13.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(25.0, 13.0, 0.0, 0.0),
                       child: Text(
                         'Анкета',
                         style:
@@ -118,7 +116,7 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(25.0, 20.0, 26.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(25.0, 20.0, 26.0, 0.0),
                     child: Container(
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -130,8 +128,7 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                         children: [
                           Flexible(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 10.0, 10.0, 10.0),
+                              padding: const EdgeInsets.all(10.0),
                               child: Text(
                                 'Видны признаки маргинального поведения (состояние опьянения, агрессивного поведения и пр.)',
                                 style: FlutterFlowTheme.of(context).labelLarge,
@@ -139,7 +136,7 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: Theme(
                               data: ThemeData(
@@ -156,6 +153,17 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                                 onChanged: (newValue) async {
                                   setState(
                                       () => _model.checkbox1Value = newValue!);
+                                  if (newValue!) {
+                                    logFirebaseEvent(
+                                        'PROVERKA_ANKETY_Checkbox-1_ON_TOGGLE_ON');
+                                    logFirebaseEvent('Checkbox-1_action_block');
+                                    await _model.anketa(context);
+                                  } else {
+                                    logFirebaseEvent(
+                                        'PROVERKA_ANKETY_Checkbox-1_ON_TOGGLE_OFF');
+                                    logFirebaseEvent('Checkbox-1_action_block');
+                                    await _model.anketa(context);
+                                  }
                                 },
                                 activeColor:
                                     FlutterFlowTheme.of(context).primary,
@@ -169,7 +177,7 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(25.0, 20.0, 26.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(25.0, 20.0, 26.0, 0.0),
                     child: Container(
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -181,8 +189,7 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                         children: [
                           Flexible(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 10.0, 10.0, 10.0),
+                              padding: const EdgeInsets.all(10.0),
                               child: Text(
                                 'Признаки мошенничества (паспорт имеет признаки подделки, признаки неплатежеспособности, неуверенное поведение и пр.)',
                                 style: FlutterFlowTheme.of(context).labelLarge,
@@ -190,7 +197,7 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: Theme(
                               data: ThemeData(
@@ -207,6 +214,17 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                                 onChanged: (newValue) async {
                                   setState(
                                       () => _model.checkbox2Value = newValue!);
+                                  if (newValue!) {
+                                    logFirebaseEvent(
+                                        'PROVERKA_ANKETY_Checkbox-2_ON_TOGGLE_ON');
+                                    logFirebaseEvent('Checkbox-2_action_block');
+                                    await _model.anketa(context);
+                                  } else {
+                                    logFirebaseEvent(
+                                        'PROVERKA_ANKETY_Checkbox-2_ON_TOGGLE_OFF');
+                                    logFirebaseEvent('Checkbox-2_action_block');
+                                    await _model.anketa(context);
+                                  }
                                 },
                                 activeColor:
                                     FlutterFlowTheme.of(context).primary,
@@ -220,7 +238,7 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(25.0, 20.0, 26.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(25.0, 20.0, 26.0, 0.0),
                     child: Container(
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -232,8 +250,7 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                         children: [
                           Flexible(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 10.0, 10.0, 10.0),
+                              padding: const EdgeInsets.all(10.0),
                               child: Text(
                                 'Принуждение клиентом (третьими лицами) курьера к оформлению заявки',
                                 style: FlutterFlowTheme.of(context).labelLarge,
@@ -241,7 +258,7 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: Theme(
                               data: ThemeData(
@@ -258,6 +275,17 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                                 onChanged: (newValue) async {
                                   setState(
                                       () => _model.checkbox3Value = newValue!);
+                                  if (newValue!) {
+                                    logFirebaseEvent(
+                                        'PROVERKA_ANKETY_Checkbox-3_ON_TOGGLE_ON');
+                                    logFirebaseEvent('Checkbox-3_action_block');
+                                    await _model.anketa(context);
+                                  } else {
+                                    logFirebaseEvent(
+                                        'PROVERKA_ANKETY_Checkbox-3_ON_TOGGLE_OFF');
+                                    logFirebaseEvent('Checkbox-3_action_block');
+                                    await _model.anketa(context);
+                                  }
                                 },
                                 activeColor:
                                     FlutterFlowTheme.of(context).primary,
@@ -277,7 +305,7 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(25.0, 10.0, 25.0, 25.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(25.0, 10.0, 25.0, 25.0),
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent('PROVERKA_ANKETY_PAGE_Button-more_ON_TAP');
@@ -288,10 +316,10 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                   options: FFButtonOptions(
                     width: 327.0,
                     height: 48.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    padding: const EdgeInsets.all(0.0),
                     iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: Color(0xFF4460F0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).secondaryText,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Montserrat',
                           color: Colors.white,
@@ -300,8 +328,7 @@ class _ProverkaAnketyWidgetState extends State<ProverkaAnketyWidget>
                           fontWeight: FontWeight.bold,
                           lineHeight: 1.5,
                         ),
-                    elevation: 2.0,
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 1.0,
                     ),

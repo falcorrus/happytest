@@ -2,17 +2,15 @@ import '/components/create_photo_string/create_photo_string_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'add_photo_model.dart';
 export 'add_photo_model.dart';
 
 class AddPhotoWidget extends StatefulWidget {
   const AddPhotoWidget({
-    Key? key,
+    super.key,
     this.slug,
-  }) : super(key: key);
+  });
 
   final String? slug;
 
@@ -52,7 +50,7 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
       mainAxisSize: MainAxisSize.max,
       children: [
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+          padding: const EdgeInsets.all(16.0),
           child: InkWell(
             splashColor: Colors.transparent,
             focusColor: Colors.transparent,
@@ -64,7 +62,7 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
               await showModalBottomSheet(
                 isScrollControlled: true,
                 backgroundColor: Colors.transparent,
-                barrierColor: Color(0x00000000),
+                barrierColor: const Color(0x00000000),
                 context: context,
                 builder: (context) {
                   return Padding(
@@ -81,7 +79,7 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
               height: 68.0,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     blurRadius: 4.0,
                     color: Color(0x0F000000),
@@ -91,7 +89,7 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
                 borderRadius: BorderRadius.circular(13.0),
               ),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -99,10 +97,10 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
                       width: 78.0,
                       height: double.infinity,
                       decoration: BoxDecoration(
-                        color: Color(0xFFDDDDDD),
+                        color: const Color(0xFFDDDDDD),
                         borderRadius: BorderRadius.circular(13.0),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.add_a_photo,
                         color: Color(0xFFB1B1B1),
                         size: 24.0,
@@ -110,7 +108,7 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                       child: Text(
                         'Добавить документ',
                         style: FlutterFlowTheme.of(context).bodyMedium,

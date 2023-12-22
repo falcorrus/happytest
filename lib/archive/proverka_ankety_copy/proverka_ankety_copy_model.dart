@@ -1,12 +1,7 @@
 import '/components/row_back/row_back_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'proverka_ankety_copy_widget.dart' show ProverkaAnketyCopyWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class ProverkaAnketyCopyModel
     extends FlutterFlowModel<ProverkaAnketyCopyWidget> {
@@ -68,10 +63,12 @@ class ProverkaAnketyCopyModel
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     rowBackModel = createModel(context, () => RowBackModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     rowBackModel.dispose();

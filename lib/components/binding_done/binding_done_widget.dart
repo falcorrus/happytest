@@ -3,14 +3,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'binding_done_model.dart';
 export 'binding_done_model.dart';
 
 class BindingDoneWidget extends StatefulWidget {
-  const BindingDoneWidget({Key? key}) : super(key: key);
+  const BindingDoneWidget({super.key});
 
   @override
   _BindingDoneWidgetState createState() => _BindingDoneWidgetState();
@@ -48,9 +46,9 @@ class _BindingDoneWidgetState extends State<BindingDoneWidget> {
       mainAxisSize: MainAxisSize.max,
       children: [
         Align(
-          alignment: AlignmentDirectional(0.00, 0.00),
+          alignment: const AlignmentDirectional(0.0, 0.0),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+            padding: const EdgeInsets.all(16.0),
             child: InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,
@@ -62,12 +60,12 @@ class _BindingDoneWidgetState extends State<BindingDoneWidget> {
                 await showModalBottomSheet(
                   isScrollControlled: true,
                   backgroundColor: Colors.transparent,
-                  barrierColor: Color(0x00000000),
+                  barrierColor: const Color(0x00000000),
                   context: context,
                   builder: (context) {
                     return Padding(
                       padding: MediaQuery.viewInsetsOf(context),
-                      child: CreatePhotoStringWidget(),
+                      child: const CreatePhotoStringWidget(),
                     );
                   },
                 ).then((value) => safeSetState(() {}));
@@ -75,7 +73,7 @@ class _BindingDoneWidgetState extends State<BindingDoneWidget> {
               child: Container(
                 width: 352.0,
                 height: 181.0,
-                constraints: BoxConstraints(
+                constraints: const BoxConstraints(
                   maxWidth: 400.0,
                   maxHeight: 900.0,
                 ),
@@ -88,7 +86,7 @@ class _BindingDoneWidgetState extends State<BindingDoneWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
                       child: Text(
                         'Карта привязана и выдана',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -101,7 +99,7 @@ class _BindingDoneWidgetState extends State<BindingDoneWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
                       child: Text(
                         'Вы можете выбрать дополнительные продукты.',
                         textAlign: TextAlign.center,
@@ -115,13 +113,13 @@ class _BindingDoneWidgetState extends State<BindingDoneWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(15.0, 34.0, 15.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(15.0, 34.0, 15.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
@@ -135,11 +133,11 @@ class _BindingDoneWidgetState extends State<BindingDoneWidget> {
                                 options: FFButtonOptions(
                                   width: double.infinity,
                                   height: 40.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  color: Color(0xFF4460F0),
+                                  color: const Color(0xFF4460F0),
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
@@ -150,7 +148,7 @@ class _BindingDoneWidgetState extends State<BindingDoneWidget> {
                                         fontWeight: FontWeight.bold,
                                       ),
                                   elevation: 0.0,
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),

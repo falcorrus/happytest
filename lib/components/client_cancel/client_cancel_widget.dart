@@ -4,17 +4,15 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'client_cancel_model.dart';
 export 'client_cancel_model.dart';
 
 class ClientCancelWidget extends StatefulWidget {
   const ClientCancelWidget({
-    Key? key,
+    super.key,
     this.slug,
-  }) : super(key: key);
+  });
 
   final String? slug;
 
@@ -55,10 +53,10 @@ class _ClientCancelWidgetState extends State<ClientCancelWidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: Material(
             color: Colors.transparent,
-            elevation: 3.0,
+            elevation: 1.0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16.0),
             ),
@@ -72,7 +70,7 @@ class _ClientCancelWidgetState extends State<ClientCancelWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 12.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 12.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -99,15 +97,15 @@ class _ClientCancelWidgetState extends State<ClientCancelWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 16.0),
                     child: Text(
-                      'Выбирите причину:',
+                      'Выберите причину:',
                       style: FlutterFlowTheme.of(context).titleMedium,
                     ),
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         logFirebaseEvent(
@@ -115,8 +113,22 @@ class _ClientCancelWidgetState extends State<ClientCancelWidget> {
                         logFirebaseEvent('Button_backend_call');
                         await HappyTestAPIGroup.statusCall.call(
                           slug: widget.slug,
-                          status: 'different_product',
+                          status: 'competitors',
                           token: FFAppState().Token,
+                        );
+                        logFirebaseEvent('Button_show_snack_bar');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'статус Competitors',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: const Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
                         );
                         logFirebaseEvent('Button_navigate_to');
 
@@ -127,9 +139,9 @@ class _ClientCancelWidgetState extends State<ClientCancelWidget> {
                         width: double.infinity,
                         height: 40.0,
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primaryBtnText,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
@@ -137,7 +149,7 @@ class _ClientCancelWidgetState extends State<ClientCancelWidget> {
                                   color: Colors.black,
                                 ),
                         elevation: 3.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),
@@ -147,7 +159,7 @@ class _ClientCancelWidgetState extends State<ClientCancelWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         logFirebaseEvent(
@@ -167,9 +179,9 @@ class _ClientCancelWidgetState extends State<ClientCancelWidget> {
                         width: double.infinity,
                         height: 40.0,
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primaryBtnText,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
@@ -177,7 +189,7 @@ class _ClientCancelWidgetState extends State<ClientCancelWidget> {
                                   color: Colors.black,
                                 ),
                         elevation: 3.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),
@@ -186,8 +198,7 @@ class _ClientCancelWidgetState extends State<ClientCancelWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         logFirebaseEvent(
@@ -195,8 +206,22 @@ class _ClientCancelWidgetState extends State<ClientCancelWidget> {
                         logFirebaseEvent('Button_backend_call');
                         await HappyTestAPIGroup.statusCall.call(
                           slug: widget.slug,
-                          status: 'competitors',
+                          status: 'different_product',
                           token: FFAppState().Token,
+                        );
+                        logFirebaseEvent('Button_show_snack_bar');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'статус different_product',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: const Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
                         );
                         logFirebaseEvent('Button_navigate_to');
 
@@ -207,9 +232,9 @@ class _ClientCancelWidgetState extends State<ClientCancelWidget> {
                         width: double.infinity,
                         height: 40.0,
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primaryBtnText,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
@@ -217,7 +242,7 @@ class _ClientCancelWidgetState extends State<ClientCancelWidget> {
                                   color: Colors.black,
                                 ),
                         elevation: 3.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),

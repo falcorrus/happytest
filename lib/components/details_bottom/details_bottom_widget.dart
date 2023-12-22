@@ -2,14 +2,12 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'details_bottom_model.dart';
 export 'details_bottom_model.dart';
 
 class DetailsBottomWidget extends StatefulWidget {
-  const DetailsBottomWidget({Key? key}) : super(key: key);
+  const DetailsBottomWidget({super.key});
 
   @override
   _DetailsBottomWidgetState createState() => _DetailsBottomWidgetState();
@@ -47,35 +45,35 @@ class _DetailsBottomWidgetState extends State<DetailsBottomWidget> {
       width: 375.0,
       height: 309.0,
       decoration: BoxDecoration(
-        color: Color(0xFFF7F7F7),
-        boxShadow: [
+        color: const Color(0xFFF7F7F7),
+        boxShadow: const [
           BoxShadow(
             blurRadius: 27.0,
             color: Color(0x33000000),
             offset: Offset(0.0, 4.0),
           )
         ],
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
           topRight: Radius.circular(20.0),
         ),
         border: Border.all(
-          color: Color(0xFFEFEFF4),
+          color: const Color(0xFFEFEFF4),
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Align(
-                alignment: AlignmentDirectional(-1.00, 0.00),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -92,7 +90,7 @@ class _DetailsBottomWidgetState extends State<DetailsBottomWidget> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Align(
-                          alignment: AlignmentDirectional(-1.00, -1.00),
+                          alignment: const AlignmentDirectional(-1.0, -1.0),
                           child: FlutterFlowIconButton(
                             borderRadius: 30.0,
                             borderWidth: 1.0,
@@ -117,7 +115,7 @@ class _DetailsBottomWidgetState extends State<DetailsBottomWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -125,7 +123,7 @@ class _DetailsBottomWidgetState extends State<DetailsBottomWidget> {
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 14.0, 0.0),
                           child: Icon(
@@ -149,13 +147,13 @@ class _DetailsBottomWidgetState extends State<DetailsBottomWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                       child: Text(
                         '№232-190222',
                         textAlign: TextAlign.end,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Montserrat',
-                              color: Color(0xFFC6C6C6),
+                              color: const Color(0xFFC6C6C6),
                               fontSize: 10.0,
                               fontWeight: FontWeight.w500,
                             ),
@@ -165,15 +163,15 @@ class _DetailsBottomWidgetState extends State<DetailsBottomWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(-1.00, 0.00),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                   child: Text(
                     '11:00 - 12:00',
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
                           fontFamily: 'Montserrat',
-                          color: Color(0xFF4460F0),
+                          color: const Color(0xFF4460F0),
                           fontSize: 28.0,
                           letterSpacing: 0.1,
                           fontWeight: FontWeight.bold,
@@ -183,15 +181,15 @@ class _DetailsBottomWidgetState extends State<DetailsBottomWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(-1.00, 0.00),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                   child: Text(
                     'Заказчик',
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Montserrat',
-                          color: Color(0xFF868686),
+                          color: const Color(0xFF868686),
                           fontSize: 10.0,
                           letterSpacing: 0.1,
                           lineHeight: 1.2,
@@ -200,14 +198,14 @@ class _DetailsBottomWidgetState extends State<DetailsBottomWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 1.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 1.0, 0.0),
                       child: Text(
                         'Янчевский Афанасий Ростиславович',
                         maxLines: 2,
@@ -224,15 +222,15 @@ class _DetailsBottomWidgetState extends State<DetailsBottomWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(-1.00, 0.00),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Text(
                     'Адрес',
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Montserrat',
-                          color: Color(0xFF868686),
+                          color: const Color(0xFF868686),
                           fontSize: 10.0,
                           letterSpacing: 0.1,
                           lineHeight: 1.2,
@@ -241,7 +239,7 @@ class _DetailsBottomWidgetState extends State<DetailsBottomWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -259,15 +257,15 @@ class _DetailsBottomWidgetState extends State<DetailsBottomWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(-1.00, 0.00),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Text(
                     'Номер телефона',
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Montserrat',
-                          color: Color(0xFF868686),
+                          color: const Color(0xFF868686),
                           fontSize: 10.0,
                           letterSpacing: 0.1,
                           lineHeight: 1.2,
@@ -276,9 +274,9 @@ class _DetailsBottomWidgetState extends State<DetailsBottomWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(-1.00, 0.00),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 22.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 22.0),
                   child: Text(
                     '+7 (954) 343 12 51',
                     textAlign: TextAlign.start,

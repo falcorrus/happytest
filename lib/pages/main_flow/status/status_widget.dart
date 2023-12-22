@@ -4,20 +4,18 @@ import '/components/client_cancel/client_cancel_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'status_model.dart';
 export 'status_model.dart';
 
 class StatusWidget extends StatefulWidget {
   const StatusWidget({
-    Key? key,
+    super.key,
     this.slug,
-  }) : super(key: key);
+  });
 
   final String? slug;
 
@@ -68,7 +66,7 @@ class _StatusWidgetState extends State<StatusWidget> {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
-            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            backgroundColor: FFAppConstants.background,
             body: Center(
               child: SizedBox(
                 width: 50.0,
@@ -89,24 +87,33 @@ class _StatusWidgetState extends State<StatusWidget> {
               : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            backgroundColor: FFAppConstants.background,
             body: Column(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primaryBackground,
-                  ),
-                  child: SingleChildScrollView(
+                Flexible(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 100),
+                    curve: Curves.easeIn,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(0.0),
+                        bottomRight: Radius.circular(0.0),
+                        topLeft: Radius.circular(16.0),
+                        topRight: Radius.circular(16.0),
+                      ),
+                    ),
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Align(
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 32.0, 0.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -124,10 +131,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Align(
-                                    alignment:
-                                        AlignmentDirectional(-1.00, -1.00),
+                                    alignment: const AlignmentDirectional(-1.0, -1.0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           12.0, 0.0, 0.0, 0.0),
                                       child: FlutterFlowIconButton(
                                         borderColor: Colors.transparent,
@@ -156,14 +162,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                             ),
                           ),
                         ),
-                        if (HappyTestAPIGroup.orderCall
-                                .statusslug(
-                                  statusOrderResponse.jsonBody,
-                                )
-                                .toString() ==
-                            'verified')
+                        if (FFAppState().status == 'verified')
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 10.0, 0.0, 0.0),
                             child: Text(
                               'Верификация пройдена',
@@ -183,7 +184,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                 .toString() ==
                             'denied')
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 10.0, 0.0, 0.0),
                             child: Text(
                               'Верификация не пройдена',
@@ -209,7 +210,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                     .toString() ==
                                 'meeting_confirmed'))
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 10.0, 0.0, 0.0),
                             child: Text(
                               'Отмена встречи',
@@ -224,9 +225,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                             ),
                           ),
                         Align(
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 16.0, 0.0, 0.0),
                             child: Text(
                               'Информация о встрече',
@@ -235,7 +236,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Montserrat',
-                                    color: Color(0xFF868686),
+                                    color: const Color(0xFF868686),
                                     fontSize: 18.0,
                                     letterSpacing: 0.1,
                                     fontWeight: FontWeight.bold,
@@ -245,9 +246,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 20.0, 0.0, 0.0),
                             child: Text(
                               'ID заказа',
@@ -256,7 +257,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Montserrat',
-                                    color: Color(0xFF868686),
+                                    color: const Color(0xFF868686),
                                     fontSize: 10.0,
                                     letterSpacing: 0.1,
                                     lineHeight: 1.2,
@@ -265,9 +266,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 5.0, 0.0, 0.0),
                             child: Text(
                               HappyTestAPIGroup.orderCall
@@ -289,9 +290,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 20.0, 0.0, 0.0),
                             child: Text(
                               'Заказчик',
@@ -300,7 +301,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Montserrat',
-                                    color: Color(0xFF868686),
+                                    color: const Color(0xFF868686),
                                     fontSize: 10.0,
                                     letterSpacing: 0.1,
                                     lineHeight: 1.2,
@@ -312,9 +313,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-1.00, 0.00),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     25.0, 0.0, 1.0, 0.0),
                                 child: Text(
                                   valueOrDefault<String>(
@@ -343,9 +344,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                           ],
                         ),
                         Align(
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 20.0, 0.0, 0.0),
                             child: Text(
                               'Адрес',
@@ -354,7 +355,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Montserrat',
-                                    color: Color(0xFF868686),
+                                    color: const Color(0xFF868686),
                                     fontSize: 10.0,
                                     letterSpacing: 0.1,
                                     lineHeight: 1.2,
@@ -363,9 +364,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 5.0, 0.0, 0.0),
                             child: Text(
                               valueOrDefault<String>(
@@ -389,9 +390,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 20.0, 0.0, 0.0),
                             child: Text(
                               'Номер телефона',
@@ -400,7 +401,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Montserrat',
-                                    color: Color(0xFF868686),
+                                    color: const Color(0xFF868686),
                                     fontSize: 10.0,
                                     letterSpacing: 0.1,
                                     lineHeight: 1.2,
@@ -409,9 +410,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 5.0, 0.0, 0.0),
                             child: Text(
                               valueOrDefault<String>(
@@ -439,2648 +440,1967 @@ class _StatusWidgetState extends State<StatusWidget> {
                     ),
                   ),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      if (HappyTestAPIGroup.orderCall
-                              .statusslug(
-                                statusOrderResponse.jsonBody,
-                              )
-                              .toString() ==
-                          'verified')
-                        Material(
-                          color: Colors.transparent,
-                          elevation: 0.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.0),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    if ((FFAppState().status == 'waiting') ||
+                        (FFAppState().status == 'meeting_rescheduled'))
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          boxShadow: const [
+                            BoxShadow(
+                              blurRadius: 4.0,
+                              color: Color(0x33000000),
+                              offset: Offset(0.0, 2.0),
+                            )
+                          ],
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(0.0),
+                            bottomRight: Radius.circular(0.0),
+                            topLeft: Radius.circular(26.0),
+                            topRight: Radius.circular(26.0),
                           ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4.0,
-                                  color: Color(0x33000000),
-                                  offset: Offset(0.0, 2.0),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(16.0),
-                              border: Border.all(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                width: 1.0,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Align(
+                              alignment: const AlignmentDirectional(-1.0, -1.0),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    25.0, 10.0, 0.0, 10.0),
+                                child: Text(
+                                  'Выберите причину отмены',
+                                  textAlign: TextAlign.start,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Montserrat',
+                                        color: const Color(0xFF868686),
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.1,
+                                        fontWeight: FontWeight.bold,
+                                        lineHeight: 1.2,
+                                      ),
+                                ),
                               ),
                             ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(-1.00, -1.00),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        25.0, 10.0, 0.0, 10.0),
-                                    child: Text(
-                                      'Выберите причину',
-                                      textAlign: TextAlign.start,
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  10.0, 0.0, 10.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'STATUS_PAGE_Row-transMeeting_ON_TAP');
+                                  logFirebaseEvent(
+                                      'Row-transMeeting_navigate_to');
+
+                                  context.goNamed(
+                                    'statusMoveMeeting',
+                                    queryParameters: {
+                                      'slug': serializeParam(
+                                        FFAppState().slug,
+                                        ParamType.String,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          15.0, 0.0, 15.0, 0.0),
+                                      child: Image.asset(
+                                        'assets/images/Vector1.png',
+                                        width: 24.0,
+                                        height: 24.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Перенос встречи',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment:
+                                            const AlignmentDirectional(1.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 15.0, 0.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                1.0,
+                                            height: 50.0,
+                                            decoration: const BoxDecoration(),
+                                            child: Align(
+                                              alignment: const AlignmentDirectional(
+                                                  1.0, 0.0),
+                                              child: Image.asset(
+                                                'assets/images/chevron-right-circle_1.png',
+                                                width: 24.0,
+                                                height: 24.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  10.0, 0.0, 10.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'STATUS_PAGE_Row-doMeeting_ON_TAP');
+                                  logFirebaseEvent(
+                                      'Row-doMeeting_backend_call');
+                                  await HappyTestAPIGroup.statusCall.call(
+                                    slug: widget.slug,
+                                    status: 'napravlen-v-do',
+                                    token: FFAppState().Token,
+                                  );
+                                  logFirebaseEvent('Row-doMeeting_navigate_to');
+
+                                  context.pushNamed('OrdersList');
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          15.0, 0.0, 15.0, 0.0),
+                                      child: Image.asset(
+                                        'assets/images/Vector1.png',
+                                        width: 24.0,
+                                        height: 24.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Направлен в ДО',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment:
+                                            const AlignmentDirectional(1.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 15.0, 0.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                1.0,
+                                            height: 50.0,
+                                            decoration: const BoxDecoration(),
+                                            child: Align(
+                                              alignment: const AlignmentDirectional(
+                                                  1.0, 0.0),
+                                              child: Image.asset(
+                                                'assets/images/chevron-right-circle_1.png',
+                                                width: 24.0,
+                                                height: 24.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  10.0, 0.0, 10.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'STATUS_PAGE_Row-errorRoute_ON_TAP');
+                                  logFirebaseEvent(
+                                      'Row-errorRoute_backend_call');
+                                  await HappyTestAPIGroup.statusCall.call(
+                                    slug: widget.slug,
+                                    status: 'osibka-marsruta',
+                                    token: FFAppState().Token,
+                                  );
+                                  logFirebaseEvent(
+                                      'Row-errorRoute_navigate_to');
+
+                                  context.pushNamed('OrdersList');
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          15.0, 0.0, 15.0, 0.0),
+                                      child: Image.asset(
+                                        'assets/images/Vector1.png',
+                                        width: 24.0,
+                                        height: 24.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Ошибка маршрута',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment:
+                                            const AlignmentDirectional(1.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 15.0, 0.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                1.0,
+                                            height: 50.0,
+                                            decoration: const BoxDecoration(),
+                                            child: Align(
+                                              alignment: const AlignmentDirectional(
+                                                  1.0, 0.0),
+                                              child: Image.asset(
+                                                'assets/images/chevron-right-circle_1.png',
+                                                width: 24.0,
+                                                height: 24.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  10.0, 0.0, 10.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'STATUS_PAGE_Row-cancelClient_ON_TAP');
+                                  logFirebaseEvent(
+                                      'Row-cancelClient_bottom_sheet');
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    barrierColor: const Color(0x00000000),
+                                    context: context,
+                                    builder: (context) {
+                                      return GestureDetector(
+                                        onTap: () => _model
+                                                .unfocusNode.canRequestFocus
+                                            ? FocusScope.of(context)
+                                                .requestFocus(
+                                                    _model.unfocusNode)
+                                            : FocusScope.of(context).unfocus(),
+                                        child: Padding(
+                                          padding:
+                                              MediaQuery.viewInsetsOf(context),
+                                          child: ClientCancelWidget(
+                                            slug: widget.slug,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ).then((value) => safeSetState(() {}));
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          15.0, 0.0, 15.0, 0.0),
+                                      child: Image.asset(
+                                        'assets/images/Vector2-1.png',
+                                        width: 24.0,
+                                        height: 24.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Отказ клиента',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Montserrat',
-                                            color: Color(0xFF868686),
-                                            fontSize: 18.0,
-                                            letterSpacing: 0.1,
-                                            fontWeight: FontWeight.bold,
-                                            lineHeight: 1.2,
+                                            color: const Color(0xFFB80000),
                                           ),
                                     ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-transMeeting_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-transMeeting_backend_call');
-                                      _model.apiResulteqs =
-                                          await HappyTestAPIGroup.statusCall
-                                              .call(
-                                        slug: widget.slug,
-                                        status: 'karta-vydana',
-                                        token: FFAppState().Token,
-                                      );
-                                      logFirebaseEvent(
-                                          'Row-transMeeting_navigate_to');
-
-                                      context.pushNamed('OrdersList');
-
-                                      setState(() {});
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
+                                    Expanded(
+                                      child: Align(
+                                        alignment:
+                                            const AlignmentDirectional(1.0, 0.0),
+                                        child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.solidCreditCard,
-                                            color: Color(0xAE4FCF4F),
-                                            size: 24.0,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Карта выдана',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 15.0, 0.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                1.0,
+                                            height: 50.0,
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.rectangle,
+                                            ),
+                                            child: Align(
+                                              alignment: const AlignmentDirectional(
+                                                  1.0, 0.0),
+                                              child: Image.asset(
+                                                'assets/images/chevron-right-circle_1.png',
+                                                width: 24.0,
+                                                height: 24.0,
+                                                fit: BoxFit.cover,
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-doMeeting_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-doMeeting_backend_call');
-                                      await HappyTestAPIGroup.statusCall.call(
-                                        slug: widget.slug,
-                                        status: 'napravlen-v-do',
-                                        token: FFAppState().Token,
-                                      );
-                                      logFirebaseEvent(
-                                          'Row-doMeeting_navigate_to');
-
-                                      context.pushNamed('OrdersList');
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Направлен в ДО',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-cancelClient_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-cancelClient_bottom_sheet');
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x00000000),
-                                        context: context,
-                                        builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: ClientCancelWidget(
-                                                slug: widget.slug,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => safeSetState(() {}));
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector2-1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Отказ клиента',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-cancelBank_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-cancelBank_bottom_sheet');
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x00000000),
-                                        context: context,
-                                        builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: BankCancelWidget(
-                                                slug: widget.slug,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => safeSetState(() {}));
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector2-1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Отказ банка',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 25.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-noContact_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-noContact_backend_call');
-                                      await HappyTestAPIGroup.statusCall.call(
-                                        slug: widget.slug,
-                                        status: 'texniceskii-sboi',
-                                        token: FFAppState().Token,
-                                      );
-                                      logFirebaseEvent(
-                                          'Row-noContact_navigate_to');
-
-                                      context.pushNamed('OrdersList');
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector3.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Тех. сбой',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  10.0, 0.0, 10.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'STATUS_PAGE_Row-cancelBank_ON_TAP');
+                                  logFirebaseEvent(
+                                      'Row-cancelBank_bottom_sheet');
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: const Color(0x32000000),
+                                    barrierColor: const Color(0x00000000),
+                                    context: context,
+                                    builder: (context) {
+                                      return GestureDetector(
+                                        onTap: () => _model
+                                                .unfocusNode.canRequestFocus
+                                            ? FocusScope.of(context)
+                                                .requestFocus(
+                                                    _model.unfocusNode)
+                                            : FocusScope.of(context).unfocus(),
+                                        child: Padding(
+                                          padding:
+                                              MediaQuery.viewInsetsOf(context),
+                                          child: BankCancelWidget(
+                                            slug: widget.slug,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ).then((value) => safeSetState(() {}));
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          15.0, 0.0, 15.0, 0.0),
+                                      child: Image.asset(
+                                        'assets/images/Vector2-1.png',
+                                        width: 24.0,
+                                        height: 24.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Отказ банка',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Montserrat',
+                                            color: const Color(0xFFB80000),
+                                          ),
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment:
+                                            const AlignmentDirectional(1.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 15.0, 0.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                1.0,
+                                            height: 50.0,
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.rectangle,
+                                            ),
+                                            child: Align(
+                                              alignment: const AlignmentDirectional(
+                                                  1.0, 0.0),
+                                              child: Image.asset(
+                                                'assets/images/chevron-right-circle_1.png',
+                                                width: 24.0,
+                                                height: 24.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  10.0, 0.0, 10.0, 10.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'STATUS_PAGE_Row-noContact_ON_TAP');
+                                  logFirebaseEvent(
+                                      'Row-noContact_backend_call');
+                                  await HappyTestAPIGroup.statusCall.call(
+                                    status: 'client_out',
+                                    slug: FFAppState().slug,
+                                    token: FFAppState().Token,
+                                  );
+                                  logFirebaseEvent('Row-noContact_navigate_to');
+
+                                  context.pushNamed('OrdersList');
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          15.0, 0.0, 15.0, 0.0),
+                                      child: Image.asset(
+                                        'assets/images/Vector3.png',
+                                        width: 24.0,
+                                        height: 24.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Недозвон',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Montserrat',
+                                            color: const Color(0xFFB80000),
+                                          ),
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment:
+                                            const AlignmentDirectional(1.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 15.0, 0.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                1.0,
+                                            height: 50.0,
+                                            decoration: const BoxDecoration(),
+                                            child: Align(
+                                              alignment: const AlignmentDirectional(
+                                                  1.0, 0.0),
+                                              child: Image.asset(
+                                                'assets/images/chevron-right-circle_1.png',
+                                                width: 24.0,
+                                                height: 24.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      if (HappyTestAPIGroup.orderCall
-                              .statusslug(
-                                statusOrderResponse.jsonBody,
+                      ),
+                    if ((FFAppState().status == 'meeting_confirmed') ||
+                        (FFAppState().status == 'nacat-vstrecu'))
+                      Material(
+                        color: Colors.transparent,
+                        elevation: 0.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            boxShadow: const [
+                              BoxShadow(
+                                blurRadius: 4.0,
+                                color: Color(0x33000000),
+                                offset: Offset(0.0, 2.0),
                               )
-                              .toString() ==
-                          'denied')
-                        Material(
-                          color: Colors.transparent,
-                          elevation: 0.0,
-                          shape: RoundedRectangleBorder(
+                            ],
                             borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          child: Container(
-                            decoration: BoxDecoration(
+                            border: Border.all(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4.0,
-                                  color: Color(0x33000000),
-                                  offset: Offset(0.0, 2.0),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(16.0),
-                              border: Border.all(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                width: 1.0,
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(-1.00, -1.00),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        25.0, 10.0, 0.0, 10.0),
-                                    child: Text(
-                                      'Выберите причину',
-                                      textAlign: TextAlign.start,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Montserrat',
-                                            color: Color(0xFF868686),
-                                            fontSize: 18.0,
-                                            letterSpacing: 0.1,
-                                            fontWeight: FontWeight.bold,
-                                            lineHeight: 1.2,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_NapravlenVDO_ON_TAP');
-                                      logFirebaseEvent(
-                                          'NapravlenVDO_backend_call');
-                                      await HappyTestAPIGroup.statusCall.call(
-                                        slug: widget.slug,
-                                        status: 'napravlen-v-do',
-                                        token: FFAppState().Token,
-                                      );
-                                      logFirebaseEvent(
-                                          'NapravlenVDO_navigate_to');
-
-                                      context.pushNamed('OrdersList');
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Направлен в ДО',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-cancelClient_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-cancelClient_bottom_sheet');
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x00000000),
-                                        context: context,
-                                        builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: ClientCancelWidget(
-                                                slug: widget.slug,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => safeSetState(() {}));
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector2-1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Отказ клиента',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-cancelBank_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-cancelBank_bottom_sheet');
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x00000000),
-                                        context: context,
-                                        builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: BankCancelWidget(
-                                                slug: widget.slug,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => safeSetState(() {}));
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector2-1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Отказ банка',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 25.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-noContact_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-noContact_backend_call');
-                                      _model.apiResultkl5 =
-                                          await HappyTestAPIGroup.nextmoduleCall
-                                              .call();
-                                      logFirebaseEvent(
-                                          'Row-noContact_navigate_to');
-
-                                      context.pushNamed('OrdersList');
-
-                                      setState(() {});
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector3.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Тех. сбой',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
+                              width: 1.0,
                             ),
                           ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Align(
+                                alignment: const AlignmentDirectional(-1.0, -1.0),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      25.0, 10.0, 0.0, 10.0),
+                                  child: Text(
+                                    'Выберите причину отмены',
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Montserrat',
+                                          color: const Color(0xFF868686),
+                                          fontSize: 18.0,
+                                          letterSpacing: 0.1,
+                                          fontWeight: FontWeight.bold,
+                                          lineHeight: 1.2,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_Row-transMeeting_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Row-transMeeting_navigate_to');
+
+                                    context.goNamed(
+                                      'statusMoveMeeting',
+                                      queryParameters: {
+                                        'slug': serializeParam(
+                                          widget.slug,
+                                          ParamType.String,
+                                        ),
+                                      }.withoutNulls,
+                                    );
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: Image.asset(
+                                          'assets/images/Vector1.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Перенос встречи',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_Row-doMeeting_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Row-doMeeting_backend_call');
+                                    await HappyTestAPIGroup.statusCall.call(
+                                      slug: widget.slug,
+                                      status: 'napravlen-v-do',
+                                      token: FFAppState().Token,
+                                    );
+                                    logFirebaseEvent(
+                                        'Row-doMeeting_navigate_to');
+
+                                    context.pushNamed('OrdersList');
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: Image.asset(
+                                          'assets/images/Vector1.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Направлен в ДО',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_Row-errorRoute_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Row-errorRoute_backend_call');
+                                    await HappyTestAPIGroup.statusCall.call(
+                                      slug: widget.slug,
+                                      status: 'texniceskii-sboi',
+                                      token: FFAppState().Token,
+                                    );
+                                    logFirebaseEvent(
+                                        'Row-errorRoute_navigate_to');
+
+                                    context.pushNamed('OrdersList');
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: Image.asset(
+                                          'assets/images/Vector1.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Технический сбой',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_Row-cancelClient_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Row-cancelClient_bottom_sheet');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      barrierColor: const Color(0x00000000),
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: ClientCancelWidget(
+                                              slug: widget.slug,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: Image.asset(
+                                          'assets/images/Vector2-1.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Отказ клиента',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Montserrat',
+                                              color: const Color(0xFFB80000),
+                                            ),
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.rectangle,
+                                              ),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_Row-cancelBank_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Row-cancelBank_bottom_sheet');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      barrierColor: const Color(0x00000000),
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: BankCancelWidget(
+                                              slug: widget.slug,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: Image.asset(
+                                          'assets/images/Vector2-1.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Отказ банка',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Montserrat',
+                                              color: const Color(0xFFB80000),
+                                            ),
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.rectangle,
+                                              ),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 25.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_Row-noContact_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Row-noContact_backend_call');
+                                    await HappyTestAPIGroup.statusCall.call(
+                                      status: 'drive_no_contact',
+                                    );
+                                    logFirebaseEvent(
+                                        'Row-noContact_navigate_to');
+
+                                    context.pushNamed('OrdersList');
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: Image.asset(
+                                          'assets/images/Vector3.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Недозвон',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Montserrat',
+                                              color: const Color(0xFFB80000),
+                                            ),
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      if (HappyTestAPIGroup.orderCall
-                              .statusslug(
-                                statusOrderResponse.jsonBody,
+                      ),
+                    if (HappyTestAPIGroup.orderCall
+                            .statusslug(
+                              statusOrderResponse.jsonBody,
+                            )
+                            .toString() ==
+                        'verified1')
+                      Material(
+                        color: Colors.transparent,
+                        elevation: 0.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            boxShadow: const [
+                              BoxShadow(
+                                blurRadius: 4.0,
+                                color: Color(0x33000000),
+                                offset: Offset(0.0, 2.0),
                               )
-                              .toString() ==
-                          'waiting')
-                        Material(
-                          color: Colors.transparent,
-                          elevation: 0.0,
-                          shape: RoundedRectangleBorder(
+                            ],
                             borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          child: Container(
-                            decoration: BoxDecoration(
+                            border: Border.all(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4.0,
-                                  color: Color(0x33000000),
-                                  offset: Offset(0.0, 2.0),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(16.0),
-                              border: Border.all(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                width: 1.0,
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(-1.00, -1.00),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        25.0, 10.0, 0.0, 10.0),
-                                    child: Text(
-                                      'Выберите причину отмены',
-                                      textAlign: TextAlign.start,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Montserrat',
-                                            color: Color(0xFF868686),
-                                            fontSize: 18.0,
-                                            letterSpacing: 0.1,
-                                            fontWeight: FontWeight.bold,
-                                            lineHeight: 1.2,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-transMeeting_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-transMeeting_navigate_to');
-
-                                      context.goNamed(
-                                        'statusMoveMeeting',
-                                        queryParameters: {
-                                          'slug': serializeParam(
-                                            widget.slug,
-                                            ParamType.String,
-                                          ),
-                                        }.withoutNulls,
-                                      );
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Перенос встречи',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-doMeeting_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-doMeeting_backend_call');
-                                      await HappyTestAPIGroup.statusCall.call(
-                                        slug: widget.slug,
-                                        status: 'napravlen-v-do',
-                                        token: FFAppState().Token,
-                                      );
-                                      logFirebaseEvent(
-                                          'Row-doMeeting_navigate_to');
-
-                                      context.pushNamed('OrdersList');
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Направлен в ДО',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-errorRoute_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-errorRoute_backend_call');
-                                      await HappyTestAPIGroup.statusCall.call(
-                                        slug: widget.slug,
-                                        status: 'osibka-marsruta',
-                                        token: FFAppState().Token,
-                                      );
-                                      logFirebaseEvent(
-                                          'Row-errorRoute_navigate_to');
-
-                                      context.pushNamed('OrdersList');
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Ошибка маршрута',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-cancelClient_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-cancelClient_bottom_sheet');
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x00000000),
-                                        context: context,
-                                        builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: ClientCancelWidget(
-                                                slug: widget.slug,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => safeSetState(() {}));
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector2-1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Отказ клиента',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-cancelBank_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-cancelBank_bottom_sheet');
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Color(0x32000000),
-                                        barrierColor: Color(0x00000000),
-                                        context: context,
-                                        builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: BankCancelWidget(
-                                                slug: widget.slug,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => safeSetState(() {}));
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector2-1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Отказ банка',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 25.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-noContact_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-noContact_backend_call');
-                                      await HappyTestAPIGroup.statusCall.call();
-                                      logFirebaseEvent(
-                                          'Row-noContact_navigate_to');
-
-                                      context.pushNamed('OrdersList');
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector3.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Недозвон',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
+                              width: 1.0,
                             ),
                           ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Align(
+                                alignment: const AlignmentDirectional(-1.0, -1.0),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      25.0, 10.0, 0.0, 10.0),
+                                  child: Text(
+                                    'Выберите причину',
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Montserrat',
+                                          color: const Color(0xFF868686),
+                                          fontSize: 18.0,
+                                          letterSpacing: 0.1,
+                                          fontWeight: FontWeight.bold,
+                                          lineHeight: 1.2,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_Row-transMeeting_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Row-transMeeting_backend_call');
+                                    _model.apiResulteqs =
+                                        await HappyTestAPIGroup.statusCall.call(
+                                      slug: widget.slug,
+                                      status: 'karta-vydana',
+                                      token: FFAppState().Token,
+                                    );
+                                    logFirebaseEvent(
+                                        'Row-transMeeting_navigate_to');
+
+                                    context.pushNamed('OrdersList');
+
+                                    setState(() {});
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      const Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: FaIcon(
+                                          FontAwesomeIcons.solidCreditCard,
+                                          color: Color(0xAE4FCF4F),
+                                          size: 24.0,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Карта выдана',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_Row-doMeeting_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Row-doMeeting_backend_call');
+                                    await HappyTestAPIGroup.statusCall.call(
+                                      slug: widget.slug,
+                                      status: 'napravlen-v-do',
+                                      token: FFAppState().Token,
+                                    );
+                                    logFirebaseEvent(
+                                        'Row-doMeeting_navigate_to');
+
+                                    context.pushNamed('OrdersList');
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: Image.asset(
+                                          'assets/images/Vector1.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Направлен в ДО',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_Row-cancelClient_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Row-cancelClient_bottom_sheet');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      barrierColor: const Color(0x00000000),
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: ClientCancelWidget(
+                                              slug: widget.slug,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: Image.asset(
+                                          'assets/images/Vector2-1.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Отказ клиента',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Montserrat',
+                                              color: const Color(0xFFB80000),
+                                            ),
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.rectangle,
+                                              ),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_Row-cancelBank_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Row-cancelBank_bottom_sheet');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      barrierColor: const Color(0x00000000),
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: BankCancelWidget(
+                                              slug: widget.slug,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: Image.asset(
+                                          'assets/images/Vector2-1.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Отказ банка',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Montserrat',
+                                              color: const Color(0xFFB80000),
+                                            ),
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.rectangle,
+                                              ),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 25.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_Row-noContact_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Row-noContact_backend_call');
+                                    await HappyTestAPIGroup.statusCall.call(
+                                      slug: widget.slug,
+                                      status: 'texniceskii-sboi',
+                                      token: FFAppState().Token,
+                                    );
+                                    logFirebaseEvent(
+                                        'Row-noContact_navigate_to');
+
+                                    context.pushNamed('OrdersList');
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: Image.asset(
+                                          'assets/images/Vector3.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Тех. сбой',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Montserrat',
+                                              color: const Color(0xFFB80000),
+                                            ),
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      if (HappyTestAPIGroup.orderCall
-                              .statusslug(
-                                statusOrderResponse.jsonBody,
+                      ),
+                    if (HappyTestAPIGroup.orderCall
+                            .statusslug(
+                              statusOrderResponse.jsonBody,
+                            )
+                            .toString() ==
+                        'denied1')
+                      Material(
+                        color: Colors.transparent,
+                        elevation: 0.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            boxShadow: const [
+                              BoxShadow(
+                                blurRadius: 4.0,
+                                color: Color(0x33000000),
+                                offset: Offset(0.0, 2.0),
                               )
-                              .toString() ==
-                          'meeting_confirmed')
-                        Material(
-                          color: Colors.transparent,
-                          elevation: 0.0,
-                          shape: RoundedRectangleBorder(
+                            ],
                             borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          child: Container(
-                            decoration: BoxDecoration(
+                            border: Border.all(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4.0,
-                                  color: Color(0x33000000),
-                                  offset: Offset(0.0, 2.0),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(16.0),
-                              border: Border.all(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                width: 1.0,
+                              width: 1.0,
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Align(
+                                alignment: const AlignmentDirectional(-1.0, -1.0),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      25.0, 10.0, 0.0, 10.0),
+                                  child: Text(
+                                    'Выберите причину',
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Montserrat',
+                                          color: const Color(0xFF868686),
+                                          fontSize: 18.0,
+                                          letterSpacing: 0.1,
+                                          fontWeight: FontWeight.bold,
+                                          lineHeight: 1.2,
+                                        ),
+                                  ),
+                                ),
                               ),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(-1.00, -1.00),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        25.0, 10.0, 0.0, 10.0),
-                                    child: Text(
-                                      'Выберите причину отмены',
-                                      textAlign: TextAlign.start,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Montserrat',
-                                            color: Color(0xFF868686),
-                                            fontSize: 18.0,
-                                            letterSpacing: 0.1,
-                                            fontWeight: FontWeight.bold,
-                                            lineHeight: 1.2,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-transMeeting_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-transMeeting_navigate_to');
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_NapravlenVDO_ON_TAP');
+                                    logFirebaseEvent(
+                                        'NapravlenVDO_backend_call');
+                                    await HappyTestAPIGroup.statusCall.call(
+                                      slug: widget.slug,
+                                      status: 'napravlen-v-do',
+                                      token: FFAppState().Token,
+                                    );
+                                    logFirebaseEvent(
+                                        'NapravlenVDO_navigate_to');
 
-                                      context.goNamed(
-                                        'statusMoveMeeting',
-                                        queryParameters: {
-                                          'slug': serializeParam(
-                                            widget.slug,
-                                            ParamType.String,
-                                          ),
-                                        }.withoutNulls,
-                                      );
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
+                                    context.pushNamed('OrdersList');
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: Image.asset(
+                                          'assets/images/Vector1.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
                                         ),
-                                        Text(
-                                          'Перенос встречи',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
+                                      ),
+                                      Text(
+                                        'Направлен в ДО',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-doMeeting_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-doMeeting_backend_call');
-                                      await HappyTestAPIGroup.statusCall.call(
-                                        slug: widget.slug,
-                                        status: 'napravlen-v-do',
-                                        token: FFAppState().Token,
-                                      );
-                                      logFirebaseEvent(
-                                          'Row-doMeeting_navigate_to');
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_Row-cancelClient_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Row-cancelClient_bottom_sheet');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      barrierColor: const Color(0x00000000),
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: ClientCancelWidget(
+                                              slug: widget.slug,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: Image.asset(
+                                          'assets/images/Vector2-1.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Отказ клиента',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Montserrat',
+                                              color: const Color(0xFFB80000),
+                                            ),
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.rectangle,
+                                              ),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_Row-cancelBank_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Row-cancelBank_bottom_sheet');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      barrierColor: const Color(0x00000000),
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: BankCancelWidget(
+                                              slug: widget.slug,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: Image.asset(
+                                          'assets/images/Vector2-1.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Отказ банка',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Montserrat',
+                                              color: const Color(0xFFB80000),
+                                            ),
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.rectangle,
+                                              ),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 25.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'STATUS_PAGE_Row-noContact_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Row-noContact_backend_call');
+                                    _model.apiResultkl5 =
+                                        await HappyTestAPIGroup.nextmoduleCall
+                                            .call();
+                                    logFirebaseEvent(
+                                        'Row-noContact_navigate_to');
 
-                                      context.pushNamed('OrdersList');
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Направлен в ДО',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-errorRoute_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-errorRoute_backend_call');
-                                      await HappyTestAPIGroup.statusCall.call(
-                                        slug: widget.slug,
-                                        status: 'texniceskii-sboi',
-                                        token: FFAppState().Token,
-                                      );
-                                      logFirebaseEvent(
-                                          'Row-errorRoute_navigate_to');
+                                    context.pushNamed('OrdersList');
 
-                                      context.pushNamed('OrdersList');
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
+                                    setState(() {});
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 15.0, 0.0),
+                                        child: Image.asset(
+                                          'assets/images/Vector3.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
                                         ),
-                                        Text(
-                                          'Технический сбой',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
+                                      ),
+                                      Text(
+                                        'Тех. сбой',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Montserrat',
+                                              color: const Color(0xFFB80000),
+                                            ),
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: const BoxDecoration(),
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Image.asset(
+                                                  'assets/images/chevron-right-circle_1.png',
+                                                  width: 24.0,
+                                                  height: 24.0,
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-cancelClient_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-cancelClient_bottom_sheet');
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x00000000),
-                                        context: context,
-                                        builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: ClientCancelWidget(
-                                                slug: widget.slug,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => safeSetState(() {}));
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector2-1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Отказ клиента',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-cancelBank_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-cancelBank_bottom_sheet');
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x00000000),
-                                        context: context,
-                                        builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: BankCancelWidget(
-                                                slug: widget.slug,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => safeSetState(() {}));
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector2-1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Отказ банка',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 25.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-noContact_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-noContact_backend_call');
-                                      await HappyTestAPIGroup.statusCall.call(
-                                        slug: FFAppState().slug,
-                                        token: FFAppState().Token,
-                                      );
-                                      logFirebaseEvent(
-                                          'Row-noContact_navigate_to');
-
-                                      context.pushNamed('OrdersList');
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector3.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Недозвон',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
-                      if ((HappyTestAPIGroup.orderCall
-                                  .statusslug(
-                                    statusOrderResponse.jsonBody,
-                                  )
-                                  .toString() !=
-                              'meeting_confirmed') ||
-                          (HappyTestAPIGroup.orderCall
-                                  .statusslug(
-                                    statusOrderResponse.jsonBody,
-                                  )
-                                  .toString() !=
-                              'verified') ||
-                          (HappyTestAPIGroup.orderCall
-                                  .statusslug(
-                                    statusOrderResponse.jsonBody,
-                                  )
-                                  .toString() !=
-                              'denied') ||
-                          (HappyTestAPIGroup.orderCall
-                                  .statusslug(
-                                    statusOrderResponse.jsonBody,
-                                  )
-                                  .toString() !=
-                              'confirmed'))
-                        Material(
-                          color: Colors.transparent,
-                          elevation: 0.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4.0,
-                                  color: Color(0x33000000),
-                                  offset: Offset(0.0, 2.0),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(16.0),
-                              border: Border.all(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                width: 1.0,
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(-1.00, -1.00),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        25.0, 10.0, 0.0, 10.0),
-                                    child: Text(
-                                      'Выберите причину отмены',
-                                      textAlign: TextAlign.start,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Montserrat',
-                                            color: Color(0xFF868686),
-                                            fontSize: 18.0,
-                                            letterSpacing: 0.1,
-                                            fontWeight: FontWeight.bold,
-                                            lineHeight: 1.2,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-transMeeting_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-transMeeting_navigate_to');
-
-                                      context.goNamed(
-                                        'statusMoveMeeting',
-                                        queryParameters: {
-                                          'slug': serializeParam(
-                                            widget.slug,
-                                            ParamType.String,
-                                          ),
-                                        }.withoutNulls,
-                                      );
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Перенос встречи',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-doMeeting_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-doMeeting_backend_call');
-                                      await HappyTestAPIGroup.statusCall.call(
-                                        slug: widget.slug,
-                                        status: 'napravlen-v-do',
-                                        token: FFAppState().Token,
-                                      );
-                                      logFirebaseEvent(
-                                          'Row-doMeeting_navigate_to');
-
-                                      context.pushNamed('OrdersList');
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Направлен в ДО',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-errorRoute_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-errorRoute_backend_call');
-                                      await HappyTestAPIGroup.statusCall.call(
-                                        slug: widget.slug,
-                                        status: 'texniceskii-sboi',
-                                        token: FFAppState().Token,
-                                      );
-                                      logFirebaseEvent(
-                                          'Row-errorRoute_navigate_to');
-
-                                      context.pushNamed('OrdersList');
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Технический сбой',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-cancelClient_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-cancelClient_bottom_sheet');
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x00000000),
-                                        context: context,
-                                        builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: ClientCancelWidget(
-                                                slug: widget.slug,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => safeSetState(() {}));
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector2-1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Отказ клиента',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-cancelBank_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-cancelBank_bottom_sheet');
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x00000000),
-                                        context: context,
-                                        builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: BankCancelWidget(
-                                                slug: widget.slug,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => safeSetState(() {}));
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector2-1.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Отказ банка',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 25.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'STATUS_PAGE_Row-noContact_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Row-noContact_backend_call');
-                                      await HappyTestAPIGroup.statusCall.call();
-                                      logFirebaseEvent(
-                                          'Row-noContact_navigate_to');
-
-                                      context.pushNamed('OrdersList');
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
-                                          child: Image.asset(
-                                            'assets/images/Vector3.png',
-                                            width: 24.0,
-                                            height: 24.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Недозвон',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                color: Color(0xFFB80000),
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 15.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.00, 0.00),
-                                                  child: Image.asset(
-                                                    'assets/images/chevron-right-circle_1.png',
-                                                    width: 24.0,
-                                                    height: 24.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
+                      ),
+                  ],
                 ),
               ],
             ),

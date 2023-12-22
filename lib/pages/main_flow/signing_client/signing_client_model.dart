@@ -1,15 +1,7 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/firebase_storage/storage.dart';
 import '/components/row_back/row_back_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_data.dart';
 import 'signing_client_widget.dart' show SigningClientWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:signature/signature.dart';
 
 class SigningClientModel extends FlutterFlowModel<SigningClientWidget> {
@@ -24,10 +16,12 @@ class SigningClientModel extends FlutterFlowModel<SigningClientWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     rowBackModel = createModel(context, () => RowBackModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     rowBackModel.dispose();

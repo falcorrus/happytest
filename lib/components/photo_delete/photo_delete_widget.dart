@@ -4,18 +4,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'photo_delete_model.dart';
 export 'photo_delete_model.dart';
 
 class PhotoDeleteWidget extends StatefulWidget {
   const PhotoDeleteWidget({
-    Key? key,
+    super.key,
     this.slug,
     this.taskNo,
-  }) : super(key: key);
+  });
 
   final String? slug;
   final int? taskNo;
@@ -56,7 +54,7 @@ class _PhotoDeleteWidgetState extends State<PhotoDeleteWidget> {
       mainAxisSize: MainAxisSize.max,
       children: [
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+          padding: const EdgeInsets.all(16.0),
           child: InkWell(
             splashColor: Colors.transparent,
             focusColor: Colors.transparent,
@@ -68,12 +66,12 @@ class _PhotoDeleteWidgetState extends State<PhotoDeleteWidget> {
               await showModalBottomSheet(
                 isScrollControlled: true,
                 backgroundColor: Colors.transparent,
-                barrierColor: Color(0x00000000),
+                barrierColor: const Color(0x00000000),
                 context: context,
                 builder: (context) {
                   return Padding(
                     padding: MediaQuery.viewInsetsOf(context),
-                    child: CreatePhotoStringWidget(),
+                    child: const CreatePhotoStringWidget(),
                   );
                 },
               ).then((value) => safeSetState(() {}));
@@ -83,7 +81,7 @@ class _PhotoDeleteWidgetState extends State<PhotoDeleteWidget> {
               height: 181.0,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     blurRadius: 4.0,
                     color: Color(0x0F000000),
@@ -97,7 +95,7 @@ class _PhotoDeleteWidgetState extends State<PhotoDeleteWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
                     child: Text(
                       'Удалить фото?',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -110,7 +108,7 @@ class _PhotoDeleteWidgetState extends State<PhotoDeleteWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
                     child: Text(
                       ' В случае удаления вы не сможете восстановить фото',
                       textAlign: TextAlign.center,
@@ -124,53 +122,79 @@ class _PhotoDeleteWidgetState extends State<PhotoDeleteWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(15.0, 34.0, 15.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(15.0, 34.0, 15.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 5.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
                                 logFirebaseEvent(
                                     'PHOTO_DELETE_COMP_ДА_BTN_ON_TAP');
                                 logFirebaseEvent('Button_backend_call');
-                                await HappyTestAPIGroup.deleteCall.call(
+                                _model.apiDelete =
+                                    await HappyTestAPIGroup.deleteCall.call(
                                   token: FFAppState().Token,
                                   slug: widget.slug,
                                   taskNo: widget.taskNo,
                                 );
-                                logFirebaseEvent('Button_show_snack_bar');
-                                ScaffoldMessenger.of(context).clearSnackBars();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Фото удалено',
-                                      style: TextStyle(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
+                                if ((_model.apiDelete?.succeeded ?? true)) {
+                                  logFirebaseEvent('Button_show_snack_bar');
+                                  ScaffoldMessenger.of(context)
+                                      .clearSnackBars();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Фото удалено',
+                                        style: TextStyle(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
                                       ),
+                                      duration: const Duration(milliseconds: 1000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryText,
                                     ),
-                                    duration: Duration(milliseconds: 1000),
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                  ),
-                                );
+                                  );
+                                } else {
+                                  logFirebaseEvent('Button_show_snack_bar');
+                                  ScaffoldMessenger.of(context)
+                                      .clearSnackBars();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'api не сработал. Ошибка ${(_model.apiDelete?.statusCode ?? 200).toString()}',
+                                        style: TextStyle(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
+                                      ),
+                                      duration: const Duration(milliseconds: 2000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                    ),
+                                  );
+                                }
+
                                 logFirebaseEvent('Button_bottom_sheet');
                                 Navigator.pop(context);
+
+                                setState(() {});
                               },
                               text: 'ДА',
                               options: FFButtonOptions(
                                 width: double.infinity,
                                 height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                color: Color(0xFF4460F0),
+                                color: const Color(0xFF4460F0),
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
@@ -181,7 +205,7 @@ class _PhotoDeleteWidgetState extends State<PhotoDeleteWidget> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                 elevation: 0.0,
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,
                                 ),
@@ -192,7 +216,7 @@ class _PhotoDeleteWidgetState extends State<PhotoDeleteWidget> {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 5.0, 0.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
@@ -205,21 +229,21 @@ class _PhotoDeleteWidgetState extends State<PhotoDeleteWidget> {
                               options: FFButtonOptions(
                                 width: double.infinity,
                                 height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                color: Color(0xFFE5E5E5),
+                                color: const Color(0xFFE5E5E5),
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
                                       fontFamily: 'Montserrat',
-                                      color: Color(0xFF9C9C9C),
+                                      color: const Color(0xFF9C9C9C),
                                       fontSize: 12.0,
                                       fontWeight: FontWeight.bold,
                                     ),
                                 elevation: 0.0,
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,
                                 ),

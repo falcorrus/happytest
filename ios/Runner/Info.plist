@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>HappyTest</string>
+	<string>happyTest1201</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 
@@ -37,10 +37,10 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>happytest.com</string>
+        <string>happytest1201.com</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>happytest</string>
+        <string>happytest1201</string>
         </array>
         </dict>
     </array>
@@ -54,10 +54,13 @@
 	<true/>
 
 	<key>NSCameraUsageDescription</key>
-    <string>In order to take a picture or video, this app requires permission to access the camera.</string>
+    <string>разрешите доступ к камере</string>
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>In order to upload data, this app requires permission to access the photo library.</string>
-
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>разрешите доступ к локации</string>
+	<key>PermissionGroupNotification</key>
+    <string>разрешите доступ к сообщениям</string>
 
 
 	<key>UILaunchStoryboardName</key>

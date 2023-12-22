@@ -6,17 +6,15 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'create_photo_string_model.dart';
 export 'create_photo_string_model.dart';
 
 class CreatePhotoStringWidget extends StatefulWidget {
   const CreatePhotoStringWidget({
-    Key? key,
+    super.key,
     this.slug,
-  }) : super(key: key);
+  });
 
   final String? slug;
 
@@ -54,21 +52,20 @@ class _CreatePhotoStringWidgetState extends State<CreatePhotoStringWidget> {
     context.watch<FFAppState>();
 
     return Align(
-      alignment: AlignmentDirectional(0.00, 0.00),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
         child: Container(
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).secondaryBackground,
             borderRadius: BorderRadius.circular(8.0),
           ),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 16.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 16.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (_model.uploadedFileUrl != null &&
-                    _model.uploadedFileUrl != '')
+                if (_model.uploadedFileUrl != '')
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
@@ -78,13 +75,12 @@ class _CreatePhotoStringWidgetState extends State<CreatePhotoStringWidget> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                if (_model.uploadedFileUrl == null ||
-                    _model.uploadedFileUrl == '')
+                if (_model.uploadedFileUrl == '')
                   Container(
                     width: double.infinity,
                     height: 42.0,
                     decoration: BoxDecoration(
-                      color: Color(0xFFEFEFEF),
+                      color: const Color(0xFFEFEFEF),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: InkWell(
@@ -156,13 +152,13 @@ class _CreatePhotoStringWidgetState extends State<CreatePhotoStringWidget> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.add_a_photo,
                             color: Color(0xFFB1B1B1),
                             size: 24.0,
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 10.0, 0.0, 0.0, 0.0),
                             child: Text(
                               'Добавить фото',
@@ -170,7 +166,7 @@ class _CreatePhotoStringWidgetState extends State<CreatePhotoStringWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Montserrat',
-                                    color: Color(0xFFB1B1B1),
+                                    color: const Color(0xFFB1B1B1),
                                   ),
                             ),
                           ),
@@ -179,14 +175,14 @@ class _CreatePhotoStringWidgetState extends State<CreatePhotoStringWidget> {
                     ),
                   ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                       borderRadius: BorderRadius.circular(8.0),
                       border: Border.all(
-                        color: Color(0xFF007AFF),
+                        color: const Color(0xFF007AFF),
                         width: 1.0,
                       ),
                     ),
@@ -194,14 +190,13 @@ class _CreatePhotoStringWidgetState extends State<CreatePhotoStringWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              2.0, 2.0, 2.0, 2.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: FlutterFlowDropDown<String>(
                             controller: _model.dropDownValueController ??=
                                 FormFieldController<String>(
                               _model.dropDownValue ??= 'Паспорт',
                             ),
-                            options: ['Паспорт', 'Селфи', 'Документ 1'],
+                            options: const ['Паспорт', 'Селфи', 'Документ 1'],
                             onChanged: (val) =>
                                 setState(() => _model.dropDownValue = val),
                             width: double.infinity,
@@ -218,7 +213,7 @@ class _CreatePhotoStringWidgetState extends State<CreatePhotoStringWidget> {
                             borderColor: Colors.transparent,
                             borderWidth: 0.0,
                             borderRadius: 0.0,
-                            margin: EdgeInsetsDirectional.fromSTEB(
+                            margin: const EdgeInsetsDirectional.fromSTEB(
                                 12.0, 4.0, 12.0, 4.0),
                             hidesUnderline: true,
                             isSearchable: false,
@@ -230,7 +225,7 @@ class _CreatePhotoStringWidgetState extends State<CreatePhotoStringWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 23.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 23.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () {
                       print('Button pressed ...');
@@ -240,10 +235,10 @@ class _CreatePhotoStringWidgetState extends State<CreatePhotoStringWidget> {
                       width: double.infinity,
                       height: 40.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: Color(0xFF4460F0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: const Color(0xFF4460F0),
                       textStyle: FlutterFlowTheme.of(context)
                           .titleSmall
                           .override(
@@ -253,7 +248,7 @@ class _CreatePhotoStringWidgetState extends State<CreatePhotoStringWidget> {
                             fontWeight: FontWeight.bold,
                           ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 1.0,
                       ),

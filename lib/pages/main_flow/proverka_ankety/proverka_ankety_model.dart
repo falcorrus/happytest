@@ -1,16 +1,8 @@
+import '/backend/api_requests/api_calls.dart';
 import '/components/row_back/row_back_widget.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/actions/actions.dart' as action_blocks;
 import 'proverka_ankety_widget.dart' show ProverkaAnketyWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class ProverkaAnketyModel extends FlutterFlowModel<ProverkaAnketyWidget> {
   ///  Local state fields for this page.
@@ -32,15 +24,33 @@ class ProverkaAnketyModel extends FlutterFlowModel<ProverkaAnketyWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     rowBackModel = createModel(context, () => RowBackModel());
   }
 
+  @override
   void dispose() {
     rowBackModel.dispose();
   }
 
   /// Action blocks are added here.
+
+  Future anketa(BuildContext context) async {
+    ApiCallResponse? apiSetQandA;
+
+    logFirebaseEvent('anketa_backend_call');
+    apiSetQandA = await HappyTestAPIGroup.nextmoduleCall.call(
+      token: FFAppState().Token,
+      code: FFAppState().nextslug,
+      sort: FFAppState().nextsort,
+      productID: FFAppState().prodslug,
+      orderId: FFAppState().slug,
+      a1: checkbox1Value,
+      a2: checkbox2Value,
+      a3: checkbox3Value,
+    );
+  }
 
   /// Additional helper methods are added here.
 }

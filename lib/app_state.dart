@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import '/backend/backend.dart';
-import 'backend/api_requests/api_manager.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:csv/csv.dart';
-import 'package:synchronized/synchronized.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
-import 'dart:convert';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -21,52 +17,48 @@ class FFAppState extends ChangeNotifier {
   }
 
   Future initializePersistedState() async {
-    secureStorage = FlutterSecureStorage();
-    await _safeInitAsync(() async {
-      _Token = await secureStorage.getString('ff_Token') ?? _Token;
+    prefs = await SharedPreferences.getInstance();
+    _safeInit(() {
+      _Token = prefs.getString('ff_Token') ?? _Token;
     });
-    await _safeInitAsync(() async {
-      _photoList =
-          (await secureStorage.getStringList('ff_photoList'))?.map((x) {
-                try {
-                  return jsonDecode(x);
-                } catch (e) {
-                  print("Can't decode persisted json. Error: $e.");
-                  return {};
-                }
-              }).toList() ??
-              _photoList;
+    _safeInit(() {
+      _photoList = prefs.getStringList('ff_photoList')?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _photoList;
     });
-    await _safeInitAsync(() async {
-      _start = _latLngFromString(await secureStorage.getString('ff_start')) ??
-          _start;
+    _safeInit(() {
+      _start = _latLngFromString(prefs.getString('ff_start')) ?? _start;
     });
-    await _safeInitAsync(() async {
-      _End = _latLngFromString(await secureStorage.getString('ff_End')) ?? _End;
+    _safeInit(() {
+      _End = _latLngFromString(prefs.getString('ff_End')) ?? _End;
     });
-    await _safeInitAsync(() async {
-      _Passport = await secureStorage.getString('ff_Passport') ?? _Passport;
+    _safeInit(() {
+      _Passport = prefs.getString('ff_Passport') ?? _Passport;
     });
-    await _safeInitAsync(() async {
-      _Document1 = await secureStorage.getString('ff_Document1') ?? _Document1;
+    _safeInit(() {
+      _Document1 = prefs.getString('ff_Document1') ?? _Document1;
     });
-    await _safeInitAsync(() async {
-      _Document2 = await secureStorage.getString('ff_Document2') ?? _Document2;
+    _safeInit(() {
+      _Document2 = prefs.getString('ff_Document2') ?? _Document2;
     });
-    await _safeInitAsync(() async {
-      _startTime = await secureStorage.read(key: 'ff_startTime') != null
-          ? DateTime.fromMillisecondsSinceEpoch(
-              (await secureStorage.getInt('ff_startTime'))!)
+    _safeInit(() {
+      _startTime = prefs.containsKey('ff_startTime')
+          ? DateTime.fromMillisecondsSinceEpoch(prefs.getInt('ff_startTime')!)
           : _startTime;
     });
-    await _safeInitAsync(() async {
-      _EndTime = await secureStorage.read(key: 'ff_EndTime') != null
-          ? DateTime.fromMillisecondsSinceEpoch(
-              (await secureStorage.getInt('ff_EndTime'))!)
+    _safeInit(() {
+      _EndTime = prefs.containsKey('ff_EndTime')
+          ? DateTime.fromMillisecondsSinceEpoch(prefs.getInt('ff_EndTime')!)
           : _EndTime;
     });
-    await _safeInitAsync(() async {
-      _PhotoCard = await secureStorage.getString('ff_PhotoCard') ?? _PhotoCard;
+    _safeInit(() {
+      _PhotoCard = prefs.getString('ff_PhotoCard') ?? _PhotoCard;
     });
   }
 
@@ -75,310 +67,335 @@ class FFAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  late FlutterSecureStorage secureStorage;
+  late SharedPreferences prefs;
 
-  bool _workDone = true;
-  bool get workDone => _workDone;
-  set workDone(bool _value) {
-    _workDone = _value;
+  String _scanAS = '';
+  String get scanAS => _scanAS;
+  set scanAS(String value) {
+    _scanAS = value;
   }
 
   String _Token = '';
   String get Token => _Token;
-  set Token(String _value) {
-    _Token = _value;
-    secureStorage.setString('ff_Token', _value);
-  }
-
-  void deleteToken() {
-    secureStorage.delete(key: 'ff_Token');
+  set Token(String value) {
+    _Token = value;
+    prefs.setString('ff_Token', value);
   }
 
   List<dynamic> _photoList = [];
   List<dynamic> get photoList => _photoList;
-  set photoList(List<dynamic> _value) {
-    _photoList = _value;
-    secureStorage.setStringList(
-        'ff_photoList', _value.map((x) => jsonEncode(x)).toList());
+  set photoList(List<dynamic> value) {
+    _photoList = value;
+    prefs.setStringList(
+        'ff_photoList', value.map((x) => jsonEncode(x)).toList());
   }
 
-  void deletePhotoList() {
-    secureStorage.delete(key: 'ff_photoList');
-  }
-
-  void addToPhotoList(dynamic _value) {
-    _photoList.add(_value);
-    secureStorage.setStringList(
+  void addToPhotoList(dynamic value) {
+    _photoList.add(value);
+    prefs.setStringList(
         'ff_photoList', _photoList.map((x) => jsonEncode(x)).toList());
   }
 
-  void removeFromPhotoList(dynamic _value) {
-    _photoList.remove(_value);
-    secureStorage.setStringList(
+  void removeFromPhotoList(dynamic value) {
+    _photoList.remove(value);
+    prefs.setStringList(
         'ff_photoList', _photoList.map((x) => jsonEncode(x)).toList());
   }
 
-  void removeAtIndexFromPhotoList(int _index) {
-    _photoList.removeAt(_index);
-    secureStorage.setStringList(
+  void removeAtIndexFromPhotoList(int index) {
+    _photoList.removeAt(index);
+    prefs.setStringList(
         'ff_photoList', _photoList.map((x) => jsonEncode(x)).toList());
   }
 
   void updatePhotoListAtIndex(
-    int _index,
+    int index,
     dynamic Function(dynamic) updateFn,
   ) {
-    _photoList[_index] = updateFn(_photoList[_index]);
-    secureStorage.setStringList(
+    _photoList[index] = updateFn(_photoList[index]);
+    prefs.setStringList(
         'ff_photoList', _photoList.map((x) => jsonEncode(x)).toList());
   }
 
-  void insertAtIndexInPhotoList(int _index, dynamic _value) {
-    _photoList.insert(_index, _value);
-    secureStorage.setStringList(
+  void insertAtIndexInPhotoList(int index, dynamic value) {
+    _photoList.insert(index, value);
+    prefs.setStringList(
         'ff_photoList', _photoList.map((x) => jsonEncode(x)).toList());
   }
 
   String _routeDistance = '';
   String get routeDistance => _routeDistance;
-  set routeDistance(String _value) {
-    _routeDistance = _value;
+  set routeDistance(String value) {
+    _routeDistance = value;
   }
 
   String _routeDuration = '';
   String get routeDuration => _routeDuration;
-  set routeDuration(String _value) {
-    _routeDuration = _value;
+  set routeDuration(String value) {
+    _routeDuration = value;
   }
 
-  LatLng? _start = LatLng(55.7533818, 37.6218572);
+  LatLng? _start = const LatLng(55.7533818, 37.6218572);
   LatLng? get start => _start;
-  set start(LatLng? _value) {
-    _start = _value;
-    _value != null
-        ? secureStorage.setString('ff_start', _value.serialize())
-        : secureStorage.remove('ff_start');
+  set start(LatLng? value) {
+    _start = value;
+    value != null
+        ? prefs.setString('ff_start', value.serialize())
+        : prefs.remove('ff_start');
   }
 
-  void deleteStart() {
-    secureStorage.delete(key: 'ff_start');
-  }
-
-  LatLng? _End = LatLng(55.6670601, 37.5628967);
+  LatLng? _End = const LatLng(55.6670601, 37.5628967);
   LatLng? get End => _End;
-  set End(LatLng? _value) {
-    _End = _value;
-    _value != null
-        ? secureStorage.setString('ff_End', _value.serialize())
-        : secureStorage.remove('ff_End');
-  }
-
-  void deleteEnd() {
-    secureStorage.delete(key: 'ff_End');
+  set End(LatLng? value) {
+    _End = value;
+    value != null
+        ? prefs.setString('ff_End', value.serialize())
+        : prefs.remove('ff_End');
   }
 
   String _Passport = '';
   String get Passport => _Passport;
-  set Passport(String _value) {
-    _Passport = _value;
-    secureStorage.setString('ff_Passport', _value);
-  }
-
-  void deletePassport() {
-    secureStorage.delete(key: 'ff_Passport');
+  set Passport(String value) {
+    _Passport = value;
+    prefs.setString('ff_Passport', value);
   }
 
   String _Document1 = '';
   String get Document1 => _Document1;
-  set Document1(String _value) {
-    _Document1 = _value;
-    secureStorage.setString('ff_Document1', _value);
-  }
-
-  void deleteDocument1() {
-    secureStorage.delete(key: 'ff_Document1');
+  set Document1(String value) {
+    _Document1 = value;
+    prefs.setString('ff_Document1', value);
   }
 
   String _Document2 = '';
   String get Document2 => _Document2;
-  set Document2(String _value) {
-    _Document2 = _value;
-    secureStorage.setString('ff_Document2', _value);
-  }
-
-  void deleteDocument2() {
-    secureStorage.delete(key: 'ff_Document2');
+  set Document2(String value) {
+    _Document2 = value;
+    prefs.setString('ff_Document2', value);
   }
 
   DateTime? _startTime = DateTime.fromMillisecondsSinceEpoch(1664434800000);
   DateTime? get startTime => _startTime;
-  set startTime(DateTime? _value) {
-    _startTime = _value;
-    _value != null
-        ? secureStorage.setInt('ff_startTime', _value.millisecondsSinceEpoch)
-        : secureStorage.remove('ff_startTime');
-  }
-
-  void deleteStartTime() {
-    secureStorage.delete(key: 'ff_startTime');
+  set startTime(DateTime? value) {
+    _startTime = value;
+    value != null
+        ? prefs.setInt('ff_startTime', value.millisecondsSinceEpoch)
+        : prefs.remove('ff_startTime');
   }
 
   DateTime? _EndTime = DateTime.fromMillisecondsSinceEpoch(1663830000000);
   DateTime? get EndTime => _EndTime;
-  set EndTime(DateTime? _value) {
-    _EndTime = _value;
-    _value != null
-        ? secureStorage.setInt('ff_EndTime', _value.millisecondsSinceEpoch)
-        : secureStorage.remove('ff_EndTime');
-  }
-
-  void deleteEndTime() {
-    secureStorage.delete(key: 'ff_EndTime');
+  set EndTime(DateTime? value) {
+    _EndTime = value;
+    value != null
+        ? prefs.setInt('ff_EndTime', value.millisecondsSinceEpoch)
+        : prefs.remove('ff_EndTime');
   }
 
   List<String> _time = ['11:00', '12:00'];
   List<String> get time => _time;
-  set time(List<String> _value) {
-    _time = _value;
+  set time(List<String> value) {
+    _time = value;
   }
 
-  void addToTime(String _value) {
-    _time.add(_value);
+  void addToTime(String value) {
+    _time.add(value);
   }
 
-  void removeFromTime(String _value) {
-    _time.remove(_value);
+  void removeFromTime(String value) {
+    _time.remove(value);
   }
 
-  void removeAtIndexFromTime(int _index) {
-    _time.removeAt(_index);
+  void removeAtIndexFromTime(int index) {
+    _time.removeAt(index);
   }
 
   void updateTimeAtIndex(
-    int _index,
+    int index,
     String Function(String) updateFn,
   ) {
-    _time[_index] = updateFn(_time[_index]);
+    _time[index] = updateFn(_time[index]);
   }
 
-  void insertAtIndexInTime(int _index, String _value) {
-    _time.insert(_index, _value);
+  void insertAtIndexInTime(int index, String value) {
+    _time.insert(index, value);
   }
 
   int _numberPhotos = 0;
   int get numberPhotos => _numberPhotos;
-  set numberPhotos(int _value) {
-    _numberPhotos = _value;
+  set numberPhotos(int value) {
+    _numberPhotos = value;
   }
 
   int _refuseReason = 0;
   int get refuseReason => _refuseReason;
-  set refuseReason(int _value) {
-    _refuseReason = _value;
+  set refuseReason(int value) {
+    _refuseReason = value;
   }
 
   bool _visibleprogress = false;
   bool get visibleprogress => _visibleprogress;
-  set visibleprogress(bool _value) {
-    _visibleprogress = _value;
+  set visibleprogress(bool value) {
+    _visibleprogress = value;
   }
 
   bool _VisibleButton = false;
   bool get VisibleButton => _VisibleButton;
-  set VisibleButton(bool _value) {
-    _VisibleButton = _value;
+  set VisibleButton(bool value) {
+    _VisibleButton = value;
   }
 
   bool _visiblebuttonGreen = false;
   bool get visiblebuttonGreen => _visiblebuttonGreen;
-  set visiblebuttonGreen(bool _value) {
-    _visiblebuttonGreen = _value;
+  set visiblebuttonGreen(bool value) {
+    _visiblebuttonGreen = value;
   }
 
   String _PhotoCard =
       'https://rgw-fittings.ru/uploads/product/000/98/thumbs/30_1626261890.jpeg';
   String get PhotoCard => _PhotoCard;
-  set PhotoCard(String _value) {
-    _PhotoCard = _value;
-    secureStorage.setString('ff_PhotoCard', _value);
-  }
-
-  void deletePhotoCard() {
-    secureStorage.delete(key: 'ff_PhotoCard');
+  set PhotoCard(String value) {
+    _PhotoCard = value;
+    prefs.setString('ff_PhotoCard', value);
   }
 
   String _photo = '';
   String get photo => _photo;
-  set photo(String _value) {
-    _photo = _value;
+  set photo(String value) {
+    _photo = value;
   }
 
   String _Ordinka = '';
   String get Ordinka => _Ordinka;
-  set Ordinka(String _value) {
-    _Ordinka = _value;
-  }
-
-  bool _newField = false;
-  bool get newField => _newField;
-  set newField(bool _value) {
-    _newField = _value;
+  set Ordinka(String value) {
+    _Ordinka = value;
   }
 
   bool _image8 = false;
   bool get image8 => _image8;
-  set image8(bool _value) {
-    _image8 = _value;
+  set image8(bool value) {
+    _image8 = value;
   }
 
   String _photo41 =
       'https://rgw-fittings.ru/uploads/product/000/98/thumbs/30_1626261890.jpeg';
   String get photo41 => _photo41;
-  set photo41(String _value) {
-    _photo41 = _value;
+  set photo41(String value) {
+    _photo41 = value;
   }
 
   String _photo42 =
       'https://rgw-fittings.ru/uploads/product/000/98/thumbs/30_1626261890.jpeg';
   String get photo42 => _photo42;
-  set photo42(String _value) {
-    _photo42 = _value;
+  set photo42(String value) {
+    _photo42 = value;
   }
 
   bool _photoVerifError = false;
   bool get photoVerifError => _photoVerifError;
-  set photoVerifError(bool _value) {
-    _photoVerifError = _value;
+  set photoVerifError(bool value) {
+    _photoVerifError = value;
   }
 
   String _slug = '';
   String get slug => _slug;
-  set slug(String _value) {
-    _slug = _value;
+  set slug(String value) {
+    _slug = value;
   }
 
   String _nextslug = '';
   String get nextslug => _nextslug;
-  set nextslug(String _value) {
-    _nextslug = _value;
+  set nextslug(String value) {
+    _nextslug = value;
   }
 
   String _clientTel = '7(999)999 99-99';
   String get clientTel => _clientTel;
-  set clientTel(String _value) {
-    _clientTel = _value;
+  set clientTel(String value) {
+    _clientTel = value;
   }
 
   int _nextsort = 0;
   int get nextsort => _nextsort;
-  set nextsort(int _value) {
-    _nextsort = _value;
+  set nextsort(int value) {
+    _nextsort = value;
   }
 
   int _prodslug = 0;
   int get prodslug => _prodslug;
-  set prodslug(int _value) {
-    _prodslug = _value;
+  set prodslug(int value) {
+    _prodslug = value;
+  }
+
+  String _bankName = '';
+  String get bankName => _bankName;
+  set bankName(String value) {
+    _bankName = value;
+  }
+
+  String _status = '';
+  String get status => _status;
+  set status(String value) {
+    _status = value;
+  }
+
+  bool _isPersonal = false;
+  bool get isPersonal => _isPersonal;
+  set isPersonal(bool value) {
+    _isPersonal = value;
+  }
+
+  String _pdf = '';
+  String get pdf => _pdf;
+  set pdf(String value) {
+    _pdf = value;
+  }
+
+  List<ScansCardsStruct> _scanCards = [];
+  List<ScansCardsStruct> get scanCards => _scanCards;
+  set scanCards(List<ScansCardsStruct> value) {
+    _scanCards = value;
+  }
+
+  void addToScanCards(ScansCardsStruct value) {
+    _scanCards.add(value);
+  }
+
+  void removeFromScanCards(ScansCardsStruct value) {
+    _scanCards.remove(value);
+  }
+
+  void removeAtIndexFromScanCards(int index) {
+    _scanCards.removeAt(index);
+  }
+
+  void updateScanCardsAtIndex(
+    int index,
+    ScansCardsStruct Function(ScansCardsStruct) updateFn,
+  ) {
+    _scanCards[index] = updateFn(_scanCards[index]);
+  }
+
+  void insertAtIndexInScanCards(int index, ScansCardsStruct value) {
+    _scanCards.insert(index, value);
+  }
+
+  bool _IsScanBack = false;
+  bool get IsScanBack => _IsScanBack;
+  set IsScanBack(bool value) {
+    _IsScanBack = value;
+  }
+
+  String _prevSlug = '';
+  String get prevSlug => _prevSlug;
+  set prevSlug(String value) {
+    _prevSlug = value;
+  }
+
+  int _prevSort = 0;
+  int get prevSort => _prevSort;
+  set prevSort(int value) {
+    _prevSort = value;
   }
 }
 
@@ -402,47 +419,4 @@ Future _safeInitAsync(Function() initializeField) async {
   try {
     await initializeField();
   } catch (_) {}
-}
-
-extension FlutterSecureStorageExtensions on FlutterSecureStorage {
-  static final _lock = Lock();
-
-  Future<void> writeSync({required String key, String? value}) async =>
-      await _lock.synchronized(() async {
-        await write(key: key, value: value);
-      });
-
-  void remove(String key) => delete(key: key);
-
-  Future<String?> getString(String key) async => await read(key: key);
-  Future<void> setString(String key, String value) async =>
-      await writeSync(key: key, value: value);
-
-  Future<bool?> getBool(String key) async => (await read(key: key)) == 'true';
-  Future<void> setBool(String key, bool value) async =>
-      await writeSync(key: key, value: value.toString());
-
-  Future<int?> getInt(String key) async =>
-      int.tryParse(await read(key: key) ?? '');
-  Future<void> setInt(String key, int value) async =>
-      await writeSync(key: key, value: value.toString());
-
-  Future<double?> getDouble(String key) async =>
-      double.tryParse(await read(key: key) ?? '');
-  Future<void> setDouble(String key, double value) async =>
-      await writeSync(key: key, value: value.toString());
-
-  Future<List<String>?> getStringList(String key) async =>
-      await read(key: key).then((result) {
-        if (result == null || result.isEmpty) {
-          return null;
-        }
-        return CsvToListConverter()
-            .convert(result)
-            .first
-            .map((e) => e.toString())
-            .toList();
-      });
-  Future<void> setStringList(String key, List<String> value) async =>
-      await writeSync(key: key, value: ListToCsvConverter().convert([value]));
 }

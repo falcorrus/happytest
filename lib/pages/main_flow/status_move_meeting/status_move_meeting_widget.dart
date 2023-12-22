@@ -9,16 +9,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'status_move_meeting_model.dart';
 export 'status_move_meeting_model.dart';
 
 class StatusMoveMeetingWidget extends StatefulWidget {
   const StatusMoveMeetingWidget({
-    Key? key,
+    super.key,
     this.slug,
-  }) : super(key: key);
+  });
 
   final String? slug;
 
@@ -68,11 +67,11 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FFAppConstants.background,
         body: Align(
-          alignment: AlignmentDirectional(0.00, 0.00),
+          alignment: const AlignmentDirectional(0.0, 0.0),
           child: Container(
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
               maxWidth: 450.0,
               maxHeight: 900.0,
             ),
@@ -80,7 +79,7 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
               color: FlutterFlowTheme.of(context).primaryBackground,
             ),
             child: Align(
-              alignment: AlignmentDirectional(-1.00, 0.00),
+              alignment: const AlignmentDirectional(-1.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,9 +89,9 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Align(
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 32.0, 0.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -120,10 +119,9 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Align(
-                                    alignment:
-                                        AlignmentDirectional(-1.00, -1.00),
+                                    alignment: const AlignmentDirectional(-1.0, -1.0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           12.0, 0.0, 0.0, 0.0),
                                       child: FlutterFlowIconButton(
                                         borderColor: Colors.transparent,
@@ -153,9 +151,9 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 10.0, 0.0, 0.0),
                             child: Text(
                               'Перенос встречи',
@@ -179,25 +177,25 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                             setState(() => _model.calendarDateSelectedDay =
                                 newSelectedDate);
                           },
-                          titleStyle: TextStyle(),
+                          titleStyle: const TextStyle(),
                           dayOfWeekStyle:
                               FlutterFlowTheme.of(context).bodyMedium,
                           dateStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Montserrat',
-                                    color: Color(0xFF4460F0),
+                                    color: const Color(0xFF4460F0),
                                     fontSize: 20.0,
                                     letterSpacing: 0.38,
                                     fontWeight: FontWeight.normal,
                                   ),
-                          selectedDateStyle: TextStyle(),
-                          inactiveDateStyle: TextStyle(
+                          selectedDateStyle: const TextStyle(),
+                          inactiveDateStyle: const TextStyle(
                             fontSize: 20.0,
                           ),
                           locale: FFLocalizations.of(context).languageCode,
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               15.0, 20.0, 15.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -221,20 +219,20 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                                       'STATUS_MOVE_MEETING_BUTTON_BTN_ON_TAP');
                                   logFirebaseEvent('Button_date_time_picker');
                                   if (kIsWeb) {
-                                    final _datePicked1Time =
+                                    final datePicked1Time =
                                         await showTimePicker(
                                       context: context,
                                       initialTime: TimeOfDay.fromDateTime(
                                           getCurrentTimestamp),
                                     );
-                                    if (_datePicked1Time != null) {
+                                    if (datePicked1Time != null) {
                                       safeSetState(() {
                                         _model.datePicked1 = DateTime(
                                           getCurrentTimestamp.year,
                                           getCurrentTimestamp.month,
                                           getCurrentTimestamp.day,
-                                          _datePicked1Time.hour,
-                                          _datePicked1Time.minute,
+                                          datePicked1Time.hour,
+                                          datePicked1Time.minute,
                                         );
                                       });
                                     }
@@ -275,9 +273,8 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                                 options: FFButtonOptions(
                                   width: 138.0,
                                   height: 43.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsets.all(0.0),
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
@@ -290,7 +287,7 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                                         fontSize: 20.0,
                                         fontWeight: FontWeight.w600,
                                       ),
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.transparent,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
@@ -300,7 +297,7 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               15.0, 16.0, 15.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -324,20 +321,20 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                                       'STATUS_MOVE_MEETING_BUTTON_BTN_ON_TAP');
                                   logFirebaseEvent('Button_date_time_picker');
                                   if (kIsWeb) {
-                                    final _datePicked2Time =
+                                    final datePicked2Time =
                                         await showTimePicker(
                                       context: context,
                                       initialTime: TimeOfDay.fromDateTime(
                                           getCurrentTimestamp),
                                     );
-                                    if (_datePicked2Time != null) {
+                                    if (datePicked2Time != null) {
                                       safeSetState(() {
                                         _model.datePicked2 = DateTime(
                                           getCurrentTimestamp.year,
                                           getCurrentTimestamp.month,
                                           getCurrentTimestamp.day,
-                                          _datePicked2Time.hour,
-                                          _datePicked2Time.minute,
+                                          datePicked2Time.hour,
+                                          datePicked2Time.minute,
                                         );
                                       });
                                     }
@@ -378,9 +375,8 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                                 options: FFButtonOptions(
                                   width: 138.0,
                                   height: 43.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsets.all(0.0),
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
@@ -393,7 +389,7 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                                         fontSize: 20.0,
                                         fontWeight: FontWeight.w600,
                                       ),
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.transparent,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
@@ -410,7 +406,7 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             24.0, 15.0, 24.0, 25.0),
                         child: FFButtonWidget(
                           onPressed: () async {
@@ -437,9 +433,15 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                                           .primaryText,
                                     ),
                                   ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor: Color(0xFFB8CFF5),
+                                  duration: const Duration(milliseconds: 4000),
+                                  backgroundColor: const Color(0xFFB8CFF5),
                                 ),
+                              );
+                              logFirebaseEvent('Button_backend_call');
+                              await HappyTestAPIGroup.statusCall.call(
+                                slug: FFAppState().slug,
+                                token: FFAppState().Token,
+                                status: 'meeting_rescheduled',
                               );
                               logFirebaseEvent('Button_navigate_to');
 
@@ -455,18 +457,17 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                                           .primaryText,
                                     ),
                                   ),
-                                  duration: Duration(milliseconds: 4000),
+                                  duration: const Duration(milliseconds: 4000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).secondary,
                                 ),
                               );
-                              logFirebaseEvent('Button_wait__delay');
                               logFirebaseEvent('Button_navigate_to');
 
                               context.pushNamed(
                                 'Login',
                                 extra: <String, dynamic>{
-                                  kTransitionInfoKey: TransitionInfo(
+                                  kTransitionInfoKey: const TransitionInfo(
                                     hasTransition: true,
                                     transitionType: PageTransitionType.fade,
                                   ),
@@ -480,11 +481,10 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                           options: FFButtonOptions(
                             width: 327.0,
                             height: 48.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsets.all(0.0),
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: Color(0xFF4460F0),
+                            color: FlutterFlowTheme.of(context).secondaryText,
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
@@ -495,8 +495,7 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
                                   fontWeight: FontWeight.bold,
                                   lineHeight: 1.5,
                                 ),
-                            elevation: 2.0,
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Colors.transparent,
                               width: 1.0,
                             ),

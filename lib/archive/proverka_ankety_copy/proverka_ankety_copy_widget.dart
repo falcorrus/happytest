@@ -4,18 +4,17 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'proverka_ankety_copy_model.dart';
 export 'proverka_ankety_copy_model.dart';
 
 class ProverkaAnketyCopyWidget extends StatefulWidget {
   const ProverkaAnketyCopyWidget({
-    Key? key,
+    super.key,
     this.slug,
     this.nextslug,
     this.nextsort,
-  }) : super(key: key);
+  });
 
   final String? slug;
   final String? nextslug;
@@ -117,9 +116,9 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: Align(
-          alignment: AlignmentDirectional(0.00, 0.00),
+          alignment: const AlignmentDirectional(0.0, 0.0),
           child: Container(
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
               maxWidth: 400.0,
               maxHeight: 900.0,
             ),
@@ -133,7 +132,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                 wrapWithModel(
                   model: _model.rowBackModel,
                   updateCallback: () => setState(() {}),
-                  child: RowBackWidget(),
+                  child: const RowBackWidget(),
                 ),
                 Expanded(
                   child: SingleChildScrollView(
@@ -143,9 +142,9 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Align(
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 13.0, 0.0, 0.0),
                             child: Text(
                               'Проверка анкеты',
@@ -160,7 +159,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               25.0, 20.0, 26.0, 0.0),
                           child: Container(
                             decoration: BoxDecoration(
@@ -169,7 +168,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: TextFormField(
                                 controller: _model.textController1,
@@ -181,7 +180,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Montserrat',
-                                        color: Color(0xFFBDBDBD),
+                                        color: const Color(0xFFBDBDBD),
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w500,
                                         lineHeight: 0.2,
@@ -196,28 +195,28 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                         fontWeight: FontWeight.w900,
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -243,7 +242,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               25.0, 20.0, 26.0, 0.0),
                           child: Container(
                             decoration: BoxDecoration(
@@ -252,7 +251,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: TextFormField(
                                 controller: _model.textController2,
@@ -264,7 +263,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Montserrat',
-                                        color: Color(0xFFBDBDBD),
+                                        color: const Color(0xFFBDBDBD),
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w500,
                                         lineHeight: 0.2,
@@ -279,28 +278,28 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                         fontWeight: FontWeight.w900,
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -326,7 +325,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               25.0, 20.0, 26.0, 0.0),
                           child: Container(
                             decoration: BoxDecoration(
@@ -335,7 +334,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: TextFormField(
                                 controller: _model.textController3,
@@ -348,7 +347,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Montserrat',
-                                        color: Color(0xFFBDBDBD),
+                                        color: const Color(0xFFBDBDBD),
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w500,
                                         lineHeight: 0.2,
@@ -363,28 +362,28 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                         fontWeight: FontWeight.w900,
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -410,7 +409,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               25.0, 20.0, 26.0, 0.0),
                           child: Container(
                             decoration: BoxDecoration(
@@ -419,7 +418,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: TextFormField(
                                 controller: _model.textController4,
@@ -431,7 +430,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Montserrat',
-                                        color: Color(0xFFBDBDBD),
+                                        color: const Color(0xFFBDBDBD),
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w500,
                                         lineHeight: 0.2,
@@ -446,28 +445,28 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                         fontWeight: FontWeight.w900,
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -493,7 +492,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               25.0, 20.0, 26.0, 0.0),
                           child: Container(
                             decoration: BoxDecoration(
@@ -502,7 +501,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: TextFormField(
                                 controller: _model.textController5,
@@ -514,7 +513,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Montserrat',
-                                        color: Color(0xFFBDBDBD),
+                                        color: const Color(0xFFBDBDBD),
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w500,
                                         lineHeight: 0.2,
@@ -529,28 +528,28 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                         fontWeight: FontWeight.w900,
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -576,7 +575,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               25.0, 20.0, 26.0, 0.0),
                           child: Container(
                             decoration: BoxDecoration(
@@ -585,7 +584,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: TextFormField(
                                 controller: _model.textController6,
@@ -597,7 +596,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Montserrat',
-                                        color: Color(0xFFBDBDBD),
+                                        color: const Color(0xFFBDBDBD),
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w500,
                                         lineHeight: 0.2,
@@ -612,28 +611,28 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                         fontWeight: FontWeight.w900,
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -659,7 +658,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               25.0, 20.0, 26.0, 0.0),
                           child: Container(
                             decoration: BoxDecoration(
@@ -668,7 +667,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: TextFormField(
                                 controller: _model.textController7,
@@ -680,7 +679,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Montserrat',
-                                        color: Color(0xFFBDBDBD),
+                                        color: const Color(0xFFBDBDBD),
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w500,
                                         lineHeight: 0.2,
@@ -695,28 +694,28 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                         fontWeight: FontWeight.w900,
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -742,7 +741,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               25.0, 20.0, 26.0, 0.0),
                           child: Container(
                             decoration: BoxDecoration(
@@ -751,7 +750,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: TextFormField(
                                 controller: _model.textController8,
@@ -763,7 +762,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Montserrat',
-                                        color: Color(0xFFBDBDBD),
+                                        color: const Color(0xFFBDBDBD),
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w500,
                                         lineHeight: 0.2,
@@ -778,28 +777,28 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                         fontWeight: FontWeight.w900,
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -825,7 +824,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               25.0, 20.0, 26.0, 0.0),
                           child: Container(
                             decoration: BoxDecoration(
@@ -834,7 +833,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: TextFormField(
                                 controller: _model.textController9,
@@ -846,7 +845,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Montserrat',
-                                        color: Color(0xFFBDBDBD),
+                                        color: const Color(0xFFBDBDBD),
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w500,
                                         lineHeight: 0.2,
@@ -861,28 +860,28 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                         fontWeight: FontWeight.w900,
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -908,7 +907,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               25.0, 20.0, 26.0, 0.0),
                           child: Container(
                             decoration: BoxDecoration(
@@ -917,7 +916,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: TextFormField(
                                 controller: _model.textController10,
@@ -929,7 +928,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Montserrat',
-                                        color: Color(0xFFBDBDBD),
+                                        color: const Color(0xFFBDBDBD),
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w500,
                                         lineHeight: 0.2,
@@ -944,28 +943,28 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                         fontWeight: FontWeight.w900,
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -991,7 +990,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               25.0, 20.0, 26.0, 0.0),
                           child: Container(
                             decoration: BoxDecoration(
@@ -1000,7 +999,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: TextFormField(
                                 controller: _model.textController11,
@@ -1012,7 +1011,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Montserrat',
-                                        color: Color(0xFFBDBDBD),
+                                        color: const Color(0xFFBDBDBD),
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w500,
                                         lineHeight: 0.2,
@@ -1027,28 +1026,28 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                         fontWeight: FontWeight.w900,
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -1081,7 +1080,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
                           25.0, 10.0, 25.0, 16.0),
                       child: FFButtonWidget(
                         onPressed: () {
@@ -1091,11 +1090,10 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                         options: FFButtonOptions(
                           width: 327.0,
                           height: 48.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsets.all(0.0),
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: Color(0xFF4460F0),
+                          color: const Color(0xFF4460F0),
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Montserrat',
@@ -1106,7 +1104,7 @@ class _ProverkaAnketyCopyWidgetState extends State<ProverkaAnketyCopyWidget> {
                                     lineHeight: 1.5,
                                   ),
                           elevation: 2.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),

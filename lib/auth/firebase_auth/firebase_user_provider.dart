@@ -7,9 +7,10 @@ import '../base_auth_user_provider.dart';
 
 export '../base_auth_user_provider.dart';
 
-class HappyTestFirebaseUser extends BaseAuthUser {
-  HappyTestFirebaseUser(this.user);
+class HappyTest1201FirebaseUser extends BaseAuthUser {
+  HappyTest1201FirebaseUser(this.user);
   User? user;
+  @override
   bool get loggedIn => user != null;
 
   @override
@@ -56,17 +57,17 @@ class HappyTestFirebaseUser extends BaseAuthUser {
   static BaseAuthUser fromUserCredential(UserCredential userCredential) =>
       fromFirebaseUser(userCredential.user);
   static BaseAuthUser fromFirebaseUser(User? user) =>
-      HappyTestFirebaseUser(user);
+      HappyTest1201FirebaseUser(user);
 }
 
-Stream<BaseAuthUser> happyTestFirebaseUserStream() => FirebaseAuth.instance
+Stream<BaseAuthUser> happyTest1201FirebaseUserStream() => FirebaseAuth.instance
         .authStateChanges()
         .debounce((user) => user == null && !loggedIn
             ? TimerStream(true, const Duration(seconds: 1))
             : Stream.value(user))
         .map<BaseAuthUser>(
       (user) {
-        currentUser = HappyTestFirebaseUser(user);
+        currentUser = HappyTest1201FirebaseUser(user);
         if (!kIsWeb) {
           FirebaseCrashlytics.instance.setUserIdentifier(user?.uid ?? '');
         }

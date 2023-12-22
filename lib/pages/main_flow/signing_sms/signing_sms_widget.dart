@@ -10,19 +10,17 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 import 'signing_sms_model.dart';
 export 'signing_sms_model.dart';
 
 class SigningSmsWidget extends StatefulWidget {
   const SigningSmsWidget({
-    Key? key,
+    super.key,
     this.slug,
     this.nextslug,
     this.nextsort,
-  }) : super(key: key);
+  });
 
   final String? slug;
   final String? nextslug;
@@ -50,8 +48,8 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
       logFirebaseEvent('SigningSms_update_page_state');
       _model.tel = functions.extractDigits(FFAppState().clientTel);
       _model.cr = (String var1) {
-        return "\n" + "\n" + var1 + "\n" + "\n";
-      }('${FFAppState().clientTel}');
+        return "\n\n$var1\n\n";
+      }(FFAppState().clientTel);
       logFirebaseEvent('SigningSms_backend_call');
       _model.apiSend2EnterCode = await HappyTestAPIGroup.nextmoduleCall.call(
         token: FFAppState().Token,
@@ -100,7 +98,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                 color: FlutterFlowTheme.of(context).primaryText,
               ),
             ),
-            duration: Duration(milliseconds: 4000),
+            duration: const Duration(milliseconds: 4000),
             backgroundColor: FlutterFlowTheme.of(context).secondary,
           ),
         );
@@ -142,7 +140,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            backgroundColor: FFAppConstants.background,
             body: Center(
               child: SizedBox(
                 width: 50.0,
@@ -163,11 +161,11 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
               : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            backgroundColor: FFAppConstants.background,
             body: Align(
-              alignment: AlignmentDirectional(0.00, 0.00),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: Container(
-                constraints: BoxConstraints(
+                constraints: const BoxConstraints(
                   maxWidth: 600.0,
                   maxHeight: 1100.0,
                 ),
@@ -181,7 +179,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                     wrapWithModel(
                       model: _model.rowBackModel,
                       updateCallback: () => setState(() {}),
-                      child: RowBackWidget(),
+                      child: const RowBackWidget(),
                     ),
                     Expanded(
                       child: Column(
@@ -190,9 +188,9 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(-1.00, 0.00),
+                            alignment: const AlignmentDirectional(-1.0, 0.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   25.0, 13.0, 0.0, 0.0),
                               child: Text(
                                 'Подписание клиент',
@@ -207,7 +205,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 24.0, 25.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -287,30 +285,38 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                 await Future.delayed(
                                     const Duration(milliseconds: 1000));
                               },
-                              child: Container(
-                                height: 160.0,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFF1F1FE),
-                                  borderRadius: BorderRadius.circular(11.0),
-                                  border: Border.all(
-                                    color: Color(0xFFEFEFF4),
-                                  ),
+                              child: Material(
+                                color: Colors.transparent,
+                                elevation: 1.0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16.0),
                                 ),
-                                child: Align(
-                                  alignment: AlignmentDirectional(0.00, 0.05),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 0.0, 10.0, 10.0),
-                                    child: Text(
-                                      'Сообщение с кодом подтверждения отправлено на номер: ${_model.tel}        Введите полученный код в поле ниже',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Montserrat',
-                                            fontSize: 13.0,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                child: Container(
+                                  height: 160.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    border: Border.all(
+                                      color: const Color(0xFFEFEFF4),
+                                    ),
+                                  ),
+                                  child: Align(
+                                    alignment: const AlignmentDirectional(0.0, 0.05),
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 0.0, 10.0, 10.0),
+                                      child: Text(
+                                        'Сообщение с кодом подтверждения отправлено на номер: ${_model.tel}        Введите полученный код в поле ниже',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Montserrat',
+                                              fontSize: 13.0,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -318,7 +324,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 20.0, 26.0, 0.0),
                             child: Container(
                               height: 47.0,
@@ -342,28 +348,28 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                             .primaryText,
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -384,7 +390,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     25.0, 15.0, 25.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
@@ -412,8 +418,8 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                                 .primaryText,
                                           ),
                                         ),
-                                        duration: Duration(milliseconds: 4000),
-                                        backgroundColor: Color(0xFFB8CFF5),
+                                        duration: const Duration(milliseconds: 4000),
+                                        backgroundColor: const Color(0xFFB8CFF5),
                                       ),
                                     );
 
@@ -423,23 +429,22 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                   options: FFButtonOptions(
                                     width: 327.0,
                                     height: 48.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsets.all(0.0),
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: Color(0xFFEAEAEA),
+                                    color: const Color(0xFFEAEAEA),
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
                                           fontFamily: 'Montserrat',
-                                          color: Color(0xFF5F5F5F),
+                                          color: const Color(0xFF5F5F5F),
                                           fontSize: 12.0,
                                           letterSpacing: 0.6,
                                           fontWeight: FontWeight.bold,
                                           lineHeight: 1.5,
                                         ),
                                     elevation: 2.0,
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),
@@ -449,7 +454,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     25.0, 10.0, 25.0, 25.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -496,7 +501,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                               ),
                                             ),
                                             duration:
-                                                Duration(milliseconds: 500),
+                                                const Duration(milliseconds: 500),
                                             backgroundColor:
                                                 FlutterFlowTheme.of(context)
                                                     .secondary,
@@ -532,7 +537,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                               ),
                                             ),
                                             duration:
-                                                Duration(milliseconds: 2000),
+                                                const Duration(milliseconds: 2000),
                                             backgroundColor:
                                                 FlutterFlowTheme.of(context)
                                                     .secondary,
@@ -595,7 +600,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                                     'Button-more_navigate_to');
 
                                                 context.pushNamed(
-                                                  'BindingOtkrytie',
+                                                  'BindingAll',
                                                   queryParameters: {
                                                     'nextslug': serializeParam(
                                                       _model.nextSl,
@@ -632,7 +637,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                                                 .primaryText,
                                                       ),
                                                     ),
-                                                    duration: Duration(
+                                                    duration: const Duration(
                                                         milliseconds: 4000),
                                                     backgroundColor:
                                                         FlutterFlowTheme.of(
@@ -737,7 +742,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                                 ),
                                               ),
                                               duration:
-                                                  Duration(milliseconds: 4000),
+                                                  const Duration(milliseconds: 4000),
                                               backgroundColor:
                                                   FlutterFlowTheme.of(context)
                                                       .secondary,
@@ -759,7 +764,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                               ),
                                             ),
                                             duration:
-                                                Duration(milliseconds: 4000),
+                                                const Duration(milliseconds: 4000),
                                             backgroundColor:
                                                 FlutterFlowTheme.of(context)
                                                     .secondary,
@@ -773,7 +778,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                           .showSnackBar(
                                         SnackBar(
                                           content: Text(
-                                            'nextSl не равен \"send_sms\"',
+                                            'nextSl не равен "send_sms"',
                                             style: TextStyle(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -781,7 +786,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                             ),
                                           ),
                                           duration:
-                                              Duration(milliseconds: 4000),
+                                              const Duration(milliseconds: 4000),
                                           backgroundColor:
                                               FlutterFlowTheme.of(context)
                                                   .secondary,
@@ -807,12 +812,12 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                     options: FFButtonOptions(
                                       width: 327.0,
                                       height: 48.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 0.0),
+                                      padding: const EdgeInsets.all(0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
-                                      color: Color(0xFF4460F0),
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
@@ -823,8 +828,7 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                             fontWeight: FontWeight.bold,
                                             lineHeight: 1.5,
                                           ),
-                                      elevation: 2.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),

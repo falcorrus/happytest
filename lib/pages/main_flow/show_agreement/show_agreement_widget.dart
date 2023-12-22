@@ -10,18 +10,17 @@ import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'show_agreement_model.dart';
 export 'show_agreement_model.dart';
 
 class ShowAgreementWidget extends StatefulWidget {
   const ShowAgreementWidget({
-    Key? key,
+    super.key,
     this.slug,
     required this.nextslug,
     required this.nextsort,
-  }) : super(key: key);
+  });
 
   final String? slug;
   final String? nextslug;
@@ -85,7 +84,7 @@ class _ShowAgreementWidgetState extends State<ShowAgreementWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FFAppConstants.background,
         body: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -97,13 +96,13 @@ class _ShowAgreementWidgetState extends State<ShowAgreementWidget> {
                 wrapWithModel(
                   model: _model.rowBackModel,
                   updateCallback: () => setState(() {}),
-                  child: RowBackWidget(),
+                  child: const RowBackWidget(),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(25.0, 13.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(25.0, 13.0, 0.0, 0.0),
                     child: Text(
                       'Договор',
                       style: FlutterFlowTheme.of(context).displaySmall.override(
@@ -116,7 +115,7 @@ class _ShowAgreementWidgetState extends State<ShowAgreementWidget> {
                 ),
                 Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(15.0, 24.0, 15.0, 20.0),
+                      const EdgeInsetsDirectional.fromSTEB(15.0, 24.0, 15.0, 20.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -188,16 +187,16 @@ class _ShowAgreementWidgetState extends State<ShowAgreementWidget> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Color(0xFFF1F1FE),
+                        color: const Color(0xFFF1F1FE),
                         borderRadius: BorderRadius.circular(11.0),
                         border: Border.all(
-                          color: Color(0xFFEFEFF4),
+                          color: const Color(0xFFEFEFF4),
                         ),
                       ),
                       child: Align(
-                        alignment: AlignmentDirectional(-1.00, 0.05),
+                        alignment: const AlignmentDirectional(-1.0, 0.05),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 13.0, 0.0, 13.0),
                           child: Text(
                             'Документ для подписания',
@@ -219,15 +218,15 @@ class _ShowAgreementWidgetState extends State<ShowAgreementWidget> {
             ),
             Flexible(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
                 child: AnimatedContainer(
-                  duration: Duration(milliseconds: 100),
+                  duration: const Duration(milliseconds: 100),
                   curve: Curves.easeIn,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: FlutterFlowPdfViewer(
+                  child: const FlutterFlowPdfViewer(
                     assetPath: 'assets/pdfs/bs6js__.pdf',
                     horizontalScroll: false,
                   ),
@@ -239,7 +238,7 @@ class _ShowAgreementWidgetState extends State<ShowAgreementWidget> {
               children: [
                 Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(25.0, 10.0, 25.0, 25.0),
+                      const EdgeInsetsDirectional.fromSTEB(25.0, 10.0, 25.0, 25.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent(
@@ -247,15 +246,14 @@ class _ShowAgreementWidgetState extends State<ShowAgreementWidget> {
                       logFirebaseEvent('Button-more_action_block');
                       await action_blocks.mainAction(context);
                     },
-                    text: 'ДАЛЕЕ',
+                    text: 'Далее',
                     options: FFButtonOptions(
                       width: 327.0,
                       height: 48.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      padding: const EdgeInsets.all(0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: Color(0xFF4460F0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).secondaryText,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
                                 fontFamily: 'Montserrat',
@@ -265,10 +263,8 @@ class _ShowAgreementWidgetState extends State<ShowAgreementWidget> {
                                 fontWeight: FontWeight.bold,
                                 lineHeight: 1.5,
                               ),
-                      elevation: 2.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
-                        width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(30.0),
                     ),
