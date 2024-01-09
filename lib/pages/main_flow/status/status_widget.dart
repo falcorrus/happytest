@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'status_model.dart';
 export 'status_model.dart';
 
@@ -92,18 +93,15 @@ class _StatusWidgetState extends State<StatusWidget> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Flexible(
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 100),
-                    curve: Curves.easeIn,
+                Align(
+                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  child: Container(
+                    constraints: BoxConstraints(
+                      maxWidth: FFAppConstants.maxWidth.toDouble(),
+                      maxHeight: FFAppConstants.maxHeight.toDouble(),
+                    ),
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).primaryBackground,
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(0.0),
-                        bottomRight: Radius.circular(0.0),
-                        topLeft: Radius.circular(16.0),
-                        topRight: Radius.circular(16.0),
-                      ),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -728,7 +726,8 @@ class _StatusWidgetState extends State<StatusWidget> {
                                     barrierColor: const Color(0x00000000),
                                     context: context,
                                     builder: (context) {
-                                      return GestureDetector(
+                                      return WebViewAware(
+                                          child: GestureDetector(
                                         onTap: () => _model
                                                 .unfocusNode.canRequestFocus
                                             ? FocusScope.of(context)
@@ -742,7 +741,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                             slug: widget.slug,
                                           ),
                                         ),
-                                      );
+                                      ));
                                     },
                                   ).then((value) => safeSetState(() {}));
                                 },
@@ -822,7 +821,8 @@ class _StatusWidgetState extends State<StatusWidget> {
                                     barrierColor: const Color(0x00000000),
                                     context: context,
                                     builder: (context) {
-                                      return GestureDetector(
+                                      return WebViewAware(
+                                          child: GestureDetector(
                                         onTap: () => _model
                                                 .unfocusNode.canRequestFocus
                                             ? FocusScope.of(context)
@@ -836,7 +836,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                             slug: widget.slug,
                                           ),
                                         ),
-                                      );
+                                      ));
                                     },
                                   ).then((value) => safeSetState(() {}));
                                 },
@@ -1268,7 +1268,8 @@ class _StatusWidgetState extends State<StatusWidget> {
                                       barrierColor: const Color(0x00000000),
                                       context: context,
                                       builder: (context) {
-                                        return GestureDetector(
+                                        return WebViewAware(
+                                            child: GestureDetector(
                                           onTap: () => _model
                                                   .unfocusNode.canRequestFocus
                                               ? FocusScope.of(context)
@@ -1283,7 +1284,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                               slug: widget.slug,
                                             ),
                                           ),
-                                        );
+                                        ));
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },
@@ -1363,7 +1364,8 @@ class _StatusWidgetState extends State<StatusWidget> {
                                       barrierColor: const Color(0x00000000),
                                       context: context,
                                       builder: (context) {
-                                        return GestureDetector(
+                                        return WebViewAware(
+                                            child: GestureDetector(
                                           onTap: () => _model
                                                   .unfocusNode.canRequestFocus
                                               ? FocusScope.of(context)
@@ -1378,7 +1380,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                               slug: widget.slug,
                                             ),
                                           ),
-                                        );
+                                        ));
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },
@@ -1743,7 +1745,8 @@ class _StatusWidgetState extends State<StatusWidget> {
                                       barrierColor: const Color(0x00000000),
                                       context: context,
                                       builder: (context) {
-                                        return GestureDetector(
+                                        return WebViewAware(
+                                            child: GestureDetector(
                                           onTap: () => _model
                                                   .unfocusNode.canRequestFocus
                                               ? FocusScope.of(context)
@@ -1758,7 +1761,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                               slug: widget.slug,
                                             ),
                                           ),
-                                        );
+                                        ));
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },
@@ -1838,7 +1841,8 @@ class _StatusWidgetState extends State<StatusWidget> {
                                       barrierColor: const Color(0x00000000),
                                       context: context,
                                       builder: (context) {
-                                        return GestureDetector(
+                                        return WebViewAware(
+                                            child: GestureDetector(
                                           onTap: () => _model
                                                   .unfocusNode.canRequestFocus
                                               ? FocusScope.of(context)
@@ -1853,7 +1857,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                               slug: widget.slug,
                                             ),
                                           ),
-                                        );
+                                        ));
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },
@@ -2145,7 +2149,8 @@ class _StatusWidgetState extends State<StatusWidget> {
                                       barrierColor: const Color(0x00000000),
                                       context: context,
                                       builder: (context) {
-                                        return GestureDetector(
+                                        return WebViewAware(
+                                            child: GestureDetector(
                                           onTap: () => _model
                                                   .unfocusNode.canRequestFocus
                                               ? FocusScope.of(context)
@@ -2160,7 +2165,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                               slug: widget.slug,
                                             ),
                                           ),
-                                        );
+                                        ));
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },
@@ -2240,7 +2245,8 @@ class _StatusWidgetState extends State<StatusWidget> {
                                       barrierColor: const Color(0x00000000),
                                       context: context,
                                       builder: (context) {
-                                        return GestureDetector(
+                                        return WebViewAware(
+                                            child: GestureDetector(
                                           onTap: () => _model
                                                   .unfocusNode.canRequestFocus
                                               ? FocusScope.of(context)
@@ -2255,7 +2261,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                               slug: widget.slug,
                                             ),
                                           ),
-                                        );
+                                        ));
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },

@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/components/row_back/row_back_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'photos_widget.dart' show PhotosWidget;
@@ -17,6 +18,12 @@ class PhotosModel extends FlutterFlowModel<PhotosWidget> {
   final unfocusNode = FocusNode();
   // Model for row_back component.
   late RowBackModel rowBackModel;
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+
+  // Stores action output result for [Backend Call - API (Media)] action in Container-1 widget.
+  ApiCallResponse? uploadMyFile;
 
   /// Initialization and disposal methods.
 

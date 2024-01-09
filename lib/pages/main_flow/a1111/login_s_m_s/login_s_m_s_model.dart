@@ -1,5 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
-import '/components/row_back/row_back_widget.dart';
+import '/components/row_back_back/row_back_back_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'login_s_m_s_widget.dart' show LoginSMSWidget;
 import 'package:flutter/material.dart';
@@ -19,8 +19,8 @@ class LoginSMSModel extends FlutterFlowModel<LoginSMSWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Model for row_back component.
-  late RowBackModel rowBackModel;
+  // Model for row_BackBack component.
+  late RowBackBackModel rowBackBackModel;
   // State field(s) for TextField-sms widget.
   FocusNode? textFieldSmsFocusNode;
   TextEditingController? textFieldSmsController;
@@ -33,13 +33,13 @@ class LoginSMSModel extends FlutterFlowModel<LoginSMSWidget> {
 
   @override
   void initState(BuildContext context) {
-    rowBackModel = createModel(context, () => RowBackModel());
+    rowBackBackModel = createModel(context, () => RowBackBackModel());
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    rowBackModel.dispose();
+    rowBackBackModel.dispose();
     textFieldSmsFocusNode?.dispose();
     textFieldSmsController?.dispose();
   }

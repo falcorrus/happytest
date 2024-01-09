@@ -1,5 +1,5 @@
-import '/backend/api_requests/api_calls.dart';
-import '/components/row_back/row_back_widget.dart';
+import '/components/message_widget.dart';
+import '/components/row_back_back/row_back_back_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'bank_docs_widget.dart' show BankDocsWidget;
 import 'package:flutter/material.dart';
@@ -7,31 +7,29 @@ import 'package:flutter/material.dart';
 class BankDocsModel extends FlutterFlowModel<BankDocsWidget> {
   ///  Local state fields for this page.
 
-  String? nextSl;
-
-  int? nextSo;
-
-  int? taskNumb;
+  String orderSlugLS = '';
 
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Model for row_back component.
-  late RowBackModel rowBackModel;
-  // Stores action output result for [Backend Call - API (bankDocs)] action in Container-1 widget.
-  ApiCallResponse? apiBankDoc;
+  // Model for row_BackBack component.
+  late RowBackBackModel rowBackBackModel;
+  // Model for Message component.
+  late MessageModel messageModel;
 
   /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
-    rowBackModel = createModel(context, () => RowBackModel());
+    rowBackBackModel = createModel(context, () => RowBackBackModel());
+    messageModel = createModel(context, () => MessageModel());
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    rowBackModel.dispose();
+    rowBackBackModel.dispose();
+    messageModel.dispose();
   }
 
   /// Action blocks are added here.

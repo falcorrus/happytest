@@ -20,6 +20,7 @@ class HappyTestAPIGroup {
   static LoginCodeCall loginCodeCall = LoginCodeCall();
   static UserCall userCall = UserCall();
   static OrdersCall ordersCall = OrdersCall();
+  static OrdersVerifCall ordersVerifCall = OrdersVerifCall();
   static OrderCall orderCall = OrderCall();
   static BankDocsCall bankDocsCall = BankDocsCall();
   static DeleteOldCall deleteOldCall = DeleteOldCall();
@@ -30,7 +31,7 @@ class HappyTestAPIGroup {
   static StatusesCall statusesCall = StatusesCall();
   static StatusCall statusCall = StatusCall();
   static NextmoduleCall nextmoduleCall = NextmoduleCall();
-  static PrevModuleCall prevModuleCall = PrevModuleCall();
+  static NextmoduleLightCall nextmoduleLightCall = NextmoduleLightCall();
   static ModulesCall modulesCall = ModulesCall();
   static ScenariosCall scenariosCall = ScenariosCall();
   static BindProductCall bindProductCall = BindProductCall();
@@ -241,7 +242,7 @@ class OrdersCall {
           .map((x) => castToType<String>(x))
           .withoutNulls
           .toList();
-  List<String>? slug(dynamic response) => (getJsonField(
+  List<String>? orderSlug(dynamic response) => (getJsonField(
         response,
         r'''$.data[:].slug''',
         true,
@@ -277,9 +278,165 @@ class OrdersCall {
           .map((x) => castToType<String>(x))
           .withoutNulls
           .toList();
-  List<String>? id(dynamic response) => (getJsonField(
+  List<int>? proSlug(dynamic response) => (getJsonField(
         response,
-        r'''$.data[:].id''',
+        r'''$.data[:].product.slug''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<String>? phone(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].client.phone''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? pdf(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].externalAgreement''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<bool>? isRequired(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].media[:].required''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<bool>(x))
+          .withoutNulls
+          .toList();
+  String? customerId(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data[:].CustomerId''',
+      ));
+}
+
+class OrdersVerifCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+    String? statusCodes = 'denied',
+    String? today = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'OrdersVerif',
+      apiUrl: '${HappyTestAPIGroup.baseUrl}/orders/',
+      callType: ApiCallType.GET,
+      headers: {
+        'origin': 'https://app.flutterflow.io',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      params: {
+        'statusCodes': "denied",
+        'deliveryDateFrom': today,
+        'deliveryDateTo': today,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: true,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+        true,
+      ) as List?;
+  List<String>? adres(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].address''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? date(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].date''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? start(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].start''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? finish(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].finish''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? createdAt(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].created_at''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? upfatedAt(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].updated_at''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? orderSlug(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].slug''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? statusName(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].status.name''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? product(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].product.name''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? customer(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].customer.name''',
         true,
       ) as List?)
           ?.withoutNulls
@@ -449,6 +606,10 @@ class OrderCall {
         response,
         r'''$.data.CustomerId''',
       ));
+  String? orderSlug(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.slug''',
+      ));
 }
 
 class BankDocsCall {
@@ -456,6 +617,7 @@ class BankDocsCall {
     String? token = '',
     String? customerID = '',
     String? agentSlug = '',
+    String? orderId = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'bankDocs',
@@ -469,6 +631,7 @@ class BankDocsCall {
       params: {
         'customerId': customerID,
         'agentSlug': agentSlug,
+        'orderId': orderId,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -478,10 +641,6 @@ class BankDocsCall {
     );
   }
 
-  bool? isPersonal(dynamic response) => castToType<bool>(getJsonField(
-        response,
-        r'''$.data.is_personal''',
-      ));
   List<String>? url(dynamic response) => (getJsonField(
         response,
         r'''$.data.files[:].path''',
@@ -508,6 +667,15 @@ class BankDocsCall {
   List<String>? agentSlug(dynamic response) => (getJsonField(
         response,
         r'''$.data.files[:].agent.slug''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? orderSlug(dynamic response) => (getJsonField(
+        response,
+        r'''$.data.files[:].order_id''',
         true,
       ) as List?)
           ?.withoutNulls
@@ -922,9 +1090,9 @@ class NextmoduleCall {
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
       returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
+      encodeBodyUtf8: true,
+      decodeUtf8: true,
+      cache: true,
       alwaysAllowBody: false,
     );
   }
@@ -939,7 +1107,7 @@ class NextmoduleCall {
       ));
 }
 
-class PrevModuleCall {
+class NextmoduleLightCall {
   Future<ApiCallResponse> call({
     String? token = '',
     String? code = '',
@@ -947,29 +1115,23 @@ class PrevModuleCall {
     String? smsCode = '',
     String? phone = '',
     int? productID,
-    bool? answerDELETE,
     String? orderId = '',
-    String? q1 =
-        'Видны признаки маргинального поведения (состояние опьянения, агрессивного поведения и пр.)',
-    bool? a1,
-    String? q2 =
-        'Признаки мошенничества (паспорт имеет признаки подделки, признаки неплатежеспособности, неуверенное поведение и пр.)',
-    bool? a2 = false,
-    String? q3 =
-        'Принуждение клиентом (третьими лицами) курьера к оформлению заявки',
-    bool? a3,
-    int? crossProductId = 0,
-    String? card = '',
+    int? crossProductId,
+    int? prevSort,
   }) async {
     final ffApiRequestBody = '''
 {
   "productId": $productID,
   "code": "$code",
-  "sort": $sort
+  "sort": $sort,
+  "data": {
+    "orderId": "$orderId",
+    "crossProductId": $crossProductId
+  }
 }''';
     return ApiManager.instance.makeApiCall(
-      callName: 'prevModule',
-      apiUrl: '${HappyTestAPIGroup.baseUrl}/products/prev_module',
+      callName: 'nextmoduleLight',
+      apiUrl: '${HappyTestAPIGroup.baseUrl}/products/next_module',
       callType: ApiCallType.POST,
       headers: {
         'origin': 'https://app.flutterflow.io',
@@ -980,20 +1142,24 @@ class PrevModuleCall {
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
       returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
+      encodeBodyUtf8: true,
+      decodeUtf8: true,
+      cache: true,
       alwaysAllowBody: false,
     );
   }
 
-  String? code(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.prev.code''',
-      ));
   int? sort(dynamic response) => castToType<int>(getJsonField(
         response,
-        r'''$.prev.sort''',
+        r'''$.next.sort''',
+      ));
+  String? code(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.next.code''',
+      ));
+  int? presSort(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.next.prevSort''',
       ));
 }
 
@@ -1093,8 +1259,8 @@ class YandexNewCall {
       },
       returnBody: true,
       encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
+      decodeUtf8: true,
+      cache: true,
       alwaysAllowBody: false,
     );
   }
@@ -1112,6 +1278,51 @@ class YandexNewCall {
       castToType<String>(getJsonField(
         response,
         r'''$.response.GeoObjectCollection.featureMember[:].GeoObject.Point.pos''',
+      ));
+}
+
+class GoogleMapCall {
+  static Future<ApiCallResponse> call({
+    String? address = '',
+    String? placeid = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Google map',
+      apiUrl: 'https://maps.googleapis.com/maps/api/geocode/json?$address',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'address': address,
+        'key': "AIzaSyBRzpvAq6MG9GdwONofiDpSSSTpR1fCg3E",
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: true,
+      cache: true,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static double? lat(dynamic response) => castToType<double>(getJsonField(
+        response,
+        r'''$.results[:].geometry.location.lat''',
+      ));
+  static double? lng(dynamic response) => castToType<double>(getJsonField(
+        response,
+        r'''$.results[:].geometry.location.lng''',
+      ));
+  static List<String>? addressName(dynamic response) => (getJsonField(
+        response,
+        r'''$.results[:].address_components[:].long_name''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static String? placeID(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.results[:].place_id''',
       ));
 }
 

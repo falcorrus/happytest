@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/row_back/row_back_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
 import 'proverka_ankety_widget.dart' show ProverkaAnketyWidget;
 import 'package:flutter/material.dart';
 
@@ -40,15 +41,19 @@ class ProverkaAnketyModel extends FlutterFlowModel<ProverkaAnketyWidget> {
     ApiCallResponse? apiSetQandA;
 
     logFirebaseEvent('anketa_backend_call');
-    apiSetQandA = await HappyTestAPIGroup.nextmoduleCall.call(
-      token: FFAppState().Token,
-      code: FFAppState().nextslug,
-      sort: FFAppState().nextsort,
-      productID: FFAppState().prodslug,
-      orderId: FFAppState().slug,
-      a1: checkbox1Value,
-      a2: checkbox2Value,
-      a3: checkbox3Value,
+    unawaited(
+      () async {
+        apiSetQandA = await HappyTestAPIGroup.nextmoduleCall.call(
+          token: FFAppState().Token,
+          code: FFAppState().nextslug,
+          sort: FFAppState().nextsort,
+          productID: FFAppState().prodslug,
+          orderId: FFAppState().slug,
+          a1: checkbox1Value,
+          a2: checkbox2Value,
+          a3: checkbox3Value,
+        );
+      }(),
     );
   }
 

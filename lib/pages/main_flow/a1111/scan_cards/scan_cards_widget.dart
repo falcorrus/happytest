@@ -1,6 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/row_back/row_back_widget.dart';
+import '/components/row_back_back/row_back_back_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'scan_cards_model.dart';
 export 'scan_cards_model.dart';
 
@@ -125,12 +126,12 @@ class _ScanCardsWidgetState extends State<ScanCardsWidget>
             curve: Curves.easeIn,
             width: double.infinity,
             height: double.infinity,
-            constraints: const BoxConstraints(
-              maxWidth: 400.0,
-              maxHeight: 1000.0,
+            constraints: BoxConstraints(
+              maxWidth: FFAppConstants.maxWidth.toDouble(),
+              maxHeight: FFAppConstants.maxHeight.toDouble(),
             ),
             decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).primaryBackground,
+              color: FFAppConstants.background,
               borderRadius: BorderRadius.circular(0.0),
             ),
             child: Column(
@@ -138,9 +139,9 @@ class _ScanCardsWidgetState extends State<ScanCardsWidget>
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 wrapWithModel(
-                  model: _model.rowBackModel,
+                  model: _model.rowBackBackModel,
                   updateCallback: () => setState(() {}),
-                  child: const RowBackWidget(),
+                  child: const RowBackBackWidget(),
                 ),
                 Align(
                   alignment: const AlignmentDirectional(-1.0, 0.0),
@@ -691,7 +692,8 @@ class _ScanCardsWidgetState extends State<ScanCardsWidget>
                                     await showDialog(
                                       context: context,
                                       builder: (alertDialogContext) {
-                                        return AlertDialog(
+                                        return WebViewAware(
+                                            child: AlertDialog(
                                           title: const Text('Выберите банк'),
                                           actions: [
                                             TextButton(
@@ -700,7 +702,7 @@ class _ScanCardsWidgetState extends State<ScanCardsWidget>
                                               child: const Text('Ok'),
                                             ),
                                           ],
-                                        );
+                                        ));
                                       },
                                     );
                                   }

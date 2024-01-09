@@ -69,9 +69,9 @@ class _SigningAgentWidgetState extends State<SigningAgentWidget> {
         body: Align(
           alignment: const AlignmentDirectional(0.0, 0.0),
           child: Container(
-            constraints: const BoxConstraints(
-              maxWidth: 500.0,
-              maxHeight: 11000.0,
+            constraints: BoxConstraints(
+              maxWidth: FFAppConstants.maxWidth.toDouble(),
+              maxHeight: FFAppConstants.maxHeight.toDouble(),
             ),
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).primaryBackground,

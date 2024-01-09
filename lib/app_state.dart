@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'flutter_flow/request_manager.dart';
 import '/backend/backend.dart';
+import 'backend/api_requests/api_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
@@ -397,6 +399,36 @@ class FFAppState extends ChangeNotifier {
   set prevSort(int value) {
     _prevSort = value;
   }
+
+  final _listManager = FutureRequestManager<ApiCallResponse>();
+  Future<ApiCallResponse> list({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<ApiCallResponse> Function() requestFn,
+  }) =>
+      _listManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearListCache() => _listManager.clear();
+  void clearListCacheKey(String? uniqueKey) =>
+      _listManager.clearRequest(uniqueKey);
+
+  final _orderManager = FutureRequestManager<ApiCallResponse>();
+  Future<ApiCallResponse> order({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<ApiCallResponse> Function() requestFn,
+  }) =>
+      _orderManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearOrderCache() => _orderManager.clear();
+  void clearOrderCacheKey(String? uniqueKey) =>
+      _orderManager.clearRequest(uniqueKey);
 }
 
 LatLng? _latLngFromString(String? val) {

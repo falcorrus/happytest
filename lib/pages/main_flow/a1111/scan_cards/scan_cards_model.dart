@@ -1,5 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
-import '/components/row_back/row_back_widget.dart';
+import '/components/row_back_back/row_back_back_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'scan_cards_widget.dart' show ScanCardsWidget;
 import 'package:flutter/material.dart';
@@ -14,8 +14,8 @@ class ScanCardsModel extends FlutterFlowModel<ScanCardsWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Model for row_back component.
-  late RowBackModel rowBackModel;
+  // Model for row_BackBack component.
+  late RowBackBackModel rowBackBackModel;
   var scanAPKResult = '';
   // State field(s) for ManualN widget.
   FocusNode? manualNFocusNode;
@@ -28,13 +28,13 @@ class ScanCardsModel extends FlutterFlowModel<ScanCardsWidget> {
 
   @override
   void initState(BuildContext context) {
-    rowBackModel = createModel(context, () => RowBackModel());
+    rowBackBackModel = createModel(context, () => RowBackBackModel());
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    rowBackModel.dispose();
+    rowBackBackModel.dispose();
     manualNFocusNode?.dispose();
     manualNController?.dispose();
   }

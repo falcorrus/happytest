@@ -80,9 +80,9 @@ class _BindingWidgetState extends State<BindingWidget> {
           child: Container(
             width: double.infinity,
             height: double.infinity,
-            constraints: const BoxConstraints(
-              maxWidth: 400.0,
-              maxHeight: 900.0,
+            constraints: BoxConstraints(
+              maxWidth: FFAppConstants.maxWidth.toDouble(),
+              maxHeight: FFAppConstants.maxHeight.toDouble(),
             ),
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).primaryBackground,

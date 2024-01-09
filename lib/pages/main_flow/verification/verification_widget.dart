@@ -78,11 +78,17 @@ class _VerificationWidgetState extends State<VerificationWidget> {
                   updateCallback: () => setState(() {}),
                   child: const RowBackWidget(),
                 ),
-                Expanded(
+                Flexible(
                   child: Align(
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Container(
-                      decoration: const BoxDecoration(),
+                      constraints: BoxConstraints(
+                        maxWidth: FFAppConstants.maxWidth.toDouble(),
+                        maxHeight: FFAppConstants.maxHeight.toDouble(),
+                      ),
+                      decoration: const BoxDecoration(
+                        color: FFAppConstants.background,
+                      ),
                       alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Align(
                         alignment: const AlignmentDirectional(0.0, -0.1),

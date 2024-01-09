@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'recognition_done_model.dart';
 export 'recognition_done_model.dart';
 
@@ -63,10 +64,11 @@ class _RecognitionDoneWidgetState extends State<RecognitionDoneWidget> {
                   barrierColor: const Color(0x00000000),
                   context: context,
                   builder: (context) {
-                    return Padding(
+                    return WebViewAware(
+                        child: Padding(
                       padding: MediaQuery.viewInsetsOf(context),
                       child: const CreatePhotoStringWidget(),
-                    );
+                    ));
                   },
                 ).then((value) => safeSetState(() {}));
               },

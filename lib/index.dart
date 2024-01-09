@@ -31,3 +31,4 @@ export '/archive/dop_main/dop_main_widget.dart' show DopMainWidget;
 export '/pages/main_flow/a1111/login_s_m_s/login_s_m_s_widget.dart'
     show LoginSMSWidget;
 export '/pages/dop1/bank_docs/bank_docs_widget.dart' show BankDocsWidget;
+export '/pages/dop1/map_points/map_points_widget.dart' show MapPointsWidget;

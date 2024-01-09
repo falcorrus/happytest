@@ -190,6 +190,80 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
               ),
             ),
+            Align(
+              alignment: const AlignmentDirectional(0.0, 0.0),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    logFirebaseEvent('DRAWER_COMP_BlockMap_ON_TAP');
+                    logFirebaseEvent('BlockMap_navigate_to');
+
+                    context.pushNamed(
+                      'ScanCards',
+                      queryParameters: {
+                        'bankName': serializeParam(
+                          FFAppConstants.bankNameConst,
+                          ParamType.String,
+                        ),
+                      }.withoutNulls,
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                12.0, 0.0, 0.0, 0.0),
+                            child: Icon(
+                              Icons.qr_code_scanner,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 20.0,
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 0.0, 0.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'DRAWER_COMP_Text_8mx1e1lt_ON_TAP');
+                                  logFirebaseEvent('Text_navigate_to');
+
+                                  context.pushNamed('MapPoints');
+                                },
+                                child: Text(
+                                  'Карта',
+                                  style:
+                                      FlutterFlowTheme.of(context).titleMedium,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
               child: InkWell(

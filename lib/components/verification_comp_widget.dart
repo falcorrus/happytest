@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'verification_comp_model.dart';
 export 'verification_comp_model.dart';
 
@@ -84,10 +85,11 @@ class _VerificationCompWidgetState extends State<VerificationCompWidget> {
                   barrierColor: const Color(0x00000000),
                   context: context,
                   builder: (context) {
-                    return Padding(
+                    return WebViewAware(
+                        child: Padding(
                       padding: MediaQuery.viewInsetsOf(context),
                       child: const CreatePhotoStringWidget(),
-                    );
+                    ));
                   },
                 ).then((value) => safeSetState(() {}));
               },
@@ -157,7 +159,8 @@ class _VerificationCompWidgetState extends State<VerificationCompWidget> {
                                             .primaryBackground,
                                     context: context,
                                     builder: (context) {
-                                      return Padding(
+                                      return WebViewAware(
+                                          child: Padding(
                                         padding:
                                             MediaQuery.viewInsetsOf(context),
                                         child: PhotoVerificationErrorWidget(
@@ -169,7 +172,7 @@ class _VerificationCompWidgetState extends State<VerificationCompWidget> {
                                               )
                                               .toString(),
                                         ),
-                                      );
+                                      ));
                                     },
                                   ).then((value) => safeSetState(() {}));
 
@@ -254,7 +257,8 @@ class _VerificationCompWidgetState extends State<VerificationCompWidget> {
                                                   .primaryBackground,
                                           context: context,
                                           builder: (context) {
-                                            return Padding(
+                                            return WebViewAware(
+                                                child: Padding(
                                               padding: MediaQuery.viewInsetsOf(
                                                   context),
                                               child:
@@ -268,7 +272,7 @@ class _VerificationCompWidgetState extends State<VerificationCompWidget> {
                                                         )
                                                         .toString(),
                                               ),
-                                            );
+                                            ));
                                           },
                                         ).then((value) => safeSetState(() {}));
                                       } else {

@@ -83,9 +83,11 @@ class _OrderWidgetState extends State<OrderWidget>
     context.watch<FFAppState>();
 
     return FutureBuilder<ApiCallResponse>(
-      future: HappyTestAPIGroup.orderCall.call(
-        token: FFAppState().Token,
-        slug: FFAppState().slug,
+      future: FFAppState().order(
+        requestFn: () => HappyTestAPIGroup.orderCall.call(
+          token: FFAppState().Token,
+          slug: FFAppState().slug,
+        ),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -367,7 +369,7 @@ class _OrderWidgetState extends State<OrderWidget>
                                                 getJsonField(
                                                   orderOrderResponse.jsonBody,
                                                   r'''$.data.externalAgreement''',
-                                                ).toString(),
+                                                )?.toString(),
                                                 'externalAgreement',
                                               )));
                                               logFirebaseEvent(
@@ -377,7 +379,7 @@ class _OrderWidgetState extends State<OrderWidget>
                                                 getJsonField(
                                                   orderOrderResponse.jsonBody,
                                                   r'''$.data.externalAgreement''',
-                                                ).toString(),
+                                                )?.toString(),
                                                 'externalAgreement',
                                               ));
                                             },
@@ -846,7 +848,7 @@ class _OrderWidgetState extends State<OrderWidget>
                                               getJsonField(
                                                 orderOrderResponse.jsonBody,
                                                 r'''$.phone''',
-                                              ).toString(),
+                                              )?.toString(),
                                               '0',
                                             )}');
                                           },

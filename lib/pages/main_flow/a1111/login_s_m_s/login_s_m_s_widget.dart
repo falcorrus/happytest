@@ -1,6 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/create_photo_string/create_photo_string_widget.dart';
-import '/components/row_back/row_back_widget.dart';
+import '/components/row_back_back/row_back_back_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -8,6 +8,7 @@ import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'login_s_m_s_model.dart';
 export 'login_s_m_s_model.dart';
 
@@ -70,9 +71,9 @@ class _LoginSMSWidgetState extends State<LoginSMSWidget> {
         body: Align(
           alignment: const AlignmentDirectional(0.0, 0.0),
           child: Container(
-            constraints: const BoxConstraints(
-              maxWidth: 600.0,
-              maxHeight: 1100.0,
+            constraints: BoxConstraints(
+              maxWidth: FFAppConstants.maxWidth.toDouble(),
+              maxHeight: FFAppConstants.maxHeight.toDouble(),
             ),
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).primaryBackground,
@@ -82,9 +83,9 @@ class _LoginSMSWidgetState extends State<LoginSMSWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 wrapWithModel(
-                  model: _model.rowBackModel,
+                  model: _model.rowBackBackModel,
                   updateCallback: () => setState(() {}),
-                  child: const RowBackWidget(),
+                  child: const RowBackBackWidget(),
                 ),
                 Expanded(
                   child: Column(
@@ -127,7 +128,8 @@ class _LoginSMSWidgetState extends State<LoginSMSWidget> {
                               barrierColor: const Color(0x00000000),
                               context: context,
                               builder: (context) {
-                                return GestureDetector(
+                                return WebViewAware(
+                                    child: GestureDetector(
                                   onTap: () =>
                                       _model.unfocusNode.canRequestFocus
                                           ? FocusScope.of(context)
@@ -137,15 +139,19 @@ class _LoginSMSWidgetState extends State<LoginSMSWidget> {
                                     padding: MediaQuery.viewInsetsOf(context),
                                     child: const CreatePhotoStringWidget(),
                                   ),
-                                );
+                                ));
                               },
                             ).then((value) => safeSetState(() {}));
                           },
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 100),
                             curve: Curves.easeIn,
-                            width: 350.0,
+                            width: 327.0,
                             height: 140.0,
+                            constraints: BoxConstraints(
+                              maxWidth: FFAppConstants.maxWidth.toDouble(),
+                              maxHeight: FFAppConstants.maxHeight.toDouble(),
+                            ),
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
@@ -198,6 +204,10 @@ class _LoginSMSWidgetState extends State<LoginSMSWidget> {
                           duration: const Duration(milliseconds: 100),
                           curve: Curves.easeIn,
                           height: 60.0,
+                          constraints: const BoxConstraints(
+                            maxWidth: 327.0,
+                            maxHeight: 48.0,
+                          ),
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,

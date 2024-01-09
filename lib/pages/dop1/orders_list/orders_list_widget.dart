@@ -7,12 +7,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'orders_list_model.dart';
 export 'orders_list_model.dart';
 
@@ -57,6 +57,25 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
     'listViewOnPageLoadAnimation2': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 300.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: const Offset(0.0, -100.0),
+          end: const Offset(0.0, 0.0),
+        ),
+      ],
+    ),
+    'listViewOnPageLoadAnimation3': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
         MoveEffect(
           curve: Curves.easeIn,
           delay: 0.ms,
@@ -79,6 +98,7 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
       logFirebaseEvent('ORDERS_LIST_OrdersList_ON_INIT_STATE');
       logFirebaseEvent('OrdersList_update_page_state');
       _model.isWork = true;
+      logFirebaseEvent('OrdersList_update_app_state');
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -105,17 +125,12 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
     context.watch<FFAppState>();
 
     return FutureBuilder<ApiCallResponse>(
-      future: _model
-          .stakan(
+      future: FFAppState().list(
         requestFn: () => HappyTestAPIGroup.ordersCall.call(
           token: FFAppState().Token,
           today: functions.currentDate(),
         ),
-      )
-          .then((result) {
-        _model.apiRequestCompleted = true;
-        return result;
-      }),
+      ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -144,7 +159,8 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
             backgroundColor: FFAppConstants.background,
             drawer: SizedBox(
               width: 260.0,
-              child: Drawer(
+              child: WebViewAware(
+                  child: Drawer(
                 elevation: 16.0,
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -161,7 +177,7 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
                     ),
                   ],
                 ),
-              ),
+              )),
             ),
             body: NestedScrollView(
               floatHeaderSlivers: true,
@@ -477,11 +493,10 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
                           if (_model.isWork ?? true)
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 24.0, 0.0, 0.0),
+                                  15.0, 24.0, 15.0, 0.0),
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 100),
                                 curve: Curves.easeIn,
-                                width: 329.0,
                                 height: 32.0,
                                 decoration: const BoxDecoration(),
                                 child: Row(
@@ -586,11 +601,17 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
                           if (!_model.isWork!)
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 24.0, 0.0, 0.0),
+                                  15.0, 24.0, 15.0, 0.0),
                               child: Container(
-                                width: 329.0,
                                 height: 32.0,
-                                decoration: const BoxDecoration(),
+                                decoration: const BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(0.0),
+                                    bottomRight: Radius.circular(0.0),
+                                    topLeft: Radius.circular(0.0),
+                                    topRight: Radius.circular(0.0),
+                                  ),
+                                ),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -704,381 +725,434 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
                                     child: EmptyListWidget(),
                                   );
                                 }
-                                return RefreshIndicator(
-                                  onRefresh: () async {
-                                    logFirebaseEvent(
-                                        'ORDERS_LIST_ListView-listOrders_ON_PULL_');
-                                    logFirebaseEvent(
-                                        'ListView-listOrders_refresh_database_req');
-                                    setState(() {
-                                      _model.clearStakanCache();
-                                      _model.apiRequestCompleted = false;
-                                    });
-                                    await _model.waitForApiRequestCompleted();
-                                  },
-                                  child: ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: data.length,
-                                    itemBuilder: (context, dataIndex) {
-                                      final dataItem = data[dataIndex];
-                                      return Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            15.0, 20.0, 15.0, 0.0),
-                                        child: AnimatedContainer(
-                                          duration: const Duration(milliseconds: 100),
-                                          curve: Curves.easeIn,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            border: Border.all(
-                                              color: const Color(0xFFEFEFF4),
-                                            ),
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  primary: false,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: data.length,
+                                  itemBuilder: (context, dataIndex) {
+                                    final dataItem = data[dataIndex];
+                                    return Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          15.0, 20.0, 15.0, 0.0),
+                                      child: AnimatedContainer(
+                                        duration: const Duration(milliseconds: 100),
+                                        curve: Curves.easeIn,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          border: Border.all(
+                                            color: const Color(0xFFEFEFF4),
                                           ),
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
+                                        ),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            logFirebaseEvent(
+                                                'ORDERS_LIST_PAGE_Column_5av4603z_ON_TAP');
+                                            // isPesronal чистим от предыдущих заявок
+                                            logFirebaseEvent(
+                                                'Column_update_app_state');
+                                            FFAppState().isPersonal = false;
+                                            logFirebaseEvent(
+                                                'Column_update_app_state');
+                                            FFAppState().slug = getJsonField(
+                                              dataItem,
+                                              r'''$.slug''',
+                                            ).toString();
+                                            FFAppState().prodslug =
+                                                getJsonField(
+                                              dataItem,
+                                              r'''$.product.slug''',
+                                            );
+                                            FFAppState().clientTel =
+                                                getJsonField(
+                                              dataItem,
+                                              r'''$.client.phone''',
+                                            ).toString();
+                                            if (getJsonField(
+                                                  dataItem,
+                                                  r'''$.data.is_personal''',
+                                                ) !=
+                                                null) {
                                               logFirebaseEvent(
-                                                  'ORDERS_LIST_PAGE_Column_5av4603z_ON_TAP');
+                                                  'Column_update_app_state');
+                                              FFAppState().isPersonal =
+                                                  getJsonField(
+                                                dataItem,
+                                                r'''$.data.is_personal''',
+                                              );
+                                            } else {
                                               // isPesronal чистим от предыдущих заявок
                                               logFirebaseEvent(
                                                   'Column_update_app_state');
                                               FFAppState().isPersonal = false;
-                                              logFirebaseEvent(
-                                                  'Column_update_app_state');
-                                              FFAppState().slug = getJsonField(
-                                                dataItem,
-                                                r'''$.slug''',
-                                              ).toString();
-                                              FFAppState().prodslug =
-                                                  getJsonField(
-                                                dataItem,
-                                                r'''$.product.slug''',
-                                              );
-                                              FFAppState().clientTel =
-                                                  getJsonField(
-                                                dataItem,
-                                                r'''$.client.phone''',
-                                              ).toString();
-                                              if (getJsonField(
-                                                    dataItem,
-                                                    r'''$.data.is_personal''',
-                                                  ) !=
-                                                  null) {
-                                                logFirebaseEvent(
-                                                    'Column_update_app_state');
-                                                FFAppState().isPersonal =
-                                                    getJsonField(
-                                                  dataItem,
-                                                  r'''$.data.is_personal''',
-                                                );
-                                              } else {
-                                                // isPesronal чистим от предыдущих заявок
-                                                logFirebaseEvent(
-                                                    'Column_update_app_state');
-                                                FFAppState().isPersonal = false;
-                                              }
+                                            }
 
-                                              logFirebaseEvent(
-                                                  'Column_update_app_state');
-                                              // теоретически можно объединить в одну линию
-                                              logFirebaseEvent(
-                                                  'Column_backend_call');
-                                              logFirebaseEvent(
-                                                  'Column_update_app_state');
-                                              logFirebaseEvent(
-                                                  'Column_update_page_state');
-                                              logFirebaseEvent(
-                                                  'Column_navigate_to');
+                                            logFirebaseEvent(
+                                                'Column_navigate_to');
 
-                                              context.pushNamed(
-                                                'Order',
-                                                queryParameters: {
-                                                  'slug': serializeParam(
-                                                    FFAppState().slug,
-                                                    ParamType.String,
-                                                  ),
-                                                  'nextslug': serializeParam(
-                                                    FFAppState().nextslug,
-                                                    ParamType.String,
-                                                  ),
-                                                  'nextsort': serializeParam(
-                                                    FFAppState().nextsort,
-                                                    ParamType.int,
-                                                  ),
-                                                }.withoutNulls,
-                                              );
-                                            },
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          15.0, 10.0, 0.0, 0.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        14.0,
-                                                                        0.0),
-                                                            child: Icon(
-                                                              Icons.circle,
-                                                              color:
-                                                                  colorFromCssString(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  getJsonField(
-                                                                    dataItem,
-                                                                    r'''$.status.color''',
-                                                                  ).toString(),
-                                                                  'black',
-                                                                ),
-                                                                defaultColor:
-                                                                    Colors
-                                                                        .black,
-                                                              ),
-                                                              size: 12.0,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              getJsonField(
-                                                                dataItem,
-                                                                r'''$.status.name''',
-                                                              ).toString(),
-                                                              'статус name',
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Montserrat',
-                                                                  fontSize:
-                                                                      10.0,
-                                                                  letterSpacing:
-                                                                      0.1,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  lineHeight:
-                                                                      1.21,
-                                                                ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      20.0,
-                                                                      0.0),
-                                                          child: Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              getJsonField(
-                                                                dataItem,
-                                                                r'''$.id''',
-                                                              ).toString(),
-                                                              'id',
-                                                            ),
-                                                            textAlign:
-                                                                TextAlign.end,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Montserrat',
-                                                                  color: const Color(
-                                                                      0xFFC6C6C6),
-                                                                  fontSize:
-                                                                      10.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
+                                            context.pushNamed(
+                                              'Order',
+                                              queryParameters: {
+                                                'slug': serializeParam(
+                                                  FFAppState().slug,
+                                                  ParamType.String,
                                                 ),
-                                                Row(
+                                                'nextslug': serializeParam(
+                                                  FFAppState().nextslug,
+                                                  ParamType.String,
+                                                ),
+                                                'nextsort': serializeParam(
+                                                  FFAppState().nextsort,
+                                                  ParamType.int,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+                                          },
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        15.0, 10.0, 0.0, 0.0),
+                                                child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
                                                           .spaceBetween,
                                                   children: [
-                                                    Align(
-                                                      alignment:
-                                                          const AlignmentDirectional(
-                                                              -1.0, 0.0),
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      14.0,
+                                                                      0.0),
+                                                          child: Icon(
+                                                            Icons.circle,
+                                                            color:
+                                                                colorFromCssString(
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                getJsonField(
+                                                                  dataItem,
+                                                                  r'''$.status.color''',
+                                                                )?.toString(),
+                                                                'black',
+                                                              ),
+                                                              defaultColor:
+                                                                  Colors.black,
+                                                            ),
+                                                            size: 12.0,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            getJsonField(
+                                                              dataItem,
+                                                              r'''$.status.name''',
+                                                            )?.toString(),
+                                                            'статус name',
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Montserrat',
+                                                                fontSize: 10.0,
+                                                                letterSpacing:
+                                                                    0.1,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                lineHeight:
+                                                                    1.21,
+                                                              ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Expanded(
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsetsDirectional
                                                                 .fromSTEB(
-                                                                    15.0,
-                                                                    5.0,
                                                                     0.0,
-                                                                    5.0),
+                                                                    0.0,
+                                                                    20.0,
+                                                                    0.0),
+                                                        child: Text(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            getJsonField(
+                                                              dataItem,
+                                                              r'''$.id''',
+                                                            )?.toString(),
+                                                            'id',
+                                                          ),
+                                                          textAlign:
+                                                              TextAlign.end,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Montserrat',
+                                                                color: const Color(
+                                                                    0xFFC6C6C6),
+                                                                fontSize: 10.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            -1.0, 0.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  15.0,
+                                                                  5.0,
+                                                                  0.0,
+                                                                  5.0),
+                                                      child: Text(
+                                                        valueOrDefault<String>(
+                                                          '${valueOrDefault<String>(
+                                                            getJsonField(
+                                                              dataItem,
+                                                              r'''$.start''',
+                                                            )?.toString(),
+                                                            'error',
+                                                          )} - ${valueOrDefault<String>(
+                                                            getJsonField(
+                                                              dataItem,
+                                                              r'''$.finish''',
+                                                            )?.toString(),
+                                                            'error',
+                                                          )}',
+                                                          'error',
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .headlineMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Montserrat',
+                                                              color: const Color(
+                                                                  0xFF4460F0),
+                                                              fontSize: 28.0,
+                                                              letterSpacing:
+                                                                  0.1,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              lineHeight: 1.22,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                15.0, 0.0),
+                                                    child:
+                                                        FlutterFlowIconButton(
+                                                      borderRadius: 20.0,
+                                                      borderWidth: 1.0,
+                                                      buttonSize: 30.0,
+                                                      icon: Icon(
+                                                        Icons.content_paste,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .accent2,
+                                                        size: 24.0,
+                                                      ),
+                                                      onPressed: () async {
+                                                        logFirebaseEvent(
+                                                            'ORDERS_LIST_content_paste_ICN_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'IconButton_navigate_to');
+
+                                                        context.pushNamed(
+                                                          'bankDocs',
+                                                          queryParameters: {
+                                                            'agentSlug':
+                                                                serializeParam(
+                                                              getJsonField(
+                                                                dataItem,
+                                                                r'''$.agent.slug''',
+                                                              ).toString(),
+                                                              ParamType.String,
+                                                            ),
+                                                            'customerId':
+                                                                serializeParam(
+                                                              getJsonField(
+                                                                dataItem,
+                                                                r'''$.CustomerId''',
+                                                              ).toString(),
+                                                              ParamType.String,
+                                                            ),
+                                                            'orderId':
+                                                                serializeParam(
+                                                              getJsonField(
+                                                                dataItem,
+                                                                r'''$.id''',
+                                                              ).toString(),
+                                                              ParamType.String,
+                                                            ),
+                                                          }.withoutNulls,
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        15.0, 0.0, 0.0, 10.0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    const Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  14.0,
+                                                                  0.0),
+                                                      child: Icon(
+                                                        Icons.person_pin_circle,
+                                                        color:
+                                                            Color(0xFFB1B1B1),
+                                                        size: 15.0,
+                                                      ),
+                                                    ),
+                                                    Flexible(
+                                                      child: Text(
+                                                        valueOrDefault<String>(
+                                                          getJsonField(
+                                                            dataItem,
+                                                            r'''$.address''',
+                                                          )?.toString(),
+                                                          'адрес',
+                                                        ),
+                                                        maxLines: 1,
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Montserrat',
+                                                              fontSize: 12.0,
+                                                              letterSpacing:
+                                                                  0.1,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              lineHeight: 1.21,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        15.0, 0.0, 0.0, 10.0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    const Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  14.0,
+                                                                  0.0),
+                                                      child: Icon(
+                                                        Icons
+                                                            .person_outline_outlined,
+                                                        color:
+                                                            Color(0xFFB1B1B1),
+                                                        size: 15.0,
+                                                      ),
+                                                    ),
+                                                    Flexible(
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    1.0,
+                                                                    0.0),
                                                         child: Text(
                                                           valueOrDefault<
                                                               String>(
                                                             '${valueOrDefault<String>(
                                                               getJsonField(
                                                                 dataItem,
-                                                                r'''$.start''',
-                                                              ).toString(),
-                                                              'error',
-                                                            )} - ${valueOrDefault<String>(
+                                                                r'''$.client.lastname''',
+                                                              )?.toString(),
+                                                              'ыва',
+                                                            )} ${valueOrDefault<String>(
                                                               getJsonField(
                                                                 dataItem,
-                                                                r'''$.finish''',
-                                                              ).toString(),
-                                                              'error',
+                                                                r'''$.client.firstname''',
+                                                              )?.toString(),
+                                                              'нет',
+                                                            )} ${valueOrDefault<String>(
+                                                              getJsonField(
+                                                                dataItem,
+                                                                r'''$.client.middlename''',
+                                                              )?.toString(),
+                                                              'нет ',
                                                             )}',
                                                             'error',
                                                           ),
-                                                          textAlign:
-                                                              TextAlign.start,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .headlineMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Montserrat',
-                                                                color: const Color(
-                                                                    0xFF4460F0),
-                                                                fontSize: 28.0,
-                                                                letterSpacing:
-                                                                    0.1,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                lineHeight:
-                                                                    1.22,
-                                                              ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  15.0,
-                                                                  0.0),
-                                                      child:
-                                                          FlutterFlowIconButton(
-                                                        borderRadius: 20.0,
-                                                        borderWidth: 1.0,
-                                                        buttonSize: 30.0,
-                                                        icon: Icon(
-                                                          Icons.content_paste,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .accent2,
-                                                          size: 24.0,
-                                                        ),
-                                                        onPressed: () async {
-                                                          logFirebaseEvent(
-                                                              'ORDERS_LIST_content_paste_ICN_ON_TAP');
-                                                          logFirebaseEvent(
-                                                              'IconButton_navigate_to');
-
-                                                          context.pushNamed(
-                                                            'bankDocs',
-                                                            queryParameters: {
-                                                              'agentSlug':
-                                                                  serializeParam(
-                                                                getJsonField(
-                                                                  ordersListOrdersResponse
-                                                                      .jsonBody,
-                                                                  r'''$.data.agent.slug''',
-                                                                ).toString(),
-                                                                ParamType
-                                                                    .String,
-                                                              ),
-                                                              'customerId':
-                                                                  serializeParam(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.data.customerId''',
-                                                                ).toString(),
-                                                                ParamType
-                                                                    .String,
-                                                              ),
-                                                            }.withoutNulls,
-                                                          );
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          15.0, 0.0, 0.0, 10.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      const Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    14.0,
-                                                                    0.0),
-                                                        child: Icon(
-                                                          Icons
-                                                              .person_pin_circle,
-                                                          color:
-                                                              Color(0xFFB1B1B1),
-                                                          size: 15.0,
-                                                        ),
-                                                      ),
-                                                      Flexible(
-                                                        child: Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            getJsonField(
-                                                              dataItem,
-                                                              r'''$.address''',
-                                                            ).toString(),
-                                                            'адрес',
-                                                          ),
-                                                          maxLines: 1,
+                                                          maxLines: 2,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium
@@ -1096,143 +1170,567 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
                                                               ),
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          15.0, 0.0, 0.0, 10.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      const Padding(
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        15.0, 0.0, 0.0, 10.0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    const Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  14.0,
+                                                                  0.0),
+                                                      child: Icon(
+                                                        Icons
+                                                            .production_quantity_limits,
+                                                        color:
+                                                            Color(0xFFB1B1B1),
+                                                        size: 15.0,
+                                                      ),
+                                                    ),
+                                                    Flexible(
+                                                      child: Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
-                                                                    14.0,
+                                                                    1.0,
                                                                     0.0),
-                                                        child: Icon(
-                                                          Icons
-                                                              .person_outline_outlined,
-                                                          color:
-                                                              Color(0xFFB1B1B1),
-                                                          size: 15.0,
+                                                        child: Text(
+                                                          getJsonField(
+                                                                    dataItem,
+                                                                    r'''$.product.name''',
+                                                                  ) !=
+                                                                  null
+                                                              ? getJsonField(
+                                                                  dataItem,
+                                                                  r'''$.product.name''',
+                                                                ).toString()
+                                                              : getJsonField(
+                                                                  dataItem,
+                                                                  r'''$.product.code''',
+                                                                ).toString(),
+                                                          maxLines: 2,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Montserrat',
+                                                                fontSize: 12.0,
+                                                                letterSpacing:
+                                                                    0.1,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                lineHeight:
+                                                                    1.21,
+                                                              ),
                                                         ),
                                                       ),
-                                                      Flexible(
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ).animateOnPageLoad(animationsMap[
+                                    'listViewOnPageLoadAnimation1']!);
+                              },
+                            ),
+                          if (_model.isWork ?? true)
+                            FutureBuilder<ApiCallResponse>(
+                              future: HappyTestAPIGroup.ordersVerifCall.call(
+                                token: FFAppState().Token,
+                                statusCodes: 'denied',
+                              ),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          FlutterFlowTheme.of(context).primary,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                final listVievInVerifOrdersVerifResponse =
+                                    snapshot.data!;
+                                return Builder(
+                                  builder: (context) {
+                                    final dataVerif =
+                                        HappyTestAPIGroup.ordersVerifCall
+                                                .data(
+                                                  listVievInVerifOrdersVerifResponse
+                                                      .jsonBody,
+                                                )
+                                                ?.toList() ??
+                                            [];
+                                    return ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      primary: false,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: dataVerif.length,
+                                      itemBuilder: (context, dataVerifIndex) {
+                                        final dataVerifItem =
+                                            dataVerif[dataVerifIndex];
+                                        return Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  15.0, 20.0, 15.0, 0.0),
+                                          child: AnimatedContainer(
+                                            duration:
+                                                const Duration(milliseconds: 100),
+                                            curve: Curves.easeIn,
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              border: Border.all(
+                                                color: const Color(0xFFEFEFF4),
+                                              ),
+                                            ),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'ORDERS_LIST_PAGE_Column_lzi7dxrz_ON_TAP');
+                                                // isPesronal чистим от предыдущих заявок
+                                                logFirebaseEvent(
+                                                    'Column_update_app_state');
+                                                FFAppState().isPersonal = false;
+                                                logFirebaseEvent(
+                                                    'Column_update_app_state');
+                                                FFAppState().slug =
+                                                    getJsonField(
+                                                  dataVerifItem,
+                                                  r'''$.slug''',
+                                                ).toString();
+                                                FFAppState().prodslug =
+                                                    getJsonField(
+                                                  dataVerifItem,
+                                                  r'''$.product.slug''',
+                                                );
+                                                FFAppState().clientTel =
+                                                    getJsonField(
+                                                  dataVerifItem,
+                                                  r'''$.client.phone''',
+                                                ).toString();
+                                                if (getJsonField(
+                                                      dataVerifItem,
+                                                      r'''$.data.is_personal''',
+                                                    ) !=
+                                                    null) {
+                                                  logFirebaseEvent(
+                                                      'Column_update_app_state');
+                                                  FFAppState().isPersonal =
+                                                      getJsonField(
+                                                    dataVerifItem,
+                                                    r'''$.data.is_personal''',
+                                                  );
+                                                } else {
+                                                  // isPesronal чистим от предыдущих заявок
+                                                  logFirebaseEvent(
+                                                      'Column_update_app_state');
+                                                  FFAppState().isPersonal =
+                                                      false;
+                                                }
+
+                                                logFirebaseEvent(
+                                                    'Column_update_app_state');
+                                                // теоретически можно объединить в одну линию
+                                                logFirebaseEvent(
+                                                    'Column_backend_call');
+                                                logFirebaseEvent(
+                                                    'Column_update_app_state');
+                                                logFirebaseEvent(
+                                                    'Column_update_page_state');
+                                                logFirebaseEvent(
+                                                    'Column_navigate_to');
+
+                                                context.pushNamed(
+                                                  'Order',
+                                                  queryParameters: {
+                                                    'slug': serializeParam(
+                                                      FFAppState().slug,
+                                                      ParamType.String,
+                                                    ),
+                                                    'nextslug': serializeParam(
+                                                      FFAppState().nextslug,
+                                                      ParamType.String,
+                                                    ),
+                                                    'nextsort': serializeParam(
+                                                      FFAppState().nextsort,
+                                                      ParamType.int,
+                                                    ),
+                                                  }.withoutNulls,
+                                                );
+                                              },
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(15.0,
+                                                                10.0, 0.0, 0.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          14.0,
+                                                                          0.0),
+                                                              child: Icon(
+                                                                Icons.circle,
+                                                                color:
+                                                                    colorFromCssString(
+                                                                  getJsonField(
+                                                                    listVievInVerifOrdersVerifResponse
+                                                                        .jsonBody,
+                                                                    r'''$.status.color''',
+                                                                  ).toString(),
+                                                                  defaultColor:
+                                                                      Colors
+                                                                          .black,
+                                                                ),
+                                                                size: 12.0,
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              getJsonField(
+                                                                dataVerifItem,
+                                                                r'''$.status.name''',
+                                                              ).toString(),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Montserrat',
+                                                                    fontSize:
+                                                                        10.0,
+                                                                    letterSpacing:
+                                                                        0.1,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    lineHeight:
+                                                                        1.21,
+                                                                  ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Flexible(
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        20.0,
+                                                                        0.0),
+                                                            child: Text(
+                                                              getJsonField(
+                                                                dataVerifItem,
+                                                                r'''$.id''',
+                                                              ).toString(),
+                                                              textAlign:
+                                                                  TextAlign.end,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Montserrat',
+                                                                    color: const Color(
+                                                                        0xFFC6C6C6),
+                                                                    fontSize:
+                                                                        10.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Align(
+                                                        alignment:
+                                                            const AlignmentDirectional(
+                                                                -1.0, 0.0),
                                                         child: Padding(
                                                           padding:
                                                               const EdgeInsetsDirectional
                                                                   .fromSTEB(
+                                                                      15.0,
+                                                                      5.0,
                                                                       0.0,
-                                                                      0.0,
-                                                                      1.0,
-                                                                      0.0),
+                                                                      5.0),
                                                           child: Text(
                                                             valueOrDefault<
                                                                 String>(
-                                                              '${valueOrDefault<String>(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.client.lastname''',
-                                                                ).toString(),
-                                                                'ыва',
-                                                              )} ${valueOrDefault<String>(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.client.firstname''',
-                                                                ).toString(),
-                                                                'нет',
-                                                              )} ${valueOrDefault<String>(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.client.middlename''',
-                                                                ).toString(),
-                                                                'нет ',
-                                                              )}',
+                                                              '${getJsonField(
+                                                                dataVerifItem,
+                                                                r'''$.start''',
+                                                              ).toString()} - ${getJsonField(
+                                                                dataVerifItem,
+                                                                r'''$.finish''',
+                                                              ).toString()}',
                                                               'error',
                                                             ),
-                                                            maxLines: 2,
+                                                            textAlign:
+                                                                TextAlign.start,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyMedium
+                                                                .headlineMedium
                                                                 .override(
                                                                   fontFamily:
                                                                       'Montserrat',
+                                                                  color: const Color(
+                                                                      0xFF4460F0),
                                                                   fontSize:
-                                                                      12.0,
+                                                                      28.0,
                                                                   letterSpacing:
                                                                       0.1,
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .w500,
+                                                                          .bold,
                                                                   lineHeight:
-                                                                      1.21,
+                                                                      1.22,
                                                                 ),
                                                           ),
                                                         ),
                                                       ),
+                                                      Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        15.0,
+                                                                        0.0),
+                                                            child:
+                                                                FlutterFlowIconButton(
+                                                              borderColor: Colors
+                                                                  .transparent,
+                                                              borderRadius:
+                                                                  20.0,
+                                                              borderWidth: 1.0,
+                                                              buttonSize: 30.0,
+                                                              icon: Icon(
+                                                                Icons
+                                                                    .text_fields,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .accent2,
+                                                                size: 24.0,
+                                                              ),
+                                                              onPressed:
+                                                                  () async {
+                                                                logFirebaseEvent(
+                                                                    'ORDERS_LIST_PAGE_text_fields_ICN_ON_TAP');
+                                                                logFirebaseEvent(
+                                                                    'IconButton_alert_dialog');
+                                                                await showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (alertDialogContext) {
+                                                                    return WebViewAware(
+                                                                        child:
+                                                                            AlertDialog(
+                                                                      title: const Text(
+                                                                          'Верификатор:'),
+                                                                      content: Text(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                        getJsonField(
+                                                                          dataVerifItem,
+                                                                          r'''$.comment''',
+                                                                        )?.toString(),
+                                                                        'Сообщения нет',
+                                                                      )),
+                                                                      actions: [
+                                                                        TextButton(
+                                                                          onPressed: () =>
+                                                                              Navigator.pop(alertDialogContext),
+                                                                          child:
+                                                                              const Text('Ok'),
+                                                                        ),
+                                                                      ],
+                                                                    ));
+                                                                  },
+                                                                );
+                                                              },
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        15.0,
+                                                                        0.0),
+                                                            child:
+                                                                FlutterFlowIconButton(
+                                                              borderColor: Colors
+                                                                  .transparent,
+                                                              borderRadius:
+                                                                  20.0,
+                                                              borderWidth: 1.0,
+                                                              buttonSize: 30.0,
+                                                              icon: Icon(
+                                                                Icons
+                                                                    .content_paste,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .accent2,
+                                                                size: 24.0,
+                                                              ),
+                                                              onPressed:
+                                                                  () async {
+                                                                logFirebaseEvent(
+                                                                    'ORDERS_LIST_content_paste_ICN_ON_TAP');
+                                                                logFirebaseEvent(
+                                                                    'IconButton_navigate_to');
+
+                                                                context
+                                                                    .pushNamed(
+                                                                  'bankDocs',
+                                                                  queryParameters:
+                                                                      {
+                                                                    'agentSlug':
+                                                                        serializeParam(
+                                                                      getJsonField(
+                                                                        listVievInVerifOrdersVerifResponse
+                                                                            .jsonBody,
+                                                                        r'''$.agent.slug''',
+                                                                      ).toString(),
+                                                                      ParamType
+                                                                          .String,
+                                                                    ),
+                                                                    'customerId':
+                                                                        serializeParam(
+                                                                      getJsonField(
+                                                                        listVievInVerifOrdersVerifResponse
+                                                                            .jsonBody,
+                                                                        r'''$.CustomerId''',
+                                                                      ).toString(),
+                                                                      ParamType
+                                                                          .String,
+                                                                    ),
+                                                                    'orderId':
+                                                                        serializeParam(
+                                                                      getJsonField(
+                                                                        listVievInVerifOrdersVerifResponse
+                                                                            .jsonBody,
+                                                                        r'''$.id''',
+                                                                      ).toString(),
+                                                                      ParamType
+                                                                          .String,
+                                                                    ),
+                                                                  }.withoutNulls,
+                                                                );
+                                                              },
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ],
                                                   ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          15.0, 0.0, 0.0, 10.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      const Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    14.0,
-                                                                    0.0),
-                                                        child: Icon(
-                                                          Icons
-                                                              .production_quantity_limits,
-                                                          color:
-                                                              Color(0xFFB1B1B1),
-                                                          size: 15.0,
-                                                        ),
-                                                      ),
-                                                      Flexible(
-                                                        child: Padding(
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(15.0, 0.0,
+                                                                0.0, 10.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        const Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       0.0,
-                                                                      1.0,
+                                                                      14.0,
                                                                       0.0),
+                                                          child: Icon(
+                                                            Icons
+                                                                .person_pin_circle,
+                                                            color: Color(
+                                                                0xFFB1B1B1),
+                                                            size: 15.0,
+                                                          ),
+                                                        ),
+                                                        Flexible(
                                                           child: Text(
                                                             getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.product.name''',
-                                                                    ) !=
-                                                                    null
-                                                                ? getJsonField(
-                                                                    dataItem,
-                                                                    r'''$.product.name''',
-                                                                  ).toString()
-                                                                : getJsonField(
-                                                                    dataItem,
-                                                                    r'''$.product.code''',
-                                                                  ).toString(),
-                                                            maxLines: 2,
+                                                              dataVerifItem,
+                                                              r'''$.address''',
+                                                            ).toString(),
+                                                            maxLines: 1,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium
@@ -1251,19 +1749,168 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
                                                                 ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(15.0, 0.0,
+                                                                0.0, 10.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        const Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      14.0,
+                                                                      0.0),
+                                                          child: Icon(
+                                                            Icons
+                                                                .person_outline_outlined,
+                                                            color: Color(
+                                                                0xFFB1B1B1),
+                                                            size: 15.0,
+                                                          ),
+                                                        ),
+                                                        Flexible(
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        1.0,
+                                                                        0.0),
+                                                            child: Text(
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                '${getJsonField(
+                                                                  dataVerifItem,
+                                                                  r'''$.client.lastname''',
+                                                                ).toString()} ${getJsonField(
+                                                                  dataVerifItem,
+                                                                  r'''$.client.firstname''',
+                                                                ).toString()} ${getJsonField(
+                                                                  dataVerifItem,
+                                                                  r'''$.client.middlename''',
+                                                                ).toString()}',
+                                                                'error',
+                                                              ),
+                                                              maxLines: 2,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Montserrat',
+                                                                    fontSize:
+                                                                        12.0,
+                                                                    letterSpacing:
+                                                                        0.1,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    lineHeight:
+                                                                        1.21,
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(15.0, 0.0,
+                                                                0.0, 10.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        const Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      14.0,
+                                                                      0.0),
+                                                          child: Icon(
+                                                            Icons
+                                                                .production_quantity_limits,
+                                                            color: Color(
+                                                                0xFFB1B1B1),
+                                                            size: 15.0,
+                                                          ),
+                                                        ),
+                                                        Flexible(
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        1.0,
+                                                                        0.0),
+                                                            child: Text(
+                                                              getJsonField(
+                                                                        dataVerifItem,
+                                                                        r'''$.product.name''',
+                                                                      ) !=
+                                                                      null
+                                                                  ? getJsonField(
+                                                                      dataVerifItem,
+                                                                      r'''$.product.name''',
+                                                                    ).toString()
+                                                                  : getJsonField(
+                                                                      dataVerifItem,
+                                                                      r'''$.product.name''',
+                                                                    ).toString(),
+                                                              maxLines: 2,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Montserrat',
+                                                                    fontSize:
+                                                                        12.0,
+                                                                    letterSpacing:
+                                                                        0.1,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    lineHeight:
+                                                                        1.21,
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ).animateOnPageLoad(animationsMap[
-                                    'listViewOnPageLoadAnimation1']!);
+                                        );
+                                      },
+                                    ).animateOnPageLoad(animationsMap[
+                                        'listViewOnPageLoadAnimation2']!);
+                                  },
+                                );
                               },
                             ),
                           if (!_model.isWork!)
@@ -1462,7 +2109,7 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
                                                                       getJsonField(
                                                                         responseItem,
                                                                         r'''$.status.color''',
-                                                                      ).toString(),
+                                                                      )?.toString(),
                                                                       'black',
                                                                     ),
                                                                     defaultColor:
@@ -1478,7 +2125,7 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
                                                                   getJsonField(
                                                                     responseItem,
                                                                     r'''$.status.name''',
-                                                                  ).toString(),
+                                                                  )?.toString(),
                                                                   'статус name',
                                                                 ),
                                                                 style: FlutterFlowTheme.of(
@@ -1515,7 +2162,7 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
                                                                   getJsonField(
                                                                     responseItem,
                                                                     r'''$.id''',
-                                                                  ).toString(),
+                                                                  )?.toString(),
                                                                   'id',
                                                                 ),
                                                                 textAlign:
@@ -1567,7 +2214,7 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
                                                                   getJsonField(
                                                                     responseItem,
                                                                     r'''$.start''',
-                                                                  ).toString(),
+                                                                  )?.toString(),
                                                                   'error',
                                                                 )} - ${getJsonField(
                                                                   responseItem,
@@ -1740,7 +2387,7 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
                                                                 getJsonField(
                                                                   responseItem,
                                                                   r'''$.client.address''',
-                                                                ).toString(),
+                                                                )?.toString(),
                                                                 'адрес',
                                                               ),
                                                               maxLines: 1,
@@ -1812,7 +2459,7 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
                                                                     getJsonField(
                                                                       responseItem,
                                                                       r'''$.client.lastname''',
-                                                                    ).toString(),
+                                                                    )?.toString(),
                                                                     'ыва',
                                                                   )} ${getJsonField(
                                                                     responseItem,
@@ -1931,7 +2578,7 @@ class _OrdersListWidgetState extends State<OrdersListWidget>
                                         );
                                       },
                                     ).animateOnPageLoad(animationsMap[
-                                        'listViewOnPageLoadAnimation2']!);
+                                        'listViewOnPageLoadAnimation3']!);
                                   },
                                 );
                               },

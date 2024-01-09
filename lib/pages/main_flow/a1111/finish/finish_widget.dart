@@ -72,9 +72,9 @@ class _FinishWidgetState extends State<FinishWidget> {
             curve: Curves.easeIn,
             width: double.infinity,
             height: double.infinity,
-            constraints: const BoxConstraints(
-              maxWidth: 600.0,
-              maxHeight: 1100.0,
+            constraints: BoxConstraints(
+              maxWidth: FFAppConstants.maxWidth.toDouble(),
+              maxHeight: FFAppConstants.maxHeight.toDouble(),
             ),
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).primaryBackground,

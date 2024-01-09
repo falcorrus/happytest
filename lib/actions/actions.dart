@@ -3,8 +3,8 @@ import '/components/verification_comp_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 
 Future mainAction(BuildContext context) async {
   ApiCallResponse? apiNextModuleBlock;
@@ -129,19 +129,16 @@ Future mainAction(BuildContext context) async {
               status: 'waiting_verification',
             );
             logFirebaseEvent('mainAction_alert_dialog');
-            await showAlignedDialog(
+            await showDialog(
               barrierDismissible: false,
               context: context,
-              isGlobal: true,
-              avoidOverflow: false,
-              targetAnchor: const AlignmentDirectional(0.0, 0.0)
-                  .resolve(Directionality.of(context)),
-              followerAnchor: const AlignmentDirectional(0.0, 0.0)
-                  .resolve(Directionality.of(context)),
               builder: (dialogContext) {
-                return const Material(
-                  color: Colors.transparent,
-                  child: VerificationCompWidget(),
+                return Dialog(
+                  insetPadding: EdgeInsets.zero,
+                  backgroundColor: Colors.transparent,
+                  alignment: const AlignmentDirectional(0.0, 0.0)
+                      .resolve(Directionality.of(context)),
+                  child: const WebViewAware(child: VerificationCompWidget()),
                 );
               },
             );
@@ -351,51 +348,57 @@ Future mainAction(BuildContext context) async {
 }
 
 Future actionBack(BuildContext context) async {
-  ApiCallResponse? apPrevModule;
+  ApiCallResponse? apiPrevModule;
   ApiCallResponse? apiResultStatus;
   ApiCallResponse? apiStatus3;
   ApiCallResponse? apiStatus1;
   ApiCallResponse? apiStatus2;
 
-  // при нажатии внизу "далее"
-  // - присваиваем Code и Sort следующей страницы.
-  // - по Code-Sort понимаем, в какой следующий блок дерева отправляем
-  //
+  // Если хотим не на след экран, а не предыдущий, то можно использовать PrevSort, он на 2 меньше чем Sort (бэк)
   logFirebaseEvent('actionBack_backend_call');
-  apPrevModule = await HappyTestAPIGroup.prevModuleCall.call(
+  apiPrevModule = await HappyTestAPIGroup.nextmoduleLightCall.call(
     token: FFAppState().Token,
-    productID: FFAppState().prodslug,
     code: FFAppState().nextslug,
-    sort: FFAppState().nextsort,
+    sort: FFAppState().nextsort > 1 ? (FFAppState().nextsort - 2) : -10,
+    productID: FFAppState().prodslug,
     orderId: FFAppState().slug,
   );
-  if ((apPrevModule.succeeded ?? true)) {
+  if ((apiPrevModule.succeeded ?? true)) {
     logFirebaseEvent('actionBack_update_app_state');
-    FFAppState().nextslug = HappyTestAPIGroup.prevModuleCall
+    FFAppState().nextslug = HappyTestAPIGroup.nextmoduleLightCall
         .code(
-          (apPrevModule.jsonBody ?? ''),
+          (apiPrevModule.jsonBody ?? ''),
         )
         .toString();
-    FFAppState().nextsort = HappyTestAPIGroup.prevModuleCall.sort(
-      (apPrevModule.jsonBody ?? ''),
+    FFAppState().nextsort = HappyTestAPIGroup.nextmoduleLightCall.sort(
+      (apiPrevModule.jsonBody ?? ''),
     )!;
-    logFirebaseEvent('actionBack_show_snack_bar');
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          FFAppState().nextslug,
-          style: const TextStyle(),
-        ),
-        duration: const Duration(milliseconds: 4000),
-        backgroundColor: FlutterFlowTheme.of(context).secondary,
-      ),
-    );
-    if (FFAppState().nextsort > 0) {
-      if (FFAppState().nextslug == 'show_agreement') {
+    if (FFAppState().nextslug == 'show_agreement') {
+      logFirebaseEvent('actionBack_navigate_to');
+
+      context.pushNamed(
+        'ShowAgreement',
+        queryParameters: {
+          'slug': serializeParam(
+            FFAppState().slug,
+            ParamType.String,
+          ),
+          'nextslug': serializeParam(
+            FFAppState().nextslug,
+            ParamType.String,
+          ),
+          'nextsort': serializeParam(
+            FFAppState().nextsort,
+            ParamType.int,
+          ),
+        }.withoutNulls,
+      );
+    } else {
+      if (FFAppState().nextslug == 'photos') {
         logFirebaseEvent('actionBack_navigate_to');
 
         context.pushNamed(
-          'ShowAgreement',
+          'Photos',
           queryParameters: {
             'slug': serializeParam(
               FFAppState().slug,
@@ -412,101 +415,98 @@ Future actionBack(BuildContext context) async {
           }.withoutNulls,
         );
       } else {
-        if (FFAppState().nextslug == 'photos') {
-          logFirebaseEvent('actionBack_navigate_to');
+        if (FFAppState().nextslug == 'wire_card') {
+          if ((FFAppState().bankName == 'bank-akbars') ||
+              (FFAppState().bankName == 'bank-rosbank')) {
+            logFirebaseEvent('actionBack_navigate_to');
 
-          context.pushNamed(
-            'Photos',
-            queryParameters: {
-              'slug': serializeParam(
-                FFAppState().slug,
-                ParamType.String,
-              ),
-              'nextslug': serializeParam(
-                FFAppState().nextslug,
-                ParamType.String,
-              ),
-              'nextsort': serializeParam(
-                FFAppState().nextsort,
-                ParamType.int,
-              ),
-            }.withoutNulls,
-          );
-        } else {
-          if (FFAppState().nextslug == 'wire_card') {
-            if ((FFAppState().bankName == 'bank-akbars') ||
-                (FFAppState().bankName == 'bank-rosbank')) {
-              logFirebaseEvent('actionBack_navigate_to');
-
-              context.pushNamed(
-                'binding',
-                queryParameters: {
-                  'nextslug': serializeParam(
-                    FFAppState().nextslug,
-                    ParamType.String,
-                  ),
-                  'nextsort': serializeParam(
-                    FFAppState().nextsort,
-                    ParamType.int,
-                  ),
-                  'slug': serializeParam(
-                    FFAppState().slug,
-                    ParamType.String,
-                  ),
-                }.withoutNulls,
-              );
-            } else {
-              logFirebaseEvent('actionBack_navigate_to');
-
-              context.pushNamed(
-                'BindingAll',
-                queryParameters: {
-                  'nextslug': serializeParam(
-                    FFAppState().nextslug,
-                    ParamType.String,
-                  ),
-                  'nextsort': serializeParam(
-                    FFAppState().nextsort,
-                    ParamType.int,
-                  ),
-                  'slug': serializeParam(
-                    FFAppState().slug,
-                    ParamType.String,
-                  ),
-                }.withoutNulls,
-              );
-            }
+            context.pushNamed(
+              'binding',
+              queryParameters: {
+                'nextslug': serializeParam(
+                  FFAppState().nextslug,
+                  ParamType.String,
+                ),
+                'nextsort': serializeParam(
+                  FFAppState().nextsort,
+                  ParamType.int,
+                ),
+                'slug': serializeParam(
+                  FFAppState().slug,
+                  ParamType.String,
+                ),
+              }.withoutNulls,
+            );
           } else {
-            if (FFAppState().nextslug == 'verification') {
-              logFirebaseEvent('actionBack_backend_call');
-              apiResultStatus = await HappyTestAPIGroup.statusCall.call(
-                token: FFAppState().Token,
-                slug: FFAppState().slug,
-                status: 'waiting_verification',
-              );
-              logFirebaseEvent('actionBack_alert_dialog');
-              await showAlignedDialog(
-                barrierDismissible: false,
-                context: context,
-                isGlobal: true,
-                avoidOverflow: false,
-                targetAnchor: const AlignmentDirectional(0.0, 0.0)
-                    .resolve(Directionality.of(context)),
-                followerAnchor: const AlignmentDirectional(0.0, 0.0)
-                    .resolve(Directionality.of(context)),
-                builder: (dialogContext) {
-                  return const Material(
-                    color: Colors.transparent,
-                    child: VerificationCompWidget(),
-                  );
-                },
+            logFirebaseEvent('actionBack_navigate_to');
+
+            context.pushNamed(
+              'BindingAll',
+              queryParameters: {
+                'nextslug': serializeParam(
+                  FFAppState().nextslug,
+                  ParamType.String,
+                ),
+                'nextsort': serializeParam(
+                  FFAppState().nextsort,
+                  ParamType.int,
+                ),
+                'slug': serializeParam(
+                  FFAppState().slug,
+                  ParamType.String,
+                ),
+              }.withoutNulls,
+            );
+          }
+        } else {
+          if (FFAppState().nextslug == 'verification') {
+            logFirebaseEvent('actionBack_backend_call');
+            apiResultStatus = await HappyTestAPIGroup.statusCall.call(
+              token: FFAppState().Token,
+              slug: FFAppState().slug,
+              status: 'waiting_verification',
+            );
+            logFirebaseEvent('actionBack_alert_dialog');
+            await showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (dialogContext) {
+                return Dialog(
+                  insetPadding: EdgeInsets.zero,
+                  backgroundColor: Colors.transparent,
+                  alignment: const AlignmentDirectional(0.0, 0.0)
+                      .resolve(Directionality.of(context)),
+                  child: const WebViewAware(child: VerificationCompWidget()),
+                );
+              },
+            );
+          } else {
+            if (FFAppState().nextslug == 'send_sms') {
+              logFirebaseEvent('actionBack_navigate_to');
+
+              context.pushNamed(
+                'SigningSms',
+                queryParameters: {
+                  'slug': serializeParam(
+                    FFAppState().slug,
+                    ParamType.String,
+                  ),
+                  'nextslug': serializeParam(
+                    FFAppState().nextslug,
+                    ParamType.String,
+                  ),
+                  'nextsort': serializeParam(
+                    FFAppState().nextsort,
+                    ParamType.int,
+                  ),
+                }.withoutNulls,
               );
             } else {
-              if (FFAppState().nextslug == 'send_sms') {
+              if (FFAppState().nextslug == 'check_report') {
                 logFirebaseEvent('actionBack_navigate_to');
 
                 context.pushNamed(
-                  'SigningSms',
+                  'proverka-ankety',
                   queryParameters: {
                     'slug': serializeParam(
                       FFAppState().slug,
@@ -523,11 +523,11 @@ Future actionBack(BuildContext context) async {
                   }.withoutNulls,
                 );
               } else {
-                if (FFAppState().nextslug == 'check_report') {
+                if (FFAppState().nextslug == 'cross_product') {
                   logFirebaseEvent('actionBack_navigate_to');
 
                   context.pushNamed(
-                    'proverka-ankety',
+                    'Finish',
                     queryParameters: {
                       'slug': serializeParam(
                         FFAppState().slug,
@@ -544,99 +544,74 @@ Future actionBack(BuildContext context) async {
                     }.withoutNulls,
                   );
                 } else {
-                  if (FFAppState().nextslug == 'cross_product') {
-                    logFirebaseEvent('actionBack_navigate_to');
-
-                    context.pushNamed(
-                      'Finish',
-                      queryParameters: {
-                        'slug': serializeParam(
-                          FFAppState().slug,
-                          ParamType.String,
-                        ),
-                        'nextslug': serializeParam(
-                          FFAppState().nextslug,
-                          ParamType.String,
-                        ),
-                        'nextsort': serializeParam(
-                          FFAppState().nextsort,
-                          ParamType.int,
-                        ),
-                      }.withoutNulls,
-                    );
-                  } else {
-                    if (FFAppState().nextslug == 'samyi-poslednii-status') {
-                      if (FFAppState().bankName == 'bank-rosbank') {
-                        logFirebaseEvent('actionBack_backend_call');
-                        unawaited(
-                          () async {
-                            apiStatus3 =
-                                await HappyTestAPIGroup.statusCall.call(
-                              token: FFAppState().Token,
-                              slug: FFAppState().slug,
-                              status: 'zaversit-vstrecu',
-                            );
-                          }(),
-                        );
-                        logFirebaseEvent('actionBack_backend_call');
-                        unawaited(
-                          () async {
-                            apiStatus1 =
-                                await HappyTestAPIGroup.statusCall.call(
-                              token: FFAppState().Token,
-                              slug: FFAppState().slug,
-                              status: 'validation_by_bank',
-                            );
-                          }(),
-                        );
-                        logFirebaseEvent('actionBack_navigate_to');
-
-                        context.goNamed('OrdersList');
-                      } else {
-                        logFirebaseEvent('actionBack_backend_call');
-                        unawaited(
-                          () async {
-                            apiStatus2 =
-                                await HappyTestAPIGroup.statusCall.call(
-                              token: FFAppState().Token,
-                              slug: FFAppState().slug,
-                              status: 'karta-vydana',
-                            );
-                          }(),
-                        );
-                        logFirebaseEvent('actionBack_navigate_to');
-
-                        context.goNamed(
-                          'Finish',
-                          queryParameters: {
-                            'slug': serializeParam(
-                              FFAppState().slug,
-                              ParamType.String,
-                            ),
-                            'nextslug': serializeParam(
-                              FFAppState().nextslug,
-                              ParamType.String,
-                            ),
-                            'nextsort': serializeParam(
-                              FFAppState().nextsort,
-                              ParamType.int,
-                            ),
-                          }.withoutNulls,
-                        );
-                      }
-                    } else {
+                  if (FFAppState().nextslug == 'samyi-poslednii-status') {
+                    if (FFAppState().bankName == 'bank-rosbank') {
+                      logFirebaseEvent('actionBack_backend_call');
+                      unawaited(
+                        () async {
+                          apiStatus3 = await HappyTestAPIGroup.statusCall.call(
+                            token: FFAppState().Token,
+                            slug: FFAppState().slug,
+                            status: 'zaversit-vstrecu',
+                          );
+                        }(),
+                      );
+                      logFirebaseEvent('actionBack_backend_call');
+                      unawaited(
+                        () async {
+                          apiStatus1 = await HappyTestAPIGroup.statusCall.call(
+                            token: FFAppState().Token,
+                            slug: FFAppState().slug,
+                            status: 'validation_by_bank',
+                          );
+                        }(),
+                      );
                       logFirebaseEvent('actionBack_navigate_to');
 
-                      context.pushNamed(
-                        'Order',
+                      context.goNamed('OrdersList');
+                    } else {
+                      logFirebaseEvent('actionBack_backend_call');
+                      unawaited(
+                        () async {
+                          apiStatus2 = await HappyTestAPIGroup.statusCall.call(
+                            token: FFAppState().Token,
+                            slug: FFAppState().slug,
+                            status: 'karta-vydana',
+                          );
+                        }(),
+                      );
+                      logFirebaseEvent('actionBack_navigate_to');
+
+                      context.goNamed(
+                        'Finish',
                         queryParameters: {
                           'slug': serializeParam(
                             FFAppState().slug,
                             ParamType.String,
                           ),
+                          'nextslug': serializeParam(
+                            FFAppState().nextslug,
+                            ParamType.String,
+                          ),
+                          'nextsort': serializeParam(
+                            FFAppState().nextsort,
+                            ParamType.int,
+                          ),
                         }.withoutNulls,
                       );
                     }
+                  } else {
+                    logFirebaseEvent('actionBack_navigate_to');
+
+                    context.pushNamed(
+                      'Order',
+                      queryParameters: {
+                        'slug': serializeParam(
+                          FFAppState().slug,
+                          ParamType.String,
+                        ),
+                      }.withoutNulls,
+                    );
                   }
                 }
               }
@@ -644,30 +619,18 @@ Future actionBack(BuildContext context) async {
           }
         }
       }
-    } else {
-      logFirebaseEvent('actionBack_navigate_to');
-
-      context.pushNamed(
-        'Order',
-        queryParameters: {
-          'slug': serializeParam(
-            FFAppState().slug,
-            ParamType.String,
-          ),
-        }.withoutNulls,
-      );
     }
   } else {
-    logFirebaseEvent('actionBack_show_snack_bar');
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text(
-          'API не сработало',
-          style: TextStyle(),
+    logFirebaseEvent('actionBack_navigate_to');
+
+    context.pushNamed(
+      'Order',
+      queryParameters: {
+        'slug': serializeParam(
+          FFAppState().slug,
+          ParamType.String,
         ),
-        duration: const Duration(milliseconds: 4000),
-        backgroundColor: FlutterFlowTheme.of(context).secondary,
-      ),
+      }.withoutNulls,
     );
   }
 }

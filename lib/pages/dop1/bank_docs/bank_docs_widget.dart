@@ -1,14 +1,13 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/empty_list/empty_list_widget.dart';
-import '/components/photo_delete/photo_delete_widget.dart';
-import '/components/row_back/row_back_widget.dart';
+import '/components/message_widget.dart';
+import '/components/row_back_back/row_back_back_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
@@ -20,10 +19,12 @@ class BankDocsWidget extends StatefulWidget {
     super.key,
     required this.agentSlug,
     required this.customerId,
+    required this.orderId,
   });
 
   final String? agentSlug;
   final String? customerId;
+  final String? orderId;
 
   @override
   _BankDocsWidgetState createState() => _BankDocsWidgetState();
@@ -48,6 +49,18 @@ class _BankDocsWidgetState extends State<BankDocsWidget>
         ),
       ],
     ),
+    'messageOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
   };
 
   @override
@@ -56,6 +69,12 @@ class _BankDocsWidgetState extends State<BankDocsWidget>
     _model = createModel(context, () => BankDocsModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'bankDocs'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('BANK_DOCS_PAGE_bankDocs_ON_INIT_STATE');
+      logFirebaseEvent('bankDocs_update_page_state');
+      _model.orderSlugLS = widget.orderId!;
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -85,6 +104,7 @@ class _BankDocsWidgetState extends State<BankDocsWidget>
         customerID: widget.customerId,
         agentSlug: widget.agentSlug,
         token: FFAppState().Token,
+        orderId: widget.orderId,
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -118,32 +138,17 @@ class _BankDocsWidgetState extends State<BankDocsWidget>
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  wrapWithModel(
+                    model: _model.rowBackBackModel,
+                    updateCallback: () => setState(() {}),
+                    child: const RowBackBackWidget(),
+                  ),
                   Expanded(
                     flex: 2,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 32.0, 0.0, 0.0),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              logFirebaseEvent(
-                                  'BANK_DOCS_PAGE_Container_lvn90xfa_ON_TAP');
-                              logFirebaseEvent('row_back_action_block');
-                              await action_blocks.actionBack(context);
-                            },
-                            child: wrapWithModel(
-                              model: _model.rowBackModel,
-                              updateCallback: () => setState(() {}),
-                              child: const RowBackWidget(),
-                            ),
-                          ),
-                        ),
                         Align(
                           alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
@@ -161,208 +166,151 @@ class _BankDocsWidgetState extends State<BankDocsWidget>
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                15.0, 0.0, 15.0, 0.0),
-                            child: Builder(
-                              builder: (context) {
-                                final allDocs = HappyTestAPIGroup.bankDocsCall
-                                        .data(
-                                          bankDocsBankDocsResponse.jsonBody,
-                                        )
-                                        ?.toList() ??
-                                    [];
-                                if (allDocs.isEmpty) {
-                                  return const EmptyListWidget();
-                                }
-                                return ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: allDocs.length,
-                                  itemBuilder: (context, allDocsIndex) {
-                                    final allDocsItem = allDocs[allDocsIndex];
-                                    return Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 14.0, 0.0, 0.0),
-                                      child: InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          logFirebaseEvent(
-                                              'BANK_DOCS_PAGE_Container-1_ON_TAP');
-                                          logFirebaseEvent(
-                                              'Container-1_backend_call');
-                                          _model.apiBankDoc =
-                                              await HappyTestAPIGroup
-                                                  .bankDocsCall
-                                                  .call();
-                                          if ((_model.apiBankDoc?.succeeded ??
-                                              true)) {
+                        if (getJsonField(
+                              bankDocsBankDocsResponse.jsonBody,
+                              r'''$.data.files''',
+                            ) !=
+                            null)
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  15.0, 0.0, 15.0, 0.0),
+                              child: Builder(
+                                builder: (context) {
+                                  final datafiles = getJsonField(
+                                    bankDocsBankDocsResponse.jsonBody,
+                                    r'''$.data.files''',
+                                  ).toList();
+                                  if (datafiles.isEmpty) {
+                                    return const EmptyListWidget();
+                                  }
+                                  return ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: datafiles.length,
+                                    itemBuilder: (context, datafilesIndex) {
+                                      final datafilesItem =
+                                          datafiles[datafilesIndex];
+                                      return Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 14.0, 0.0, 0.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            logFirebaseEvent(
+                                                'BANK_DOCS_PAGE_Container-1_ON_TAP');
                                             logFirebaseEvent(
                                                 'Container-1_launch_u_r_l');
                                             await launchURL(getJsonField(
-                                              allDocsItem,
-                                              r'''$.data.files.path''',
+                                              datafilesItem,
+                                              r'''$.path''',
                                             ).toString());
-                                          } else {
-                                            logFirebaseEvent(
-                                                'Container-1_wait__delay');
-                                            await Future.delayed(const Duration(
-                                                milliseconds: 2000));
-                                          }
-
-                                          setState(() {});
-                                        },
-                                        child: AnimatedContainer(
-                                          duration: const Duration(milliseconds: 100),
-                                          curve: Curves.easeInOut,
-                                          width: 348.0,
-                                          height: 68.0,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            border: Border.all(
-                                              color: const Color(0xFFEFEFF4),
+                                          },
+                                          child: AnimatedContainer(
+                                            duration:
+                                                const Duration(milliseconds: 100),
+                                            curve: Curves.easeInOut,
+                                            width: 348.0,
+                                            height: 68.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              border: Border.all(
+                                                color: const Color(0xFFEFEFF4),
+                                              ),
                                             ),
-                                          ),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Expanded(
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  15.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: AnimatedContainer(
-                                                        duration: const Duration(
-                                                            milliseconds: 100),
-                                                        curve: Curves.easeIn,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryBackground,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      13.0),
-                                                        ),
-                                                        child: Text(
-                                                          allDocsItem
-                                                              .toString(),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium,
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    15.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: const Duration(
+                                                              milliseconds:
+                                                                  100),
+                                                          curve: Curves.easeIn,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryBackground,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        13.0),
+                                                          ),
+                                                          child: Text(
+                                                            getJsonField(
+                                                              datafilesItem,
+                                                              r'''$.name''',
+                                                            ).toString(),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium,
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment: const AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 10.0, 0.0),
-                                                  child: FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 30.0,
-                                                    borderWidth: 1.0,
-                                                    buttonSize: 40.0,
-                                                    icon: Icon(
-                                                      Icons.close,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      size: 18.0,
-                                                    ),
-                                                    onPressed: () async {
-                                                      logFirebaseEvent(
-                                                          'BANK_DOCS_PAGE_close_ICN_ON_TAP');
-                                                      logFirebaseEvent(
-                                                          'IconButton_bottom_sheet');
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        barrierColor:
-                                                            const Color(0x00000000),
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return GestureDetector(
-                                                            onTap: () => _model
-                                                                    .unfocusNode
-                                                                    .canRequestFocus
-                                                                ? FocusScope.of(
-                                                                        context)
-                                                                    .requestFocus(
-                                                                        _model
-                                                                            .unfocusNode)
-                                                                : FocusScope.of(
-                                                                        context)
-                                                                    .unfocus(),
-                                                            child: Padding(
-                                                              padding: MediaQuery
-                                                                  .viewInsetsOf(
-                                                                      context),
-                                                              child: SizedBox(
-                                                                height: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .height *
-                                                                    0.6,
-                                                                child:
-                                                                    PhotoDeleteWidget(
-                                                                  slug:
-                                                                      FFAppState()
-                                                                          .slug,
-                                                                  taskNo:
-                                                                      getJsonField(
-                                                                    allDocsItem,
-                                                                    r'''$.task_no''',
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).then((value) =>
-                                                          safeSetState(() {}));
-                                                    },
+                                                    ],
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                ).animateOnPageLoad(animationsMap[
-                                    'listViewOnPageLoadAnimation']!);
-                              },
+                                      );
+                                    },
+                                  ).animateOnPageLoad(animationsMap[
+                                      'listViewOnPageLoadAnimation']!);
+                                },
+                              ),
                             ),
                           ),
-                        ),
+                        if (getJsonField(
+                              bankDocsBankDocsResponse.jsonBody,
+                              r'''$.data.files''',
+                            ) ==
+                            null)
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 200.0, 0.0, 0.0),
+                            child: wrapWithModel(
+                              model: _model.messageModel,
+                              updateCallback: () => setState(() {}),
+                              child: const Hero(
+                                tag: 'message',
+                                transitionOnUserGestures: true,
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: MessageWidget(
+                                    messageText:
+                                        'Банковские документы в заявке отсутствуют',
+                                  ),
+                                ),
+                              ),
+                            ).animateOnPageLoad(
+                                animationsMap['messageOnPageLoadAnimation']!),
+                          ),
                       ],
                     ),
                   ),

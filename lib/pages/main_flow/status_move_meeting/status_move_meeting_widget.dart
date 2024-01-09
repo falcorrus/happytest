@@ -71,12 +71,12 @@ class _StatusMoveMeetingWidgetState extends State<StatusMoveMeetingWidget> {
         body: Align(
           alignment: const AlignmentDirectional(0.0, 0.0),
           child: Container(
-            constraints: const BoxConstraints(
-              maxWidth: 450.0,
-              maxHeight: 900.0,
+            constraints: BoxConstraints(
+              maxWidth: FFAppConstants.maxWidth.toDouble(),
+              maxHeight: FFAppConstants.maxHeight.toDouble(),
             ),
-            decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).primaryBackground,
+            decoration: const BoxDecoration(
+              color: FFAppConstants.background,
             ),
             child: Align(
               alignment: const AlignmentDirectional(-1.0, 0.0),

@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'add_photo_model.dart';
 export 'add_photo_model.dart';
 
@@ -65,12 +66,13 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
                 barrierColor: const Color(0x00000000),
                 context: context,
                 builder: (context) {
-                  return Padding(
+                  return WebViewAware(
+                      child: Padding(
                     padding: MediaQuery.viewInsetsOf(context),
                     child: CreatePhotoStringWidget(
                       slug: widget.slug,
                     ),
-                  );
+                  ));
                 },
               ).then((value) => safeSetState(() {}));
             },

@@ -244,7 +244,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => BankDocsWidget(
                 agentSlug: params.getParam('agentSlug', ParamType.String),
                 customerId: params.getParam('customerId', ParamType.String),
+                orderId: params.getParam('orderId', ParamType.String),
               ),
+            ),
+            FFRoute(
+              name: 'MapPoints',
+              path: 'MapPoints',
+              builder: (context, params) => const MapPointsWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

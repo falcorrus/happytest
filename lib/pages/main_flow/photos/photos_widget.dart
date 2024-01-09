@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
 import '/actions/actions.dart' as action_blocks;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -15,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'photos_model.dart';
 export 'photos_model.dart';
 
@@ -127,25 +129,21 @@ class _PhotosWidgetState extends State<PhotosWidget>
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 32.0, 0.0, 0.0),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              logFirebaseEvent(
-                                  'PHOTOS_PAGE_Container_190wfanz_ON_TAP');
-                              logFirebaseEvent('row_back_action_block');
-                              await action_blocks.actionBack(context);
-                            },
-                            child: wrapWithModel(
-                              model: _model.rowBackModel,
-                              updateCallback: () => setState(() {}),
-                              child: const RowBackWidget(),
-                            ),
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            logFirebaseEvent(
+                                'PHOTOS_PAGE_Container_190wfanz_ON_TAP');
+                            logFirebaseEvent('row_back_action_block');
+                            await action_blocks.actionBack(context);
+                          },
+                          child: wrapWithModel(
+                            model: _model.rowBackModel,
+                            updateCallback: () => setState(() {}),
+                            child: const RowBackWidget(),
                           ),
                         ),
                         Align(
@@ -215,255 +213,399 @@ class _PhotosWidgetState extends State<PhotosWidget>
                                       return Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 14.0, 0.0, 0.0),
-                                        child: AnimatedContainer(
-                                          duration: const Duration(milliseconds: 100),
-                                          curve: Curves.easeInOut,
-                                          width: 348.0,
-                                          height: 68.0,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            border: Border.all(
-                                              color: const Color(0xFFEFEFF4),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            logFirebaseEvent(
+                                                'PHOTOS_PAGE_Container-1_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Container-1_store_media_for_upload');
+                                            final selectedMedia =
+                                                await selectMedia(
+                                              maxWidth: 2300.00,
+                                              maxHeight: 2300.00,
+                                              imageQuality: 80,
+                                              multiImage: false,
+                                            );
+                                            if (selectedMedia != null &&
+                                                selectedMedia.every((m) =>
+                                                    validateFileFormat(
+                                                        m.storagePath,
+                                                        context))) {
+                                              setState(() => _model
+                                                  .isDataUploading = true);
+                                              var selectedUploadedFiles =
+                                                  <FFUploadedFile>[];
+
+                                              try {
+                                                showUploadMessage(
+                                                  context,
+                                                  'Uploading file...',
+                                                  showLoading: true,
+                                                );
+                                                selectedUploadedFiles =
+                                                    selectedMedia
+                                                        .map((m) =>
+                                                            FFUploadedFile(
+                                                              name: m
+                                                                  .storagePath
+                                                                  .split('/')
+                                                                  .last,
+                                                              bytes: m.bytes,
+                                                              height: m
+                                                                  .dimensions
+                                                                  ?.height,
+                                                              width: m
+                                                                  .dimensions
+                                                                  ?.width,
+                                                              blurHash:
+                                                                  m.blurHash,
+                                                            ))
+                                                        .toList();
+                                              } finally {
+                                                ScaffoldMessenger.of(context)
+                                                    .hideCurrentSnackBar();
+                                                _model.isDataUploading = false;
+                                              }
+                                              if (selectedUploadedFiles
+                                                      .length ==
+                                                  selectedMedia.length) {
+                                                setState(() {
+                                                  _model.uploadedLocalFile =
+                                                      selectedUploadedFiles
+                                                          .first;
+                                                });
+                                                showUploadMessage(
+                                                    context, 'Success!');
+                                              } else {
+                                                setState(() {});
+                                                showUploadMessage(context,
+                                                    'Failed to upload data');
+                                                return;
+                                              }
+                                            }
+
+                                            logFirebaseEvent(
+                                                'Container-1_backend_call');
+                                            _model.uploadMyFile =
+                                                await HappyTestAPIGroup
+                                                    .mediaCall
+                                                    .call(
+                                              token: FFAppState().Token,
+                                              slug: FFAppState().slug,
+                                              taskNo: getJsonField(
+                                                mediaItem,
+                                                r'''$.task_no''',
+                                              ),
+                                              file: _model.uploadedLocalFile,
+                                            );
+                                            if ((_model
+                                                    .uploadMyFile?.succeeded ??
+                                                true)) {
+                                              logFirebaseEvent(
+                                                  'Container-1_clear_uploaded_data');
+                                              setState(() {
+                                                _model.isDataUploading = false;
+                                                _model.uploadedLocalFile =
+                                                    FFUploadedFile(
+                                                        bytes:
+                                                            Uint8List.fromList(
+                                                                []));
+                                              });
+                                            } else {
+                                              logFirebaseEvent(
+                                                  'Container-1_show_snack_bar');
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'фото не загружено',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Montserrat',
+                                                          color:
+                                                              const Color(0xFF9E0000),
+                                                        ),
+                                                  ),
+                                                  duration: const Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      const Color(0x00000000),
+                                                ),
+                                              );
+                                            }
+
+                                            setState(() {});
+                                          },
+                                          child: AnimatedContainer(
+                                            duration:
+                                                const Duration(milliseconds: 100),
+                                            curve: Curves.easeInOut,
+                                            width: 348.0,
+                                            height: 68.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              border: Border.all(
+                                                color: const Color(0xFFEFEFF4),
+                                              ),
                                             ),
-                                          ),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Expanded(
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    AnimatedContainer(
-                                                      duration: const Duration(
-                                                          milliseconds: 100),
-                                                      curve: Curves.easeIn,
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(13.0),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets.all(8.0),
-                                                        child: InkWell(
-                                                          splashColor: Colors
-                                                              .transparent,
-                                                          focusColor: Colors
-                                                              .transparent,
-                                                          hoverColor: Colors
-                                                              .transparent,
-                                                          highlightColor: Colors
-                                                              .transparent,
-                                                          onTap: () async {
-                                                            logFirebaseEvent(
-                                                                'PHOTOS_PAGE_Image_pjet1w49_ON_TAP');
-                                                            logFirebaseEvent(
-                                                                'Image_expand_image');
-                                                            await Navigator
-                                                                .push(
-                                                              context,
-                                                              PageTransition(
-                                                                type:
-                                                                    PageTransitionType
-                                                                        .fade,
-                                                                child:
-                                                                    FlutterFlowExpandedImageView(
-                                                                  image:
-                                                                      CachedNetworkImage(
-                                                                    fadeInDuration:
-                                                                        const Duration(
-                                                                            milliseconds:
-                                                                                500),
-                                                                    fadeOutDuration:
-                                                                        const Duration(
-                                                                            milliseconds:
-                                                                                500),
-                                                                    imageUrl:
-                                                                        valueOrDefault<
-                                                                            String>(
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      AnimatedContainer(
+                                                        duration: const Duration(
+                                                            milliseconds: 100),
+                                                        curve: Curves.easeIn,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      13.0),
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets.all(
+                                                                  8.0),
+                                                          child: InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              logFirebaseEvent(
+                                                                  'PHOTOS_PAGE_Image_cve1klpl_ON_TAP');
+                                                              logFirebaseEvent(
+                                                                  'Image_expand_image');
+                                                              await Navigator
+                                                                  .push(
+                                                                context,
+                                                                PageTransition(
+                                                                  type:
+                                                                      PageTransitionType
+                                                                          .fade,
+                                                                  child:
+                                                                      FlutterFlowExpandedImageView(
+                                                                    image:
+                                                                        CachedNetworkImage(
+                                                                      fadeInDuration:
+                                                                          const Duration(
+                                                                              milliseconds: 500),
+                                                                      fadeOutDuration:
+                                                                          const Duration(
+                                                                              milliseconds: 500),
+                                                                      imageUrl:
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                        getJsonField(
+                                                                          mediaItem,
+                                                                          r'''$.url''',
+                                                                        )?.toString(),
+                                                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/happy-akbars-22jzxk/assets/asr8e8i3vilo/vk.jpeg',
+                                                                      ),
+                                                                      fit: BoxFit
+                                                                          .contain,
+                                                                    ),
+                                                                    allowRotation:
+                                                                        false,
+                                                                    tag: valueOrDefault<
+                                                                        String>(
                                                                       getJsonField(
                                                                         mediaItem,
                                                                         r'''$.url''',
-                                                                      ).toString(),
-                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/happy-akbars-22jzxk/assets/asr8e8i3vilo/vk.jpeg',
+                                                                      )?.toString(),
+                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/happy-akbars-22jzxk/assets/asr8e8i3vilo/vk.jpeg' '$mediaIndex',
                                                                     ),
-                                                                    fit: BoxFit
-                                                                        .contain,
+                                                                    useHeroAnimation:
+                                                                        true,
                                                                   ),
-                                                                  allowRotation:
-                                                                      false,
-                                                                  tag: valueOrDefault<
+                                                                ),
+                                                              );
+                                                            },
+                                                            child: Hero(
+                                                              tag:
+                                                                  valueOrDefault<
                                                                       String>(
+                                                                getJsonField(
+                                                                  mediaItem,
+                                                                  r'''$.url''',
+                                                                )?.toString(),
+                                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/happy-akbars-22jzxk/assets/asr8e8i3vilo/vk.jpeg' '$mediaIndex',
+                                                              ),
+                                                              transitionOnUserGestures:
+                                                                  true,
+                                                              child: ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8.0),
+                                                                child:
+                                                                    CachedNetworkImage(
+                                                                  fadeInDuration:
+                                                                      const Duration(
+                                                                          milliseconds:
+                                                                              500),
+                                                                  fadeOutDuration:
+                                                                      const Duration(
+                                                                          milliseconds:
+                                                                              500),
+                                                                  imageUrl:
+                                                                      valueOrDefault<
+                                                                          String>(
                                                                     getJsonField(
                                                                       mediaItem,
                                                                       r'''$.url''',
-                                                                    ).toString(),
-                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/happy-akbars-22jzxk/assets/asr8e8i3vilo/vk.jpeg' '$mediaIndex',
+                                                                    )?.toString(),
+                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/happy-akbars-22jzxk/assets/asr8e8i3vilo/vk.jpeg',
                                                                   ),
-                                                                  useHeroAnimation:
-                                                                      true,
+                                                                  width: 78.0,
+                                                                  height: 52.0,
+                                                                  fit: BoxFit
+                                                                      .cover,
                                                                 ),
-                                                              ),
-                                                            );
-                                                          },
-                                                          child: Hero(
-                                                            tag: valueOrDefault<
-                                                                String>(
-                                                              getJsonField(
-                                                                mediaItem,
-                                                                r'''$.url''',
-                                                              ).toString(),
-                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/happy-akbars-22jzxk/assets/asr8e8i3vilo/vk.jpeg' '$mediaIndex',
-                                                            ),
-                                                            transitionOnUserGestures:
-                                                                true,
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8.0),
-                                                              child:
-                                                                  CachedNetworkImage(
-                                                                fadeInDuration:
-                                                                    const Duration(
-                                                                        milliseconds:
-                                                                            500),
-                                                                fadeOutDuration:
-                                                                    const Duration(
-                                                                        milliseconds:
-                                                                            500),
-                                                                imageUrl:
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                  getJsonField(
-                                                                    mediaItem,
-                                                                    r'''$.url''',
-                                                                  ).toString(),
-                                                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/happy-akbars-22jzxk/assets/asr8e8i3vilo/vk.jpeg',
-                                                                ),
-                                                                width: 78.0,
-                                                                height: 52.0,
-                                                                fit: BoxFit
-                                                                    .cover,
                                                               ),
                                                             ),
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    Expanded(
-                                                      child: AutoSizeText(
-                                                        valueOrDefault<String>(
-                                                          getJsonField(
-                                                            mediaItem,
-                                                            r'''$.task''',
-                                                          ).toString(),
-                                                          'empty',
+                                                      Expanded(
+                                                        child: AutoSizeText(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            getJsonField(
+                                                              mediaItem,
+                                                              r'''$.task''',
+                                                            )?.toString(),
+                                                            'empty',
+                                                          ),
+                                                          maxLines: 2,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Montserrat',
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
                                                         ),
-                                                        maxLines: 2,
-                                                        style:
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                10.0, 0.0),
+                                                    child:
+                                                        FlutterFlowIconButton(
+                                                      borderColor:
+                                                          Colors.transparent,
+                                                      borderRadius: 30.0,
+                                                      borderWidth: 1.0,
+                                                      buttonSize: 40.0,
+                                                      icon: Icon(
+                                                        Icons.close,
+                                                        color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Montserrat',
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                ),
+                                                                .primaryText,
+                                                        size: 18.0,
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment: const AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 10.0, 0.0),
-                                                  child: FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 30.0,
-                                                    borderWidth: 1.0,
-                                                    buttonSize: 40.0,
-                                                    icon: Icon(
-                                                      Icons.close,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      size: 18.0,
-                                                    ),
-                                                    onPressed: () async {
-                                                      logFirebaseEvent(
-                                                          'PHOTOS_PAGE_close_ICN_ON_TAP');
-                                                      logFirebaseEvent(
-                                                          'IconButton_bottom_sheet');
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        barrierColor:
-                                                            const Color(0x00000000),
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return GestureDetector(
-                                                            onTap: () => _model
-                                                                    .unfocusNode
-                                                                    .canRequestFocus
-                                                                ? FocusScope.of(
-                                                                        context)
-                                                                    .requestFocus(
-                                                                        _model
-                                                                            .unfocusNode)
-                                                                : FocusScope.of(
-                                                                        context)
-                                                                    .unfocus(),
-                                                            child: Padding(
-                                                              padding: MediaQuery
-                                                                  .viewInsetsOf(
-                                                                      context),
-                                                              child: SizedBox(
-                                                                height: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .height *
-                                                                    0.6,
+                                                      onPressed: () async {
+                                                        logFirebaseEvent(
+                                                            'PHOTOS_PAGE_close_ICN_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'IconButton_bottom_sheet');
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          barrierColor:
+                                                              const Color(0x00000000),
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return WebViewAware(
                                                                 child:
-                                                                    PhotoDeleteWidget(
-                                                                  slug:
-                                                                      FFAppState()
-                                                                          .slug,
-                                                                  taskNo:
-                                                                      getJsonField(
-                                                                    mediaItem,
-                                                                    r'''$.task_no''',
+                                                                    GestureDetector(
+                                                              onTap: () => _model
+                                                                      .unfocusNode
+                                                                      .canRequestFocus
+                                                                  ? FocusScope.of(
+                                                                          context)
+                                                                      .requestFocus(
+                                                                          _model
+                                                                              .unfocusNode)
+                                                                  : FocusScope.of(
+                                                                          context)
+                                                                      .unfocus(),
+                                                              child: Padding(
+                                                                padding: MediaQuery
+                                                                    .viewInsetsOf(
+                                                                        context),
+                                                                child:
+                                                                    SizedBox(
+                                                                  height: MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .height *
+                                                                      0.6,
+                                                                  child:
+                                                                      PhotoDeleteWidget(
+                                                                    slug: FFAppState()
+                                                                        .slug,
+                                                                    taskNo:
+                                                                        getJsonField(
+                                                                      mediaItem,
+                                                                      r'''$.task_no''',
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).then((value) =>
-                                                          safeSetState(() {}));
-                                                    },
+                                                            ));
+                                                          },
+                                                        ).then((value) =>
+                                                            safeSetState(
+                                                                () {}));
+                                                      },
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       );
