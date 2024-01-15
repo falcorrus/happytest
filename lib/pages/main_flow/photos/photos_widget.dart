@@ -16,7 +16,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 import 'photos_model.dart';
 export 'photos_model.dart';
 
@@ -559,9 +558,7 @@ class _PhotosWidgetState extends State<PhotosWidget>
                                                               const Color(0x00000000),
                                                           context: context,
                                                           builder: (context) {
-                                                            return WebViewAware(
-                                                                child:
-                                                                    GestureDetector(
+                                                            return GestureDetector(
                                                               onTap: () => _model
                                                                       .unfocusNode
                                                                       .canRequestFocus
@@ -595,7 +592,7 @@ class _PhotosWidgetState extends State<PhotosWidget>
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ));
+                                                            );
                                                           },
                                                         ).then((value) =>
                                                             safeSetState(

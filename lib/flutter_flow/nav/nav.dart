@@ -436,13 +436,9 @@ class FFRoute {
                   ? Container()
                   : Container(
                       color: Colors.transparent,
-                      child: Center(
-                        child: Image.asset(
-                          'assets/images/Logo_HappyGO_.png',
-                          width: 500.0,
-                          height: 500.0,
-                          fit: BoxFit.contain,
-                        ),
+                      child: Image.asset(
+                        'assets/images/Logo_HappyGO_.png',
+                        fit: BoxFit.contain,
                       ),
                     )
               : page;

@@ -1,7 +1,8 @@
 // Export pages
 export '/pages/main_flow/a1111/login/login_widget.dart' show LoginWidget;
-export '/pages/dop1/orders_list/orders_list_widget.dart' show OrdersListWidget;
-export '/pages/dop1/order/order_widget.dart' show OrderWidget;
+export '/pages/actual/orders_list/orders_list_widget.dart'
+    show OrdersListWidget;
+export '/pages/actual/order/order_widget.dart' show OrderWidget;
 export '/pages/main_flow/photos/photos_widget.dart' show PhotosWidget;
 export '/pages/main_flow/status_move_meeting/status_move_meeting_widget.dart'
     show StatusMoveMeetingWidget;
@@ -30,5 +31,6 @@ export '/pages/main_flow/a1111/scan_cards/scan_cards_widget.dart'
 export '/archive/dop_main/dop_main_widget.dart' show DopMainWidget;
 export '/pages/main_flow/a1111/login_s_m_s/login_s_m_s_widget.dart'
     show LoginSMSWidget;
-export '/pages/dop1/bank_docs/bank_docs_widget.dart' show BankDocsWidget;
-export '/pages/dop1/map_points/map_points_widget.dart' show MapPointsWidget;
+export '/pages/main_flow/a1111/bank_docs/bank_docs_widget.dart'
+    show BankDocsWidget;
+export '/pages/actual/map_points/map_points_widget.dart' show MapPointsWidget;

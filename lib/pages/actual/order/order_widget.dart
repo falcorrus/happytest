@@ -119,10 +119,10 @@ class _OrderWidgetState extends State<OrderWidget>
               future: YandexNewCall.call(
                 geokode: valueOrDefault<String>(
                   '${HappyTestAPIGroup.orderCall.city(
-                        orderOrderResponse.jsonBody,
-                      ).toString()}+${HappyTestAPIGroup.orderCall.adress(
-                        orderOrderResponse.jsonBody,
-                      ).toString()}',
+                    orderOrderResponse.jsonBody,
+                  )}+${HappyTestAPIGroup.orderCall.adress(
+                    orderOrderResponse.jsonBody,
+                  )}',
                   'Москва красная площадь',
                 ),
               ),
@@ -161,11 +161,10 @@ class _OrderWidgetState extends State<OrderWidget>
                         Align(
                           alignment: const AlignmentDirectional(0.0, -1.0),
                           child: FlutterFlowStaticMap(
-                            location: functions.latLong((YandexNewCall.latLong(
+                            location: functions.latLong(YandexNewCall.latLong(
                               stackYandexNewResponse.jsonBody,
-                            ) as List)
-                                .map<String>((s) => s.toString())
-                                .toList().toList()),
+                            )!
+                                .toList()),
                             apiKey:
                                 'pk.eyJ1IjoibGFwdHlzIiwiYSI6ImNsNnhndml5bzBjdXMzanJ4cnpxajA4N2cifQ.lmFnbGdUcyz_CQo1SA1YPA',
                             style: MapBoxStyle.Outdoors,
@@ -341,10 +340,8 @@ class _OrderWidgetState extends State<OrderWidget>
                                                 valueOrDefault<String>(
                                                   HappyTestAPIGroup.orderCall
                                                       .color(
-                                                        orderOrderResponse
-                                                            .jsonBody,
-                                                      )
-                                                      .toString(),
+                                                    orderOrderResponse.jsonBody,
+                                                  ),
                                                   'black',
                                                 ),
                                                 defaultColor: Colors.black,
@@ -387,10 +384,8 @@ class _OrderWidgetState extends State<OrderWidget>
                                               valueOrDefault<String>(
                                                 HappyTestAPIGroup.orderCall
                                                     .status(
-                                                      orderOrderResponse
-                                                          .jsonBody,
-                                                    )
-                                                    .toString(),
+                                                  orderOrderResponse.jsonBody,
+                                                ),
                                                 'error',
                                               ),
                                               style: FlutterFlowTheme.of(
@@ -456,11 +451,9 @@ class _OrderWidgetState extends State<OrderWidget>
                                           },
                                           child: Text(
                                             valueOrDefault<String>(
-                                              HappyTestAPIGroup.orderCall
-                                                  .id(
-                                                    orderOrderResponse.jsonBody,
-                                                  )
-                                                  .toString(),
+                                              HappyTestAPIGroup.orderCall.id(
+                                                orderOrderResponse.jsonBody,
+                                              ),
                                               'id',
                                             ),
                                             textAlign: TextAlign.end,
@@ -486,10 +479,10 @@ class _OrderWidgetState extends State<OrderWidget>
                                     child: Text(
                                       valueOrDefault<String>(
                                         '${HappyTestAPIGroup.orderCall.start(
-                                              orderOrderResponse.jsonBody,
-                                            ).toString()} - ${HappyTestAPIGroup.orderCall.finish(
-                                              orderOrderResponse.jsonBody,
-                                            ).toString()}',
+                                          orderOrderResponse.jsonBody,
+                                        )} - ${HappyTestAPIGroup.orderCall.finish(
+                                          orderOrderResponse.jsonBody,
+                                        )}',
                                         'error',
                                       ),
                                       textAlign: TextAlign.start,
@@ -534,25 +527,20 @@ class _OrderWidgetState extends State<OrderWidget>
                                     child: Text(
                                       valueOrDefault<String>(
                                         '${valueOrDefault<String>(
-                                          HappyTestAPIGroup.orderCall
-                                              .lastName(
-                                                orderOrderResponse.jsonBody,
-                                              )
-                                              .toString(),
+                                          HappyTestAPIGroup.orderCall.lastName(
+                                            orderOrderResponse.jsonBody,
+                                          ),
                                           'Фамилия',
                                         )} ${valueOrDefault<String>(
-                                          HappyTestAPIGroup.orderCall
-                                              .firstName(
-                                                orderOrderResponse.jsonBody,
-                                              )
-                                              .toString(),
+                                          HappyTestAPIGroup.orderCall.firstName(
+                                            orderOrderResponse.jsonBody,
+                                          ),
                                           'Имя',
                                         )} ${valueOrDefault<String>(
                                           HappyTestAPIGroup.orderCall
                                               .middleName(
-                                                orderOrderResponse.jsonBody,
-                                              )
-                                              .toString(),
+                                            orderOrderResponse.jsonBody,
+                                          ),
                                           'отчество',
                                         )}',
                                         'error',
@@ -635,10 +623,9 @@ class _OrderWidgetState extends State<OrderWidget>
                                                         HappyTestAPIGroup
                                                             .orderCall
                                                             .adress(
-                                                              orderOrderResponse
-                                                                  .jsonBody,
-                                                            )
-                                                            .toString(),
+                                                          orderOrderResponse
+                                                              .jsonBody,
+                                                        )!,
                                                         style: TextStyle(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
@@ -657,10 +644,8 @@ class _OrderWidgetState extends State<OrderWidget>
                                                 child: Text(
                                                   HappyTestAPIGroup.orderCall
                                                       .adress(
-                                                        orderOrderResponse
-                                                            .jsonBody,
-                                                      )
-                                                      .toString(),
+                                                    orderOrderResponse.jsonBody,
+                                                  )!,
                                                   maxLines: 2,
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -690,10 +675,10 @@ class _OrderWidgetState extends State<OrderWidget>
                                           future: YandexNewCall.call(
                                             geokode: valueOrDefault<String>(
                                               '${HappyTestAPIGroup.orderCall.city(
-                                                    orderOrderResponse.jsonBody,
-                                                  ).toString()}+${HappyTestAPIGroup.orderCall.adress(
-                                                    orderOrderResponse.jsonBody,
-                                                  ).toString()}',
+                                                orderOrderResponse.jsonBody,
+                                              )}+${HappyTestAPIGroup.orderCall.adress(
+                                                orderOrderResponse.jsonBody,
+                                              )}',
                                               'Москва красная площадь',
                                             ),
                                           ),
@@ -736,10 +721,10 @@ class _OrderWidgetState extends State<OrderWidget>
                                                     'IconButton_launch_u_r_l');
                                                 await launchURL(
                                                     valueOrDefault<String>(
-                                                  'https://yandex.ru/maps/?pt=${functions.textLat(functions.latLong((YandexNewCall.latLong(
+                                                  'https://yandex.ru/maps/?pt=${functions.textLat(functions.latLong(YandexNewCall.latLong(
                                                     iconButtonYandexNewResponse
                                                         .jsonBody,
-                                                  ) as List).map<String>((s) => s.toString()).toList().toList()))}',
+                                                  )!.toList()))}',
                                                   '0',
                                                 ));
                                               },
@@ -798,10 +783,8 @@ class _OrderWidgetState extends State<OrderWidget>
                                                 valueOrDefault<String>(
                                                   HappyTestAPIGroup.orderCall
                                                       .phone(
-                                                        orderOrderResponse
-                                                            .jsonBody,
-                                                      )
-                                                      .toString(),
+                                                    orderOrderResponse.jsonBody,
+                                                  ),
                                                   'error',
                                                 ),
                                                 textAlign: TextAlign.start,
@@ -843,14 +826,10 @@ class _OrderWidgetState extends State<OrderWidget>
                                                 'ORDER_PAGE_phone_ICN_ON_TAP');
                                             logFirebaseEvent(
                                                 'IconButton_launch_u_r_l');
-                                            await launchURL(
-                                                'tel:${valueOrDefault<String>(
-                                              getJsonField(
-                                                orderOrderResponse.jsonBody,
-                                                r'''$.phone''',
-                                              )?.toString(),
-                                              '0',
-                                            )}');
+                                            await launchURL('tel:${getJsonField(
+                                              orderOrderResponse.jsonBody,
+                                              r'''$.phone''',
+                                            ).toString()}');
                                           },
                                         ),
                                       ),
@@ -884,11 +863,9 @@ class _OrderWidgetState extends State<OrderWidget>
                                         25.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       valueOrDefault<String>(
-                                        HappyTestAPIGroup.orderCall
-                                            .product(
-                                              orderOrderResponse.jsonBody,
-                                            )
-                                            .toString(),
+                                        HappyTestAPIGroup.orderCall.product(
+                                          orderOrderResponse.jsonBody,
+                                        ),
                                         'продукт',
                                       ),
                                       textAlign: TextAlign.start,
@@ -1018,11 +995,9 @@ class _OrderWidgetState extends State<OrderWidget>
                                         25.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       valueOrDefault<String>(
-                                        HappyTestAPIGroup.orderCall
-                                            .date(
-                                              orderOrderResponse.jsonBody,
-                                            )
-                                            .toString(),
+                                        HappyTestAPIGroup.orderCall.date(
+                                          orderOrderResponse.jsonBody,
+                                        ),
                                         'error',
                                       ),
                                       textAlign: TextAlign.start,
@@ -1040,17 +1015,13 @@ class _OrderWidgetState extends State<OrderWidget>
                                 ),
 
                                 // Из status waiting "Ожидает доставку" показываем "Подтвердить встречу" (статус "meeting_confirmed"
-                                if ((HappyTestAPIGroup.orderCall
-                                            .statusslug(
-                                              orderOrderResponse.jsonBody,
-                                            )
-                                            .toString() ==
+                                if ((HappyTestAPIGroup.orderCall.statusslug(
+                                          orderOrderResponse.jsonBody,
+                                        ) ==
                                         'waiting') ||
-                                    (HappyTestAPIGroup.orderCall
-                                            .statusslug(
-                                              orderOrderResponse.jsonBody,
-                                            )
-                                            .toString() ==
+                                    (HappyTestAPIGroup.orderCall.statusslug(
+                                          orderOrderResponse.jsonBody,
+                                        ) ==
                                         'move_to_delivery'))
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
@@ -1088,11 +1059,10 @@ class _OrderWidgetState extends State<OrderWidget>
                                               );
                                               if (HappyTestAPIGroup.orderCall
                                                       .statusslug(
-                                                        (_model.apiOrder
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                      )
-                                                      .toString() ==
+                                                    (_model.apiOrder
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                  ) ==
                                                   'meeting_confirmed') {
                                                 logFirebaseEvent(
                                                     'Button_show_snack_bar');
@@ -1161,11 +1131,10 @@ class _OrderWidgetState extends State<OrderWidget>
                                                     HappyTestAPIGroup
                                                         .nextmoduleCall
                                                         .code(
-                                                          (_model.apiResultProduct2
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                        )
-                                                        .toString(),
+                                                      (_model.apiResultProduct2
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                    ),
                                                     '111',
                                                   );
                                                   FFAppState().nextsort =
@@ -1184,11 +1153,10 @@ class _OrderWidgetState extends State<OrderWidget>
                                                       HappyTestAPIGroup
                                                           .nextmoduleCall
                                                           .code(
-                                                            (_model.apiResultProduct2
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                          )
-                                                          .toString();
+                                                    (_model.apiResultProduct2
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                  );
                                                   _model.nextSo =
                                                       HappyTestAPIGroup
                                                           .nextmoduleCall
@@ -1270,10 +1238,8 @@ class _OrderWidgetState extends State<OrderWidget>
                                               FFAppState().status =
                                                   HappyTestAPIGroup.orderCall
                                                       .statusslug(
-                                                        orderOrderResponse
-                                                            .jsonBody,
-                                                      )
-                                                      .toString();
+                                                orderOrderResponse.jsonBody,
+                                              )!;
                                               logFirebaseEvent(
                                                   'Button_navigate_to');
 
@@ -1323,17 +1289,13 @@ class _OrderWidgetState extends State<OrderWidget>
                                   ),
 
                                 // status meeting_confirmed "Встреча подтверждена"
-                                if ((HappyTestAPIGroup.orderCall
-                                            .statusslug(
-                                              orderOrderResponse.jsonBody,
-                                            )
-                                            .toString() ==
+                                if ((HappyTestAPIGroup.orderCall.statusslug(
+                                          orderOrderResponse.jsonBody,
+                                        ) ==
                                         'meeting_confirmed') ||
-                                    (HappyTestAPIGroup.orderCall
-                                            .statusslug(
-                                              orderOrderResponse.jsonBody,
-                                            )
-                                            .toString() ==
+                                    (HappyTestAPIGroup.orderCall.statusslug(
+                                          orderOrderResponse.jsonBody,
+                                        ) ==
                                         'nacat-vstrecu'))
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
@@ -1551,10 +1513,8 @@ class _OrderWidgetState extends State<OrderWidget>
                                                 FFAppState().bankName =
                                                     HappyTestAPIGroup.orderCall
                                                         .bank(
-                                                          orderOrderResponse
-                                                              .jsonBody,
-                                                        )
-                                                        .toString();
+                                                  orderOrderResponse.jsonBody,
+                                                )!;
                                                 logFirebaseEvent(
                                                     'Button_action_block');
                                                 await action_blocks
@@ -1609,10 +1569,8 @@ class _OrderWidgetState extends State<OrderWidget>
                                               FFAppState().status =
                                                   HappyTestAPIGroup.orderCall
                                                       .statusslug(
-                                                        orderOrderResponse
-                                                            .jsonBody,
-                                                      )
-                                                      .toString();
+                                                orderOrderResponse.jsonBody,
+                                              )!;
                                               logFirebaseEvent(
                                                   'Button_navigate_to');
 
@@ -1661,23 +1619,17 @@ class _OrderWidgetState extends State<OrderWidget>
                                   ),
 
                                 // status meeting_confirmed "Встреча подтверждена"
-                                if ((HappyTestAPIGroup.orderCall
-                                            .statusslug(
-                                              orderOrderResponse.jsonBody,
-                                            )
-                                            .toString() ==
+                                if ((HappyTestAPIGroup.orderCall.statusslug(
+                                          orderOrderResponse.jsonBody,
+                                        ) ==
                                         'denied') ||
-                                    (HappyTestAPIGroup.orderCall
-                                            .statusslug(
-                                              orderOrderResponse.jsonBody,
-                                            )
-                                            .toString() ==
+                                    (HappyTestAPIGroup.orderCall.statusslug(
+                                          orderOrderResponse.jsonBody,
+                                        ) ==
                                         'denied') ||
-                                    (HappyTestAPIGroup.orderCall
-                                            .statusslug(
-                                              orderOrderResponse.jsonBody,
-                                            )
-                                            .toString() ==
+                                    (HappyTestAPIGroup.orderCall.statusslug(
+                                          orderOrderResponse.jsonBody,
+                                        ) ==
                                         'waiting_verification'))
                                   Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -1881,10 +1833,8 @@ class _OrderWidgetState extends State<OrderWidget>
                                               FFAppState().bankName =
                                                   HappyTestAPIGroup.orderCall
                                                       .bank(
-                                                        orderOrderResponse
-                                                            .jsonBody,
-                                                      )
-                                                      .toString();
+                                                orderOrderResponse.jsonBody,
+                                              )!;
                                               logFirebaseEvent(
                                                   'Button_action_block');
                                               await action_blocks
@@ -1924,17 +1874,13 @@ class _OrderWidgetState extends State<OrderWidget>
                                       ),
 
                                       // ?выскакивает, когда в Dop нажимают Завершить
-                                      if ((HappyTestAPIGroup.orderCall
-                                                  .status(
-                                                    orderOrderResponse.jsonBody,
-                                                  )
-                                                  .toString() ==
+                                      if ((HappyTestAPIGroup.orderCall.status(
+                                                orderOrderResponse.jsonBody,
+                                              ) ==
                                               'Верификация пройдена') ||
-                                          (HappyTestAPIGroup.orderCall
-                                                  .status(
-                                                    orderOrderResponse.jsonBody,
-                                                  )
-                                                  .toString() ==
+                                          (HappyTestAPIGroup.orderCall.status(
+                                                orderOrderResponse.jsonBody,
+                                              ) ==
                                               'Верификация не пройдена'))
                                         Padding(
                                           padding:
@@ -2008,17 +1954,13 @@ class _OrderWidgetState extends State<OrderWidget>
                                         ),
 
                                       // ?выскакивает, когда в Dop нажимают Завершить
-                                      if ((HappyTestAPIGroup.orderCall
-                                                  .status(
-                                                    orderOrderResponse.jsonBody,
-                                                  )
-                                                  .toString() ==
+                                      if ((HappyTestAPIGroup.orderCall.status(
+                                                orderOrderResponse.jsonBody,
+                                              ) ==
                                               'Верификация пройдена') ||
-                                          (HappyTestAPIGroup.orderCall
-                                                  .status(
-                                                    orderOrderResponse.jsonBody,
-                                                  )
-                                                  .toString() ==
+                                          (HappyTestAPIGroup.orderCall.status(
+                                                orderOrderResponse.jsonBody,
+                                              ) ==
                                               'Завершить встречу'))
                                         Padding(
                                           padding:

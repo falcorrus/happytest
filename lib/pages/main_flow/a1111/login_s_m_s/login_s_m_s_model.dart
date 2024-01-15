@@ -3,7 +3,6 @@ import '/components/row_back_back/row_back_back_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'login_s_m_s_widget.dart' show LoginSMSWidget;
 import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class LoginSMSModel extends FlutterFlowModel<LoginSMSWidget> {
   ///  Local state fields for this page.
@@ -24,7 +23,6 @@ class LoginSMSModel extends FlutterFlowModel<LoginSMSWidget> {
   // State field(s) for TextField-sms widget.
   FocusNode? textFieldSmsFocusNode;
   TextEditingController? textFieldSmsController;
-  final textFieldSmsMask = MaskTextInputFormatter(mask: '######');
   String? Function(BuildContext, String?)? textFieldSmsControllerValidator;
   // Stores action output result for [Backend Call - API (loginCode)] action in Button-more widget.
   ApiCallResponse? apiLoginCode;

@@ -400,20 +400,41 @@ class FFAppState extends ChangeNotifier {
     _prevSort = value;
   }
 
-  final _listManager = FutureRequestManager<ApiCallResponse>();
-  Future<ApiCallResponse> list({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Future<ApiCallResponse> Function() requestFn,
-  }) =>
-      _listManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearListCache() => _listManager.clear();
-  void clearListCacheKey(String? uniqueKey) =>
-      _listManager.clearRequest(uniqueKey);
+  List<dynamic> _listAppstate = [];
+  List<dynamic> get listAppstate => _listAppstate;
+  set listAppstate(List<dynamic> value) {
+    _listAppstate = value;
+  }
+
+  void addToListAppstate(dynamic value) {
+    _listAppstate.add(value);
+  }
+
+  void removeFromListAppstate(dynamic value) {
+    _listAppstate.remove(value);
+  }
+
+  void removeAtIndexFromListAppstate(int index) {
+    _listAppstate.removeAt(index);
+  }
+
+  void updateListAppstateAtIndex(
+    int index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _listAppstate[index] = updateFn(_listAppstate[index]);
+  }
+
+  void insertAtIndexInListAppstate(int index, dynamic value) {
+    _listAppstate.insert(index, value);
+  }
+
+  String _yandexAPIUrl =
+      'https://static-maps.yandex.ru/v1?apikey=742bdd2e-d2a4-42f2-a457-f22c292ea02c&';
+  String get yandexAPIUrl => _yandexAPIUrl;
+  set yandexAPIUrl(String value) {
+    _yandexAPIUrl = value;
+  }
 
   final _orderManager = FutureRequestManager<ApiCallResponse>();
   Future<ApiCallResponse> order({

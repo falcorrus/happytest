@@ -59,27 +59,21 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
         phone: _model.tel,
       );
       logFirebaseEvent('SigningSms_update_page_state');
-      _model.nextSl = HappyTestAPIGroup.nextmoduleCall
-          .code(
-            (_model.apiSend2EnterCode?.jsonBody ?? ''),
-          )
-          .toString();
+      _model.nextSl = HappyTestAPIGroup.nextmoduleCall.code(
+        (_model.apiSend2EnterCode?.jsonBody ?? ''),
+      );
       _model.nextSo = HappyTestAPIGroup.nextmoduleCall.sort(
         (_model.apiSend2EnterCode?.jsonBody ?? ''),
       );
       if ((_model.apiSend2EnterCode?.succeeded ?? true)) {
         if (_model.nextSl ==
-            HappyTestAPIGroup.nextmoduleCall
-                .code(
-                  (_model.apiSend2EnterCode?.jsonBody ?? ''),
-                )
-                .toString()) {
+            HappyTestAPIGroup.nextmoduleCall.code(
+              (_model.apiSend2EnterCode?.jsonBody ?? ''),
+            )) {
           logFirebaseEvent('SigningSms_update_page_state');
-          _model.nextSl = HappyTestAPIGroup.nextmoduleCall
-              .code(
-                (_model.apiSend2EnterCode?.jsonBody ?? ''),
-              )
-              .toString();
+          _model.nextSl = HappyTestAPIGroup.nextmoduleCall.code(
+            (_model.apiSend2EnterCode?.jsonBody ?? ''),
+          );
           _model.nextSo = HappyTestAPIGroup.nextmoduleCall.sort(
             (_model.apiSend2EnterCode?.jsonBody ?? ''),
           );
@@ -509,14 +503,12 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                         );
                                         logFirebaseEvent(
                                             'Button-more_update_page_state');
-                                        _model.nextSl =
-                                            HappyTestAPIGroup.nextmoduleCall
-                                                .code(
-                                                  (_model.apiResultCopy2
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                )
-                                                .toString();
+                                        _model.nextSl = HappyTestAPIGroup
+                                            .nextmoduleCall
+                                            .code(
+                                          (_model.apiResultCopy2?.jsonBody ??
+                                              ''),
+                                        );
                                         _model.nextSo = HappyTestAPIGroup
                                             .nextmoduleCall
                                             .sort(
@@ -626,10 +618,9 @@ class _SigningSmsWidgetState extends State<SigningSmsWidget> {
                                                       HappyTestAPIGroup
                                                           .orderCall
                                                           .phone(
-                                                            signingSmsOrderResponse
-                                                                .jsonBody,
-                                                          )
-                                                          .toString(),
+                                                        signingSmsOrderResponse
+                                                            .jsonBody,
+                                                      )!,
                                                       style: TextStyle(
                                                         color:
                                                             FlutterFlowTheme.of(

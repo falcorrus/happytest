@@ -12,7 +12,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 import 'scan_cards_model.dart';
 export 'scan_cards_model.dart';
 
@@ -692,8 +691,7 @@ class _ScanCardsWidgetState extends State<ScanCardsWidget>
                                     await showDialog(
                                       context: context,
                                       builder: (alertDialogContext) {
-                                        return WebViewAware(
-                                            child: AlertDialog(
+                                        return AlertDialog(
                                           title: const Text('Выберите банк'),
                                           actions: [
                                             TextButton(
@@ -702,7 +700,7 @@ class _ScanCardsWidgetState extends State<ScanCardsWidget>
                                               child: const Text('Ok'),
                                             ),
                                           ],
-                                        ));
+                                        );
                                       },
                                     );
                                   }

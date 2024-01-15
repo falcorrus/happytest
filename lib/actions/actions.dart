@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 
 Future mainAction(BuildContext context) async {
   ApiCallResponse? apiNextModuleBlock;
@@ -26,11 +25,9 @@ Future mainAction(BuildContext context) async {
     orderId: FFAppState().slug,
   );
   logFirebaseEvent('mainAction_update_app_state');
-  FFAppState().nextslug = HappyTestAPIGroup.nextmoduleCall
-      .code(
-        (apiNextModuleBlock.jsonBody ?? ''),
-      )
-      .toString();
+  FFAppState().nextslug = HappyTestAPIGroup.nextmoduleCall.code(
+    (apiNextModuleBlock.jsonBody ?? ''),
+  )!;
   FFAppState().nextsort = HappyTestAPIGroup.nextmoduleCall.sort(
     (apiNextModuleBlock.jsonBody ?? ''),
   )!;
@@ -138,7 +135,7 @@ Future mainAction(BuildContext context) async {
                   backgroundColor: Colors.transparent,
                   alignment: const AlignmentDirectional(0.0, 0.0)
                       .resolve(Directionality.of(context)),
-                  child: const WebViewAware(child: VerificationCompWidget()),
+                  child: const VerificationCompWidget(),
                 );
               },
             );
@@ -306,11 +303,13 @@ Future mainAction(BuildContext context) async {
       logFirebaseEvent('mainAction_wait__delay');
       await Future.delayed(const Duration(milliseconds: 2000));
     } else {
-      if (HappyTestAPIGroup.nextmoduleCall
-                  .code(
-                    (apiNextModuleBlock.jsonBody ?? ''),
-                  )
-                  .toString() ==
+      if (HappyTestAPIGroup.nextmoduleCall.code(
+                (apiNextModuleBlock.jsonBody ?? ''),
+              ) ==
+              null ||
+          HappyTestAPIGroup.nextmoduleCall.code(
+                (apiNextModuleBlock.jsonBody ?? ''),
+              ) ==
               '') {
         logFirebaseEvent('mainAction_show_snack_bar');
         ScaffoldMessenger.of(context).showSnackBar(
@@ -365,11 +364,9 @@ Future actionBack(BuildContext context) async {
   );
   if ((apiPrevModule.succeeded ?? true)) {
     logFirebaseEvent('actionBack_update_app_state');
-    FFAppState().nextslug = HappyTestAPIGroup.nextmoduleLightCall
-        .code(
-          (apiPrevModule.jsonBody ?? ''),
-        )
-        .toString();
+    FFAppState().nextslug = HappyTestAPIGroup.nextmoduleLightCall.code(
+      (apiPrevModule.jsonBody ?? ''),
+    )!;
     FFAppState().nextsort = HappyTestAPIGroup.nextmoduleLightCall.sort(
       (apiPrevModule.jsonBody ?? ''),
     )!;
@@ -476,7 +473,7 @@ Future actionBack(BuildContext context) async {
                   backgroundColor: Colors.transparent,
                   alignment: const AlignmentDirectional(0.0, 0.0)
                       .resolve(Directionality.of(context)),
-                  child: const WebViewAware(child: VerificationCompWidget()),
+                  child: const VerificationCompWidget(),
                 );
               },
             );

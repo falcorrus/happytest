@@ -14,9 +14,17 @@ class MapPointsModel extends FlutterFlowModel<MapPointsWidget> {
 
   bool? isPersonalPS;
 
+  String? stringURL;
+
+  LatLng? userWhere;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Custom Action - returnString] action in MapPoints widget.
+  String? url;
+  // Stores action output result for [Custom Action - imagePath] action in MapPoints widget.
+  String? imageFromURL;
   // Model for row_BackBack component.
   late RowBackBackModel rowBackBackModel;
 

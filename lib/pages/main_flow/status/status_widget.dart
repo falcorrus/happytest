@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 import 'status_model.dart';
 export 'status_model.dart';
 
@@ -175,11 +174,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                                   ),
                             ),
                           ),
-                        if (HappyTestAPIGroup.orderCall
-                                .statusslug(
-                                  statusOrderResponse.jsonBody,
-                                )
-                                .toString() ==
+                        if (HappyTestAPIGroup.orderCall.statusslug(
+                              statusOrderResponse.jsonBody,
+                            ) ==
                             'denied')
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
@@ -195,17 +192,13 @@ class _StatusWidgetState extends State<StatusWidget> {
                                   ),
                             ),
                           ),
-                        if ((HappyTestAPIGroup.orderCall
-                                    .statusslug(
-                                      statusOrderResponse.jsonBody,
-                                    )
-                                    .toString() ==
+                        if ((HappyTestAPIGroup.orderCall.statusslug(
+                                  statusOrderResponse.jsonBody,
+                                ) ==
                                 'waiting') ||
-                            (HappyTestAPIGroup.orderCall
-                                    .statusslug(
-                                      statusOrderResponse.jsonBody,
-                                    )
-                                    .toString() ==
+                            (HappyTestAPIGroup.orderCall.statusslug(
+                                  statusOrderResponse.jsonBody,
+                                ) ==
                                 'meeting_confirmed'))
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
@@ -269,11 +262,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 5.0, 0.0, 0.0),
                             child: Text(
-                              HappyTestAPIGroup.orderCall
-                                  .id(
-                                    statusOrderResponse.jsonBody,
-                                  )
-                                  .toString(),
+                              HappyTestAPIGroup.orderCall.id(
+                                statusOrderResponse.jsonBody,
+                              )!,
                               textAlign: TextAlign.start,
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -318,12 +309,12 @@ class _StatusWidgetState extends State<StatusWidget> {
                                 child: Text(
                                   valueOrDefault<String>(
                                     '${HappyTestAPIGroup.orderCall.lastName(
-                                          statusOrderResponse.jsonBody,
-                                        ).toString()} ${HappyTestAPIGroup.orderCall.firstName(
-                                          statusOrderResponse.jsonBody,
-                                        ).toString()} ${HappyTestAPIGroup.orderCall.middleName(
-                                          statusOrderResponse.jsonBody,
-                                        ).toString()}',
+                                      statusOrderResponse.jsonBody,
+                                    )} ${HappyTestAPIGroup.orderCall.firstName(
+                                      statusOrderResponse.jsonBody,
+                                    )} ${HappyTestAPIGroup.orderCall.middleName(
+                                      statusOrderResponse.jsonBody,
+                                    )}',
                                     'error',
                                   ),
                                   maxLines: 2,
@@ -368,11 +359,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                                 25.0, 5.0, 0.0, 0.0),
                             child: Text(
                               valueOrDefault<String>(
-                                HappyTestAPIGroup.orderCall
-                                    .adress(
-                                      statusOrderResponse.jsonBody,
-                                    )
-                                    .toString(),
+                                HappyTestAPIGroup.orderCall.adress(
+                                  statusOrderResponse.jsonBody,
+                                ),
                                 'error',
                               ),
                               style: FlutterFlowTheme.of(context)
@@ -414,11 +403,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                                 25.0, 5.0, 0.0, 0.0),
                             child: Text(
                               valueOrDefault<String>(
-                                HappyTestAPIGroup.orderCall
-                                    .phone(
-                                      statusOrderResponse.jsonBody,
-                                    )
-                                    .toString(),
+                                HappyTestAPIGroup.orderCall.phone(
+                                  statusOrderResponse.jsonBody,
+                                ),
                                 'error',
                               ),
                               textAlign: TextAlign.start,
@@ -726,8 +713,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                     barrierColor: const Color(0x00000000),
                                     context: context,
                                     builder: (context) {
-                                      return WebViewAware(
-                                          child: GestureDetector(
+                                      return GestureDetector(
                                         onTap: () => _model
                                                 .unfocusNode.canRequestFocus
                                             ? FocusScope.of(context)
@@ -741,7 +727,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                             slug: widget.slug,
                                           ),
                                         ),
-                                      ));
+                                      );
                                     },
                                   ).then((value) => safeSetState(() {}));
                                 },
@@ -821,8 +807,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                     barrierColor: const Color(0x00000000),
                                     context: context,
                                     builder: (context) {
-                                      return WebViewAware(
-                                          child: GestureDetector(
+                                      return GestureDetector(
                                         onTap: () => _model
                                                 .unfocusNode.canRequestFocus
                                             ? FocusScope.of(context)
@@ -836,7 +821,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                             slug: widget.slug,
                                           ),
                                         ),
-                                      ));
+                                      );
                                     },
                                   ).then((value) => safeSetState(() {}));
                                 },
@@ -1268,8 +1253,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                       barrierColor: const Color(0x00000000),
                                       context: context,
                                       builder: (context) {
-                                        return WebViewAware(
-                                            child: GestureDetector(
+                                        return GestureDetector(
                                           onTap: () => _model
                                                   .unfocusNode.canRequestFocus
                                               ? FocusScope.of(context)
@@ -1284,7 +1268,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                               slug: widget.slug,
                                             ),
                                           ),
-                                        ));
+                                        );
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },
@@ -1364,8 +1348,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                       barrierColor: const Color(0x00000000),
                                       context: context,
                                       builder: (context) {
-                                        return WebViewAware(
-                                            child: GestureDetector(
+                                        return GestureDetector(
                                           onTap: () => _model
                                                   .unfocusNode.canRequestFocus
                                               ? FocusScope.of(context)
@@ -1380,7 +1363,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                               slug: widget.slug,
                                             ),
                                           ),
-                                        ));
+                                        );
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },
@@ -1523,11 +1506,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                           ),
                         ),
                       ),
-                    if (HappyTestAPIGroup.orderCall
-                            .statusslug(
-                              statusOrderResponse.jsonBody,
-                            )
-                            .toString() ==
+                    if (HappyTestAPIGroup.orderCall.statusslug(
+                          statusOrderResponse.jsonBody,
+                        ) ==
                         'verified1')
                       Material(
                         color: Colors.transparent,
@@ -1745,8 +1726,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                       barrierColor: const Color(0x00000000),
                                       context: context,
                                       builder: (context) {
-                                        return WebViewAware(
-                                            child: GestureDetector(
+                                        return GestureDetector(
                                           onTap: () => _model
                                                   .unfocusNode.canRequestFocus
                                               ? FocusScope.of(context)
@@ -1761,7 +1741,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                               slug: widget.slug,
                                             ),
                                           ),
-                                        ));
+                                        );
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },
@@ -1841,8 +1821,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                       barrierColor: const Color(0x00000000),
                                       context: context,
                                       builder: (context) {
-                                        return WebViewAware(
-                                            child: GestureDetector(
+                                        return GestureDetector(
                                           onTap: () => _model
                                                   .unfocusNode.canRequestFocus
                                               ? FocusScope.of(context)
@@ -1857,7 +1836,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                               slug: widget.slug,
                                             ),
                                           ),
-                                        ));
+                                        );
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },
@@ -2002,11 +1981,9 @@ class _StatusWidgetState extends State<StatusWidget> {
                           ),
                         ),
                       ),
-                    if (HappyTestAPIGroup.orderCall
-                            .statusslug(
-                              statusOrderResponse.jsonBody,
-                            )
-                            .toString() ==
+                    if (HappyTestAPIGroup.orderCall.statusslug(
+                          statusOrderResponse.jsonBody,
+                        ) ==
                         'denied1')
                       Material(
                         color: Colors.transparent,
@@ -2149,8 +2126,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                       barrierColor: const Color(0x00000000),
                                       context: context,
                                       builder: (context) {
-                                        return WebViewAware(
-                                            child: GestureDetector(
+                                        return GestureDetector(
                                           onTap: () => _model
                                                   .unfocusNode.canRequestFocus
                                               ? FocusScope.of(context)
@@ -2165,7 +2141,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                               slug: widget.slug,
                                             ),
                                           ),
-                                        ));
+                                        );
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },
@@ -2245,8 +2221,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                       barrierColor: const Color(0x00000000),
                                       context: context,
                                       builder: (context) {
-                                        return WebViewAware(
-                                            child: GestureDetector(
+                                        return GestureDetector(
                                           onTap: () => _model
                                                   .unfocusNode.canRequestFocus
                                               ? FocusScope.of(context)
@@ -2261,7 +2236,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                                               slug: widget.slug,
                                             ),
                                           ),
-                                        ));
+                                        );
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },

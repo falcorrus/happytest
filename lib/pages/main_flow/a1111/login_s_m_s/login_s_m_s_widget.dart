@@ -8,7 +8,6 @@ import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 import 'login_s_m_s_model.dart';
 export 'login_s_m_s_model.dart';
 
@@ -128,8 +127,7 @@ class _LoginSMSWidgetState extends State<LoginSMSWidget> {
                               barrierColor: const Color(0x00000000),
                               context: context,
                               builder: (context) {
-                                return WebViewAware(
-                                    child: GestureDetector(
+                                return GestureDetector(
                                   onTap: () =>
                                       _model.unfocusNode.canRequestFocus
                                           ? FocusScope.of(context)
@@ -139,7 +137,7 @@ class _LoginSMSWidgetState extends State<LoginSMSWidget> {
                                     padding: MediaQuery.viewInsetsOf(context),
                                     child: const CreatePhotoStringWidget(),
                                   ),
-                                ));
+                                );
                               },
                             ).then((value) => safeSetState(() {}));
                           },
@@ -153,8 +151,6 @@ class _LoginSMSWidgetState extends State<LoginSMSWidget> {
                               maxHeight: FFAppConstants.maxHeight.toDouble(),
                             ),
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Column(
@@ -170,7 +166,7 @@ class _LoginSMSWidgetState extends State<LoginSMSWidget> {
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Montserrat',
-                                          fontSize: 18.0,
+                                          fontSize: 24.0,
                                           letterSpacing: 0.18,
                                           lineHeight: 1.1,
                                         ),
@@ -186,7 +182,7 @@ class _LoginSMSWidgetState extends State<LoginSMSWidget> {
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Montserrat',
-                                          fontSize: 12.0,
+                                          fontSize: 14.0,
                                           letterSpacing: 0.18,
                                           lineHeight: 1.1,
                                         ),
@@ -199,83 +195,84 @@ class _LoginSMSWidgetState extends State<LoginSMSWidget> {
                       ),
                       Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                            25.0, 20.0, 26.0, 20.0),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 100),
-                          curve: Curves.easeIn,
-                          height: 60.0,
-                          constraints: const BoxConstraints(
-                            maxWidth: 327.0,
-                            maxHeight: 48.0,
-                          ),
+                            30.0, 0.0, 30.0, 0.0),
+                        child: Container(
+                          width: 315.0,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
                             borderRadius: BorderRadius.circular(30.0),
                           ),
-                          child: Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: TextFormField(
-                                controller: _model.textFieldSmsController,
-                                focusNode: _model.textFieldSmsFocusNode,
-                                autofocus: true,
-                                textCapitalization: TextCapitalization.none,
-                                textInputAction: TextInputAction.next,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  hintText: 'Введите полученное смс',
-                                  hintStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Montserrat',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                      ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(30.0),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(30.0),
-                                  ),
-                                  errorBorder: UnderlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(30.0),
-                                  ),
-                                  focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(30.0),
-                                  ),
-                                ),
-                                style: FlutterFlowTheme.of(context)
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                20.0, 2.0, 50.0, 2.0),
+                            child: TextFormField(
+                              controller: _model.textFieldSmsController,
+                              focusNode: _model.textFieldSmsFocusNode,
+                              textInputAction: TextInputAction.next,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'Введите полученн',
+                                hintStyle: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Montserrat',
-                                      fontSize: 14.0,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w500,
                                     ),
-                                textAlign: TextAlign.center,
-                                maxLines: null,
-                                keyboardType: TextInputType.number,
-                                validator: _model
-                                    .textFieldSmsControllerValidator
-                                    .asValidator(context),
-                                inputFormatters: [_model.textFieldSmsMask],
+                                enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
+                                focusedBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
+                                errorBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
+                                focusedErrorBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
                               ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Montserrat',
+                                    color: const Color(0xFFBDBDBD),
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                    lineHeight: 1.5,
+                                  ),
+                              keyboardType: TextInputType.emailAddress,
+                              validator: _model.textFieldSmsControllerValidator
+                                  .asValidator(context),
                             ),
                           ),
                         ),
@@ -283,40 +280,6 @@ class _LoginSMSWidgetState extends State<LoginSMSWidget> {
                       Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                25.0, 15.0, 25.0, 0.0),
-                            child: FFButtonWidget(
-                              onPressed: () {
-                                print('Button-again pressed ...');
-                              },
-                              text: 'ПОВТОРНО ПОЛУЧИТЬ СМС',
-                              options: FFButtonOptions(
-                                width: 327.0,
-                                height: 48.0,
-                                padding: const EdgeInsets.all(0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: const Color(0xFFEAEAEA),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Montserrat',
-                                      color: const Color(0xFF5F5F5F),
-                                      fontSize: 12.0,
-                                      letterSpacing: 0.6,
-                                      fontWeight: FontWeight.bold,
-                                      lineHeight: 1.5,
-                                    ),
-                                borderSide: const BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              showLoadingIndicator: false,
-                            ),
-                          ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 25.0, 10.0, 25.0, 25.0),
@@ -346,12 +309,10 @@ class _LoginSMSWidgetState extends State<LoginSMSWidget> {
                                       true)) {
                                     logFirebaseEvent(
                                         'Button-more_update_app_state');
-                                    FFAppState().Token = HappyTestAPIGroup
-                                        .loginCodeCall
-                                        .token(
-                                          (_model.apiLoginCode?.jsonBody ?? ''),
-                                        )
-                                        .toString();
+                                    FFAppState().Token =
+                                        HappyTestAPIGroup.loginCodeCall.token(
+                                      (_model.apiLoginCode?.jsonBody ?? ''),
+                                    )!;
                                     logFirebaseEvent('Button-more_navigate_to');
 
                                     context.pushNamed('OrdersList');

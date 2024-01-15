@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 import 'verification_comp_model.dart';
 export 'verification_comp_model.dart';
 
@@ -85,11 +84,10 @@ class _VerificationCompWidgetState extends State<VerificationCompWidget> {
                   barrierColor: const Color(0x00000000),
                   context: context,
                   builder: (context) {
-                    return WebViewAware(
-                        child: Padding(
+                    return Padding(
                       padding: MediaQuery.viewInsetsOf(context),
                       child: const CreatePhotoStringWidget(),
-                    ));
+                    );
                   },
                 ).then((value) => safeSetState(() {}));
               },
@@ -159,20 +157,18 @@ class _VerificationCompWidgetState extends State<VerificationCompWidget> {
                                             .primaryBackground,
                                     context: context,
                                     builder: (context) {
-                                      return WebViewAware(
-                                          child: Padding(
+                                      return Padding(
                                         padding:
                                             MediaQuery.viewInsetsOf(context),
                                         child: PhotoVerificationErrorWidget(
                                           comment: HappyTestAPIGroup.orderCall
                                               .comment(
-                                                (_model.apiResultOfVerif
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              )
-                                              .toString(),
+                                            (_model.apiResultOfVerif
+                                                    ?.jsonBody ??
+                                                ''),
+                                          )!,
                                         ),
-                                      ));
+                                      );
                                     },
                                   ).then((value) => safeSetState(() {}));
 
@@ -215,21 +211,19 @@ class _VerificationCompWidgetState extends State<VerificationCompWidget> {
                                         true)) {
                                       if (HappyTestAPIGroup.orderCall
                                               .statusslug(
-                                                (_model.apiResultOfVerif
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              )
-                                              .toString() ==
+                                            (_model.apiResultOfVerif
+                                                    ?.jsonBody ??
+                                                ''),
+                                          ) ==
                                           'verified') {
                                         logFirebaseEvent('Button_action_block');
                                         await action_blocks.mainAction(context);
                                       } else if (HappyTestAPIGroup.orderCall
                                               .statusslug(
-                                                (_model.apiResultOfVerif
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              )
-                                              .toString() ==
+                                            (_model.apiResultOfVerif
+                                                    ?.jsonBody ??
+                                                ''),
+                                          ) ==
                                           'denied') {
                                         logFirebaseEvent('Button_backend_call');
                                         _model.apiSetStatusDenied =
@@ -257,22 +251,20 @@ class _VerificationCompWidgetState extends State<VerificationCompWidget> {
                                                   .primaryBackground,
                                           context: context,
                                           builder: (context) {
-                                            return WebViewAware(
-                                                child: Padding(
+                                            return Padding(
                                               padding: MediaQuery.viewInsetsOf(
                                                   context),
                                               child:
                                                   PhotoVerificationErrorWidget(
-                                                comment:
-                                                    HappyTestAPIGroup.orderCall
-                                                        .comment(
-                                                          (_model.apiResultOfVerif
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                        )
-                                                        .toString(),
+                                                comment: HappyTestAPIGroup
+                                                    .orderCall
+                                                    .comment(
+                                                  (_model.apiResultOfVerif
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                )!,
                                               ),
-                                            ));
+                                            );
                                           },
                                         ).then((value) => safeSetState(() {}));
                                       } else {

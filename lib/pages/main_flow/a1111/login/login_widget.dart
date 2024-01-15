@@ -333,11 +333,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 'loginSMS',
                                 queryParameters: {
                                   'phone': serializeParam(
-                                    HappyTestAPIGroup.loginCall
-                                        .phone(
-                                          (_model.apiLogin?.jsonBody ?? ''),
-                                        )
-                                        .toString(),
+                                    HappyTestAPIGroup.loginCall.phone(
+                                      (_model.apiLogin?.jsonBody ?? ''),
+                                    ),
                                     ParamType.String,
                                   ),
                                 }.withoutNulls,

@@ -96,6 +96,15 @@ String timeFunc(DateTime timet) {
   return ('$hourString' + ':$minuteString');
 }
 
+dynamic latLongJSON(List<String> json) {
+  List<String> newJson = json[0].split(" ");
+  Map<String, double> coordinates = {
+    'lat': double.parse(newJson[1]),
+    'lng': double.parse(newJson[0]),
+  };
+  return coordinates;
+}
+
 String? photo(
   List<dynamic> json,
   int number,

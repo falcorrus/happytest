@@ -117,11 +117,9 @@ class _FinishWidgetState extends State<FinishWidget> {
                               token: FFAppState().Token,
                               slug: FFAppState().slug,
                             );
-                            if (HappyTestAPIGroup.orderCall
-                                    .bank(
-                                      (_model.order?.jsonBody ?? ''),
-                                    )
-                                    .toString() ==
+                            if (HappyTestAPIGroup.orderCall.bank(
+                                  (_model.order?.jsonBody ?? ''),
+                                ) ==
                                 'bank-rosbank') {
                               logFirebaseEvent('Button-more_backend_call');
                               await HappyTestAPIGroup.statusCall.call(
